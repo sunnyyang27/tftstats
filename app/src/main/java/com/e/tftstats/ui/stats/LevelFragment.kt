@@ -46,8 +46,7 @@ class LevelFragment : StatsFragment() {
     private fun calculateDataPoint(levels: List<LevelTuple>) : Double {
         var sum = 0.0
         for (level in levels) {
-            val maxXp = Helper.xpTable[level.level - 1]
-            sum += level.level + if (maxXp > 0) (level.xp.toDouble() / maxXp) else 0.0
+            sum += Helper.getLevelXp(level.level, level.xp)
         }
         return sum / levels.size
     }

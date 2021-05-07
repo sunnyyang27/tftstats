@@ -50,7 +50,7 @@ class GameStatsFragment : Fragment() {
         for (stage in stages) {
             dataPoints[0].add(Entry(stage.stageNumber.toFloat(), stage.gold.toFloat()))
             dataPoints[1].add(Entry(stage.stageNumber.toFloat(), stage.health.toFloat()))
-            dataPoints[2].add(Entry(stage.stageNumber.toFloat(), stage.level.toFloat()))
+            dataPoints[2].add(Entry(stage.stageNumber.toFloat(), Helper.getLevelXp(stage.level, stage.xp).toFloat()))
             dataPoints[3].add(Entry(stage.stageNumber.toFloat(), stage.placement.toFloat()))
         }
 

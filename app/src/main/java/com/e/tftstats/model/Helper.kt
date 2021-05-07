@@ -558,5 +558,10 @@ class Helper {
             }
             return rounded.toString()
         }
+
+        fun getLevelXp(level: Int, xp: Int) : Double {
+            val maxXp = xpTable[level - 1]
+            return level + if (maxXp > 0) (xp.toDouble() / maxXp) else 0.0
+        }
     }
 }
