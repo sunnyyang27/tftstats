@@ -285,7 +285,7 @@ class StageFragment : Fragment() {
             }
             row.addView(clear)
 
-            pveTable.addView(row, index)
+            pveTable.addView(row, index++)
         }
 
         // One row with +
