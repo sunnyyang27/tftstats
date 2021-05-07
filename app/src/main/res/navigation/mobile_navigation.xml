@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.e.tftstats.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_stage"
+            app:destination="@id/nav_stage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gold"
+        android:name="com.e.tftstats.ui.stats.GoldFragment"
+        android:label="@string/menu_gold"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/nav_health"
+        android:name="com.e.tftstats.ui.stats.HealthFragment"
+        android:label="@string/menu_health"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/nav_placement"
+        android:name="com.e.tftstats.ui.stats.PlacementFragment"
+        android:label="@string/menu_placement"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/nav_level"
+        android:name="com.e.tftstats.ui.stats.LevelFragment"
+        android:label="@string/menu_level"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/nav_item_stats"
+        android:name="com.e.tftstats.ui.stats.ItemStatsFragment"
+        android:label="@string/menu_item_stats"
+        tools:layout="@layout/fragment_item_stats" />
+
+    <fragment
+        android:id="@+id/nav_final_comp_stats"
+        android:name="com.e.tftstats.ui.stats.FinalCompStatsFragment"
+        android:label="@string/menu_final_comp_stats"
+        tools:layout="@layout/fragment_final_comp_stats" />
+
+    <fragment
+        android:id="@+id/nav_game_stats"
+        android:name="com.e.tftstats.ui.stats.GameStatsFragment"
+        android:label="@string/menu_game_stats"
+        tools:layout="@layout/fragment_game_stats" />
+
+    <fragment
+        android:id="@+id/nav_stage"
+        android:name="com.e.tftstats.ui.game.StageFragment"
+        android:label="@string/menu_game"
+        tools:layout="@layout/fragment_stage" />
+
+    <fragment
+        android:id="@+id/nav_final_comp"
+        android:name="com.e.tftstats.ui.game.FinalCompFragment"
+        android:label="@string/menu_final_comp"
+        tools:layout="@layout/fragment_final_comp" />
+
+    <fragment
+        android:id="@+id/nav_addchamp"
+        android:name="com.e.tftstats.ui.game.AddChampFragment"
+        android:label="@string/menu_addchamp"
+        tools:layout="@layout/fragment_add_champ" />
+
+    <fragment
+        android:id="@+id/nav_additem"
+        android:name="com.e.tftstats.ui.game.AddItemFragment"
+        android:label="@string/menu_additem"
+        tools:layout="@layout/fragment_add_item" />
+
+</navigation>

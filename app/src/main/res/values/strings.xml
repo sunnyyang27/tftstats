@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">TFT Stats</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_game">New Game</string>
+    <string name="menu_gold">Gold</string>
+    <string name="menu_health">Health</string>
+    <string name="menu_placement">Placement</string>
+    <string name="menu_level">Level</string>
+    <string name="menu_item_stats">Item Stats</string>
+    <string name="menu_final_comp">Final Comp</string>
+    <string name="menu_final_comp_stats">Final Comp Stats</string>
+    <string name="menu_addchamp">Add champion</string>
+    <string name="menu_additem">Add item</string>
+    <string name="menu_game_stats">Game Stats</string>
+
+    <string-array name="placement_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="star_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="round_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+</resources>

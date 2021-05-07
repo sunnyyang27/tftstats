@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_stage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_title_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gold_label"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:gravity="center_vertical"
+        android:text="Gold:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_stage" />
+
+    <EditText
+        android:id="@+id/gold_input"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/text_height"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/gold_label"
+        app:layout_constraintTop_toBottomOf="@+id/text_stage" />
+
+    <TextView
+        android:id="@+id/health_label"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:gravity="center_vertical"
+        android:text="Health:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gold_label" />
+
+    <EditText
+        android:id="@+id/health_input"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/text_height"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/health_label"
+        app:layout_constraintTop_toBottomOf="@+id/gold_input" />
+
+    <TextView
+        android:id="@+id/placement_label"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
+        android:text="Placement:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toEndOf="@+id/gold_input"
+        app:layout_constraintTop_toBottomOf="@+id/text_stage" />
+
+    <Spinner
+        android:id="@+id/placement_spin"
+        android:layout_width="@dimen/spin_width"
+        android:layout_height="@dimen/text_height"
+        android:background="@android:color/transparent"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/placement_label"
+        app:layout_constraintTop_toBottomOf="@+id/text_stage" />
+
+    <TextView
+        android:id="@+id/level_label"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
+        android:text="Level:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toEndOf="@+id/health_input"
+        app:layout_constraintTop_toBottomOf="@+id/placement_label" />
+
+    <Spinner
+        android:id="@+id/level_spin"
+        android:layout_width="@dimen/spin_width"
+        android:layout_height="@dimen/text_height"
+        android:background="@android:color/transparent"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/level_label"
+        app:layout_constraintTop_toBottomOf="@+id/placement_spin" />
+
+    <TextView
+        android:id="@+id/xp_label"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:gravity="center_vertical"
+        android:text="XP:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/health_label" />
+
+    <EditText
+        android:id="@+id/xp_input"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/text_height"
+        android:ems="10"
+        android:textAlignment="center"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/xp_label"
+        app:layout_constraintTop_toBottomOf="@+id/health_input" />
+
+    <CheckBox
+        android:id="@+id/died_check"
+        android:layout_width="@dimen/text_width"
+        android:layout_height="@dimen/text_height"
+        android:text="Died?"
+        android:textSize="@dimen/text_body_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xp_label" />
+
+    <LinearLayout
+        android:id="@+id/round_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/died_check"
+        app:layout_constraintTop_toBottomOf="@+id/xp_input"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/round_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Round died:"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/text_body_size" />
+
+        <Spinner
+            android:id="@+id/round_spin"
+            android:layout_width="@dimen/spin_width"
+            android:layout_height="@dimen/text_height"
+            android:background="@android:color/transparent"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+<!--    ITEMS -->
+    <LinearLayout
+        android:id="@+id/armory_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/died_check"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/armory_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:text="Armory item:"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/text_body_size" />
+
+        <Button
+            android:id="@+id/armory_button"
+            android:layout_width="@dimen/input_width"
+            android:layout_height="@dimen/text_height"
+            android:background="@android:color/transparent"
+            android:text="+"
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_green_light" />
+
+        <ImageView
+            android:id="@+id/armory_image"
+            android:layout_width="@dimen/item_size"
+            android:layout_height="@dimen/item_size"
+            android:layout_marginStart="5dp"
+            android:visibility="gone"
+            android:focusable="true"
+            android:clickable="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/carousel_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/armory_layout"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/carousel_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="Carousel item:"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/text_body_size"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/carousel_button"
+            android:layout_width="@dimen/input_width"
+            android:layout_height="@dimen/text_height"
+            android:background="@android:color/transparent"
+            android:text="+"
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_green_light" />
+
+        <ImageView
+            android:id="@+id/carousel_image"
+            android:layout_width="@dimen/item_size"
+            android:layout_height="@dimen/item_size"
+            android:layout_marginStart="5dp"
+            android:visibility="gone"
+            android:focusable="true"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pve_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carousel_layout"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/pve_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="center_vertical"
+            android:text="PVE items:"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="@dimen/text_body_size" />
+
+        <TableLayout
+            android:id="@+id/pve_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <TableRow>
+                <Button
+                    android:id="@+id/pve_button"
+                    android:layout_width="@dimen/input_width"
+                    android:layout_height="@dimen/text_height"
+                    android:background="@android:color/transparent"
+                    android:text="+"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/holo_green_light" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/prev_stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Previous Stage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/next_stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Stage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/final_comp_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Final Comp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
