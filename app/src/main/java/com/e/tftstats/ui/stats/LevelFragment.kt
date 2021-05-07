@@ -47,7 +47,7 @@ class LevelFragment : StatsFragment() {
         var sum = 0.0
         for (level in levels) {
             val maxXp = Helper.xpTable[level.level - 1]
-            sum += level.level + (level.xp.toDouble() / maxXp)
+            sum += level.level + if (maxXp > 0) (level.xp.toDouble() / maxXp) else 0.0
         }
         return sum / levels.size
     }
