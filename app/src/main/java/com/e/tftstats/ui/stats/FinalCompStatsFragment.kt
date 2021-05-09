@@ -276,10 +276,7 @@ class FinalCompStatsFragment : Fragment() {
         val lineChart = root.findViewById<LineChart>(R.id.avg_team_cost_linechart)
         Helper.designLineChart(lineChart)
         Helper.setLineChartData(lineChart, listOf(dataSet))
-        val desc = Description()
-        desc.text = "Avg team cost per placement"
-        desc.textSize = 15f
-        lineChart.description = desc
+        lineChart.description = null
     }
 
     private fun createTextView(text: String, isBold: Boolean = false) : TextView {

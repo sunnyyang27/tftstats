@@ -3,126 +3,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="false">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/placement_by_trait_label"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
-        android:gravity="center_vertical"
-        android:text="Average Placement by Trait"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/text_title_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-        <AutoCompleteTextView
-            android:id="@+id/trait_name"
+        <TextView
+            android:id="@+id/placement_by_trait_label"
             android:layout_width="wrap_content"
-            android:minWidth="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Average Placement by Trait"
             android:textAlignment="center"
-            android:hint="Trait name" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="@dimen/text_title_size" />
 
-        <ImageView
-            android:id="@+id/trait_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
-
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/placement_by_trait_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TableLayout>
-
-    <TextView
-        android:id="@+id/best_traits_label"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
-        android:gravity="center_vertical"
-        android:text="Best Final Traits"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/text_title_size" />
-
-    <TableLayout
-        android:id="@+id/best_traits_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TableLayout>
-
-    <TextView
-        android:id="@+id/placement_by_champion_label"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
-        android:gravity="center_vertical"
-        android:text="Average Placement by Champion"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/text_title_size" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <AutoCompleteTextView
-            android:id="@+id/champion_name"
-            android:layout_width="wrap_content"
-            android:minWidth="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:hint="Champion name" />
+            android:gravity="center_vertical">
 
-        <ImageView
-            android:id="@+id/champion_image"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
-    </LinearLayout>
+            <AutoCompleteTextView
+                android:id="@+id/trait_name"
+                android:layout_width="wrap_content"
+                android:minWidth="150dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint="Trait name" />
 
-    <TableLayout
-        android:id="@+id/placement_by_champion_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TableLayout>
+            <ImageView
+                android:id="@+id/trait_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
-    <TextView
-        android:id="@+id/best_champions_label"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/text_height"
-        android:gravity="center_vertical"
-        android:text="Best Final Champions"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="@dimen/text_title_size" />
+        </LinearLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/best_champions_scrollview"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:scrollbars="horizontal|vertical">
         <TableLayout
-            android:id="@+id/best_champions_table"
-            android:layout_width="wrap_content"
+            android:id="@+id/placement_by_trait_table"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </TableLayout>
-    </HorizontalScrollView>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/avg_team_cost_linechart"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        <TextView
+            android:id="@+id/best_traits_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Best Final Traits"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="@dimen/text_title_size" />
 
-</LinearLayout>
+        <TableLayout
+            android:id="@+id/best_traits_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/placement_by_champion_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Average Placement by Champion"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="@dimen/text_title_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <AutoCompleteTextView
+                android:id="@+id/champion_name"
+                android:layout_width="wrap_content"
+                android:minWidth="200dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint="Champion name" />
+
+            <ImageView
+                android:id="@+id/champion_image"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/placement_by_champion_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/best_champions_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Best Final Champions"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="@dimen/text_title_size" />
+
+        <HorizontalScrollView
+            android:id="@+id/best_champions_scrollview"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:scrollbars="horizontal|vertical">
+            <TableLayout
+                android:id="@+id/best_champions_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/avg_team_cost_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:gravity="center_vertical"
+            android:text="Average Team Cost Per Placement"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="@dimen/text_title_size" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/avg_team_cost_linechart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+    </LinearLayout>
 </ScrollView>
