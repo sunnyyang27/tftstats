@@ -156,11 +156,12 @@ class FinalCompStatsFragment : Fragment() {
         val custom = Comparator<Pair<Pair<Champion.Origin, Int>, Pair<Int, Int>>> { a, b ->
             when {
                 // Placement
-                (a.second.second < b.second.second) -> -1
-                (a.second.second > b.second.second) -> 1
+                (a.second.first < b.second.first) -> -1
+                (a.second.first > b.second.first) -> 1
                 // Count
-                (a.second.first > b.second.first) -> -1
-                (a.second.first < b.second.first) -> 1
+                (a.second.second > b.second.second) -> -1
+                (a.second.second < b.second.second) -> 1
+                // Trait level
                 (a.first.second > b.first.second) -> -1
                 (a.first.second < b.first.second) -> 1
                 else -> 0
