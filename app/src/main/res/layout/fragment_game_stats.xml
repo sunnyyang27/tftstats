@@ -42,7 +42,7 @@
                 android:layout_marginEnd="10dp"/>
 
             <TextView
-                android:text="PVE Items"
+                android:text="PVE"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
