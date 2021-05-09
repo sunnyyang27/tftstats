@@ -122,10 +122,10 @@ interface StageDao {
     fun getPveItemsWithFinalPlacement() : List<PvePlacementTuple>
 
     // Section 2
-    @Query("SELECT armoryItem item, avg(G.placement) avgPlacement FROM Stage S JOIN Game G on S.gameId = G.id where stageNumber = :stageNumber GROUP BY armoryItem ORDER BY avgPlacement LIMIT 1")
+    @Query("SELECT armoryItem item, avg(G.placement) avgPlacement FROM Stage S JOIN Game G on S.gameId = G.id where stageNumber = :stageNumber and armoryItem != -1 GROUP BY armoryItem ORDER BY avgPlacement LIMIT 1")
     fun getArmoryItemWithMaxPlacementPerStage(stageNumber: Int): ItemPlacementTuple?
 
-    @Query("SELECT carouselItem item, avg(G.placement) avgPlacement FROM Stage S JOIN Game G on S.gameId = G.id where stageNumber = :stageNumber GROUP BY carouselItem ORDER BY avgPlacement LIMIT 1")
+    @Query("SELECT carouselItem item, avg(G.placement) avgPlacement FROM Stage S JOIN Game G on S.gameId = G.id where stageNumber = :stageNumber and carouselItem != -1 GROUP BY carouselItem ORDER BY avgPlacement LIMIT 1")
     fun getCarouselItemWithMaxPlacementPerStage(stageNumber: Int): ItemPlacementTuple?
 
     @Update
