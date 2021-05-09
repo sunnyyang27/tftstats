@@ -31,21 +31,21 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/item_with_highest_placement_label"
+        android:id="@+id/best_items_label"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="Item with Highest Placement"
+        android:text="Best Items"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/text_title_size"
         android:layout_below="@+id/placement_by_item_table" />
 
     <TableLayout
-        android:id="@+id/item_with_highest_placement_table"
+        android:id="@+id/best_items_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_with_highest_placement_label">
+        android:layout_below="@+id/best_items_label">
     </TableLayout>
 
 </RelativeLayout>

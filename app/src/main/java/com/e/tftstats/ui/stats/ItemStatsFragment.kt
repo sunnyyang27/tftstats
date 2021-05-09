@@ -38,7 +38,7 @@ class ItemStatsFragment : Fragment() {
         createAutoCompleteTextView(root)
 
         // Section 2
-        val section2Table = root.findViewById<TableLayout>(R.id.item_with_highest_placement_table)
+        val section2Table = root.findViewById<TableLayout>(R.id.best_items_table)
         createHeaderRow(section2Table, "Item\\Stage")
         createSection2Row(section2Table, "Armory", stageDao::getArmoryItemWithMaxPlacementPerStage)
         createSection2Row(section2Table, "Carousel", stageDao::getCarouselItemWithMaxPlacementPerStage)
