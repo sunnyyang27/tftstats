@@ -79,14 +79,13 @@ class HomeFragment : Fragment() {
                     //Remove the listener before proceeding
                     root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     // measure your views here
-                    val distance = measureDistance(bigScroll, root.findViewById(R.id.delete_games))
+                    val distance = measureDistance(bigScroll, root.findViewById(R.id.new_game))
                     constraintSet.constrainMaxHeight(R.id.games_scroll, distance)
                     constraintSet.applyTo(constraintLayout)
                 }
             }
         )
-        val stages = MainActivity.db!!.stageDao().getAll()
-        val teams = teamDao.getAll()
+
         return root
     }
 

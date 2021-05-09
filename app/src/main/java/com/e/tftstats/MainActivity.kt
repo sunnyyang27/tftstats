@@ -34,33 +34,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Migrations
-//        val MIGRATION_1_2 = object : Migration(1, 2) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE Stage ADD COLUMN carouselItem INTEGER")
-//                database.execSQL("ALTER TABLE TEAM ADD COLUMN chosenTrait INTEGER NOT NULL DEFAULT 0")
-//            }
-//        }
-//        val MIGRATION_2_3 = object : Migration(2, 3) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE Stage ADD COLUMN armoryItem INTEGER")
-//                // Delete chosenTrait
-//                database.execSQL("CREATE TABLE team_backup (id INTEGER NOT NULL,gameId INTEGER NOT NULL references Game(id) ON DELETE CASCADE,champId INTEGER NOT NULL,items TEXT,starLevel INTEGER NOT NULL,isCarry INTEGER NOT NULL, PRIMARY KEY(id));")
-//                database.execSQL("INSERT INTO team_backup SELECT id,gameId,champId,items,starLevel,isCarry FROM Team;")
-//                database.execSQL("DROP TABLE Team;")
-//                database.execSQL("ALTER TABLE team_backup RENAME TO Team;")
-//            }
-//        }
-//        val MIGRATION_3_4 = object : Migration(3, 4) {
-//            override fun migrate(database: SupportSQLiteDatabase) {
-//                database.execSQL("ALTER TABLE Stage ADD COLUMN pveItems TEXT NOT NULL DEFAULT \'\'")
-//            }
-//        }
-
         db = Room.databaseBuilder(this, AppDatabase::class.java, "tft-set-4")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
-//            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
             .build()
 
         if (!Helper.isInitialized()) {
@@ -98,18 +74,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    fun deleteGames(view: View) {
-//        db!!.gameDao().deleteAll()
-    }
-
-    fun deleteStages(view: View) {
-//        db!!.stageDao().deleteAll()
-    }
-
-    fun deleteTeams(view: View) {
-//        db!!.teamDao().deleteAll()
     }
 
     /** FINISH GAME */
