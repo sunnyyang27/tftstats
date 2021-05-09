@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <HorizontalScrollView
-        android:id="@+id/champ_table_scroll"
-        android:layout_height="wrap_content"
-        android:scrollbars="horizontal|vertical"
-        android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TableLayout
-            android:id="@+id/champ_table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TableLayout>
-    </HorizontalScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/add_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add row"
-        app:layout_constraintTop_toBottomOf="@+id/champ_table_scroll"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <HorizontalScrollView
+            android:id="@+id/champ_table_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical">
+            <TableLayout
+                android:id="@+id/champ_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/add_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add row"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/champ_table_scroll"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/finish_game"
@@ -32,8 +35,6 @@
         android:layout_height="wrap_content"
         android:text="Finish Game"
         android:onClick="onFinishGameClicked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>
