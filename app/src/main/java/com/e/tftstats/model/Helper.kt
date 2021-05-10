@@ -424,6 +424,33 @@ class Helper {
             return traitMap[origin]!!
         }
 
+        fun calculateTeamsTraits(teamComp: List<Team>) : Map<Origin, Int> {
+            val traitMap = HashMap<Origin, Int>() // Trait, count
+            for (team in teamComp) {
+                val champ = getChampion(team.champId)
+                champ.origins.forEach {
+                    val count = traitMap[it]
+                    if (count == null)
+                        traitMap[it] = 1
+                    else
+                        traitMap[it] = count + 1
+                }
+                // Spat item check
+                val items = team.items.split(",").map { if (it.toInt() == -1) null else getItem(it.toInt()) }
+                    .filter { item -> item != null && item is SpatItem }
+                items.forEach {
+                    if (it != null && it is SpatItem) {
+                        val count = traitMap[it.origin]
+                        if (count == null)
+                            traitMap[it.origin] = 1
+                        else
+                            traitMap[it.origin] = count + 1
+                    }
+                }
+            }
+            return traitMap
+        }
+
         /** UI helpers */
         fun createRow(context: Context?, margin: Int = 0) : TableRow {
             val row = TableRow(context)

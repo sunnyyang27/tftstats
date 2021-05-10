@@ -6,25 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.HorizontalScrollView
-import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.e.tftstats.MainActivity
 import com.e.tftstats.R
-import com.e.tftstats.model.Game
-import com.e.tftstats.model.GameDao
-import com.e.tftstats.model.Helper
-import com.e.tftstats.model.TeamDao
+import com.e.tftstats.model.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlin.math.abs
-import kotlin.math.min
-import kotlin.math.roundToInt
-import kotlin.math.truncate
+import kotlin.math.*
 
 class HomeFragment : Fragment() {
 
@@ -112,18 +103,32 @@ class HomeFragment : Fragment() {
         placement.layoutParams = placementParams
         row.addView(placement)
 
+        // Three rows for stars, champion images, and items
+        val starRow = Helper.createRow(context, 3)
+        val championRow = Helper.createRow(context, 3)
+        val itemRow = Helper.createRow(context, 3)
+
         val champWidth = 150
-
         val teamComp = teamDao.getTeamByGame(game.id)
-        for (team in teamComp) {
+        // Sort by cost then number of items
+        val custom = Comparator<Team> { a, b ->
+            val champACost = Helper.getChampion(a.champId).cost * 3.0.pow(a.starLevel - 1)
+            val champBCost = Helper.getChampion(b.champId).cost * 3.0.pow(b.starLevel - 1)
+            val champAItems = a.items.split(",").size
+            val champBItems = b.items.split(",").size
+            when {
+                // Cost
+                (champACost > champBCost) -> -1
+                (champACost < champBCost) -> 1
+                // Number of items
+                (champAItems > champBItems) -> -1
+                (champAItems < champBItems) -> 1
+                else -> 0
+            }
+        }
+        val sortedTeamComp = teamComp.sortedWith(custom)
+        for (team in sortedTeamComp) {
             val champion = Helper.getChampion(team.champId)
-
-            // Vertical linear layout
-            val champLayout = LinearLayout(context)
-            val champParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-            champParams.marginEnd = 3
-            champLayout.layoutParams = champParams
-            champLayout.orientation = LinearLayout.VERTICAL
 
             // Stars: horizontal
             val starsLayout = LinearLayout(context)
@@ -134,11 +139,11 @@ class HomeFragment : Fragment() {
                 val star = Helper.createImageView(root.context, R.drawable.ic_star, starParams)
                 starsLayout.addView(star)
             }
-            champLayout.addView(starsLayout)
+            starRow.addView(starsLayout)
 
             // Champion image
-            val imageParams = LinearLayout.LayoutParams(champWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
-            imageParams.bottomMargin = 3
+            val imageParams = TableRow.LayoutParams(champWidth, TableRow.LayoutParams.WRAP_CONTENT)
+            imageParams.marginEnd = 3
             val image = Helper.createImageView(context, champion.imagePath, imageParams)
             var color = R.color.gray
             when (champion.cost) {
@@ -157,7 +162,7 @@ class HomeFragment : Fragment() {
             }
             image.setBackgroundColor(resources.getColor(color, null))
             image.setPadding(5, 5, 5, 5)
-            champLayout.addView(image)
+            championRow.addView(image)
 
             // Items: horizontal
             val itemsLayout = LinearLayout(context)
@@ -171,11 +176,46 @@ class HomeFragment : Fragment() {
                 val itemImage = Helper.createImageView(context, Helper.getItem(item.toInt()).imagePath, layoutParams)
                 itemsLayout.addView(itemImage)
             }
-            champLayout.addView(itemsLayout)
-
-            // Add layout to parent layout
-            row.addView(champLayout)
+            itemRow.addView(itemsLayout)
         }
+
+        // Traits: sort by level, then add to row
+        val traitLayout = LinearLayout(context)
+        traitLayout.orientation = LinearLayout.HORIZONTAL
+        traitLayout.gravity = Gravity.CENTER_VERTICAL
+        val traitMap = Helper.calculateTeamsTraits(teamComp)
+        val sortedTraitMap = traitMap.map { (key, value ) -> key to value}.sortedByDescending { (_, value) -> value }.toMap()
+        for (origin in sortedTraitMap) {
+            if (origin.key == Champion.Origin.GODKING && origin.value > 1) continue
+            val trait = Helper.getTrait(origin.key)
+            val levels = trait.levels.reversedArray()
+            for (level in levels) {
+                if (origin.value >= level) {
+                    // Create and Add to trait layout
+                    val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 50)
+                    imageParams.marginEnd = 5
+                    val traitImage = Helper.createImageView(context, trait.imagePath, imageParams)
+                    traitImage.tooltipText = "${Helper.originName(origin.key)} $level"
+                    traitLayout.addView(traitImage)
+                    break
+                }
+            }
+        }
+
+        // Add rows to table
+        val gameTable = TableLayout(context)
+        gameTable.addView(starRow)
+        gameTable.addView(championRow)
+        gameTable.addView(itemRow)
+
+        // Add table and traits to vertical layout
+        val teamLayout = LinearLayout(context)
+        teamLayout.orientation = LinearLayout.VERTICAL
+        teamLayout.addView(gameTable)
+        teamLayout.addView(traitLayout)
+
+        // Add vertical layout to horizontal row
+        row.addView(teamLayout)
 
         // Add row to horizontal scroll
         val horizontalScroll = HorizontalScrollView(context)
@@ -183,7 +223,9 @@ class HomeFragment : Fragment() {
 
         // Add scroll to games_layout
         val gamesLayout = root.findViewById<LinearLayout>(R.id.games_layout)
-        gamesLayout.addView(horizontalScroll)
+        val horizontalScrollParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        horizontalScrollParams.bottomMargin = 20
+        gamesLayout.addView(horizontalScroll, horizontalScrollParams)
     }
 
     private fun measureDistance(view1: View, view2: View) : Int {

@@ -110,29 +110,7 @@ class FinalCompStatsFragment : Fragment() {
             // Get all champs in the game
             val teamComp = teamDao.getTeamByGame(game.id)
             // Track members per trait
-            val traitMap = HashMap<Champion.Origin, Int>()
-            for (team in teamComp) {
-                val champ = Helper.getChampion(team.champId)
-                champ.origins.forEach {
-                    val count = traitMap[it]
-                    if (count == null)
-                        traitMap[it] = 1
-                    else
-                        traitMap[it] = count + 1
-                }
-                // Spat item check
-                val items = team.items.split(",").map { if (it.toInt() == -1) null else Helper.getItem(it.toInt()) }
-                    .filter { item -> item != null && item is SpatItem }
-                items.forEach {
-                    if (it != null && it is SpatItem) {
-                        val count = traitMap[it.origin]
-                        if (count == null)
-                            traitMap[it.origin] = 1
-                        else
-                            traitMap[it.origin] = count + 1
-                    }
-                }
-            }
+            val traitMap = Helper.calculateTeamsTraits(teamComp)
             // For each trait, calculate its trait levels
             for (trait in traitMap) {
                 if (trait.key == Champion.Origin.GODKING && trait.value > 1) continue
