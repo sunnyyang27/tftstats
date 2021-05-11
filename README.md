@@ -19,15 +19,31 @@ When you die, it is unlikely you will have time to screenshot your final game st
 Here's a demo on how to input game results:
 
 1. On the Home page, click the + button.
-2. Your game has started. You have just picked an item from the carousel. Take a screenshot.(pictures: screenshot of 1-1 and 1-2)
-3. Stage 2 round 1 (2-1) has started. Take a screenshot. Here's what stage 1 should look like: (screenshot of 2-1 and app. circle the numbers on the 2-1 screenshot and match the circle colours onto the app ss)
+2. Your game has started. You have just picked an item from the carousel. Take a screenshot.
+
+    <img src="demo/1-2.png" width="300">
+3. Stage 2 round 1 (2-1) has started. Take a screenshot. Here's what stage 1 should look like:
+
+    <img src="demo/2-1.png" width="600">
 4. 2-2 has started. After you select an armory item, take a screenshot.
+
+    <img src="demo/2-2.png" width="400">
 5. 2-5 has started. Since you selected a carousel item in the previous round, take a screenshot.
+
+    <img src="demo/2-5.png" width="400">
 6. 3-1 has started. Take a screenshot. Here's what stage 2 should look like:
+
+    <img src="demo/3-1.png" width="600">
 7. This continues until 5-1. From 5-2 and onward, there is no armory item so you do not need to screenshot round 2.
-8. 5-5 has started. Take a screenshot.
+8. 5-5 has started. Take a screenshot. Here I accidentally took the screenshot one round late but I remembered what I picked.
+
+    <img src="demo/5-6.png" width="300">
 9. 6-1 has started. Take a screenshot. Here's what stage 5 should look like:
-10. Once the game has ended and you have been eliminated, go to https://lolchess.gg/leaderboards, input your username and find your game. Depending on when you died, you may or may not have to fill out certain fields. For example, if you died before round 4, you will not have to add carousel or pve items. Here's what your final stage should look like: (ss of ending screen and lolchess)
+
+    <img src="demo/6-1.png" width="600">
+10. Once the game has ended and you have been eliminated, go to https://lolchess.gg/leaderboards, input your username and find your game. Depending on when you died, you may or may not have to fill out certain fields. For example, if you died before round 4, you will not have to add carousel or pve items. You may also not know your xp, so don't worry about it. Here's what your final stage should look like:
+
+    <img src="demo/lolchess.png" width="90%">
 
 ### Functionality
 To change the placement or level, click on the number to open a dropdown.
@@ -42,7 +58,7 @@ When adding a champion, type in their name to display some suggestions. If you d
 - A champion cannot equip a spat item of an origin that they already are. For example, Katarina, a Forgotten and Assassin, cannot equip a Forgotten or Assassin spat.
 
 ## Viewing statistics
-When you click the top left hamburger, you will see some statistics pages.
+When you click the top left hamburger, you will see some statistics pages. ss
 
 ### Home
 ss
