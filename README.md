@@ -46,7 +46,8 @@ When you click the top left hamburger, you will see some statistics pages.
 
 ### Home
 ss
-You will see a list of your last 10 games. Each game will show your final placement and your final team comp, along with each champion's items. To view more information about a game, you can tap anywhere on the game's row (ss). 
+You will see a list of your last 10 games. Each game will show your final placement, final team comp, team traits, and each champion's items.
+To view more information about a game, you can tap anywhere on the game's row (ss). 
 Then you will see the items you got from armory, carousel, and pve. You can also see the progression of gold, health, level, and placements. ss
 
 ### Gold, Health, Level, and Placement
@@ -72,3 +73,70 @@ Under "Average Placement by Champion", you can enter a champion and view your av
 Under "Best Final Champions", you can view the champions that give the highest average final placement. These are sorted by placement, count, star level, carry percentage, and number of items.
 
 ## Coming up
+### Features
+#### Edit and Delete games
+As a user, I want to edit an existing game. This includes changing a stage's values, adding new stages, and modifying my team.
+Acceptance criteria:
+- There are three buttons: Delete, Edit stages, and Edit team
+- When Delete is clicked, a warning popups up for confirmation with text "Are you sure you want to delete the game? All data related to the game will be removed and will not appear in statistic pages.". The popup has two options "Cancel" and "Yes".
+- When Edit stages is clicked, the first stage is loaded (StageFragment). The user can modify the stage. There are buttons to Save, Next Stage, Previous Stage (if applicable), and Exit.
+   - Exit should go back to the original page where Edit stages was clicked
+- When Edit team is clicked, the team comp is loaded (FinalCompFragment). Same functionality as before. There is a button "Exit". When the user edits/deletes a champion, the team is immediately updated.
+Design options:
+- put Edit and Delete button on Home, next to the team
+- put Edit and Delete button on Game Stats, at bottom of page
+- For stage navigation, provide options like "Save and next", "Save and exit". If user makes changes and wants to go to the previous/next stage without saving, they should have that option.
+
+#### Home page: support viewing more than 10 games
+As a user, I want the option to view the next 10 games.
+Acceptance criteria:
+- next to the label "Last 10 games", there is a selector to go to the next 10 games or select a specific page of games
+- when a page has been selected, the games should update
+- replace the label with "Games 1-10" and update based on the current page
+
+#### Trait UI improvements
+As a user, I want all the trait images to have the same size and be coloured depending on the trait level. (ss)
+Acceptance criteria:
+- trait images have the same size. Currently Ironclad is too small
+- On Home page, traits should be coloured depending on trait level.
+- On Final Comp Stats page, under "Average Placement by Trait", remove the trait image next to the input, replace the first column's rows with the coloured trait image, and add a tooltip as "TraitLevel"
+- On Final Comp Stats page, under "Best Final Traits", remove "Trait" column, 
+the trait image, and add a tooltip as "TraitName TraitLevel"
+- the colouring should match how TFT does it in game
+Design:
+- trait images should be replaced with svg that have an outline and a fill
+- the outline and fill colour can be changed based on trait level
+- determine logic for associating a trait level with a colour
+
+#### Final Comp page: display current traits
+As a user, when I add champions to my team I want to see the number of units per trait
+Acceptance criteria:
+- the trait images are displayed in a row
+- each image is coloured based on trait level. This includes an incomplete trait. For example, if there is 1 Dawnbringer then show the image outline with a transparent fill
+- each image has a tooltip with the exact number of units contributing to the trait. For example, if there are 3 Dawnbringer then the tooltip should show 3
+- as champions are added, edited, or removed, traits should be updated
+- trait images are sorted by level in descending order. For example, Dawnbringer 4 should be left of Coven 3.
+- if there are many traits, the row should not be cut off. Add a horizontal scroll
+
+#### Add a statistics page for stage and round of elimination
+As a user, I want to know my average placement when I die at stage _ round _ .
+Acceptance criteria:
+- create a line chart where x-axis is stage and round and y-axis placement
+- y-axis scale is 1-8, with a label at each value
+- x-axis scale depends on the most late stage/round.
+- since each stage is only 7 rounds, each x value should be a decimal of stage + (round / 7).
+
+#### Tech Debt: move all hardcoded strings to strings.xml
+Acceptance criteria:
+- All xml files should not have hardcoded texts
+- All Kotlin fragment files should not have hardcoded texts
+
+### Existing Bugs
+#### Using built-in back on a Stage page causes issues
+When inputting stage data, there is a manual "Previous Stage" or "Cancel" button to replace Android back functionality. If Android back is used, the stage will be incorrect. However, Android back does work for all other pages.
+Steps:
+1. On Home, click +
+2. Use Android back
+3. Click +
+Expected: every field is blank
+Actual: gold, health, and xp are set to 0, indicating that the game was not reset.
