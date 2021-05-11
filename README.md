@@ -13,7 +13,7 @@ TFTStats is a statistics tracker that help players improve by using players' gam
 TFTStats requires players to input the game state as it progresses. Since this is difficult to do in the middle of the game, the player only needs to screenshot their game at the start of a few rounds. In particular:
 - Stage 1: screenshot at the start of round 2.
 - Stages 2-4: screenshot at start of round 1, 2, and 5. The screenshot at round 1 will help you fill out the last bit of information from the previous stage.
-- Stage 5+: screenshot at start of round 1 and 4.
+- Stage 5+: screenshot at start of round 1 and 5.
 When you die, it is unlikely you will have time to screenshot your final game state. Instead, go to https://lolchess.gg/leaderboards, select your region and input your username. Find your game and use it input your final game state into the app.
 
 Here's a demo on how to input game results:
@@ -63,6 +63,7 @@ When you click the top left hamburger, you will see some statistics pages. ss
 ### Home
 ss
 You will see a list of your last 10 games. Each game will show your final placement, final team comp, team traits, and each champion's items.
+
 To view more information about a game, you can tap anywhere on the game's row (ss). 
 Then you will see the items you got from armory, carousel, and pve. You can also see the progression of gold, health, level, and placements. ss
 
@@ -72,32 +73,42 @@ These pages will show you the average gold/health/level/placement per stage, sep
 - Game 1: stage 1 had 1 gold, stage 2 had 5 gold, and you placed 2nd.
 - Game 2: stage 1 had 5 gold, stage 2 had 3 gold, and you placed 2nd.
 - Game 3: stage 1 had 1 gold, stage 2 had 1 gold, and you played 8th.
+
 Then the red line will show 3 gold at stage 1 and 4 gold at stage 2. The purple line will show 0 gold at stage 1 and 0 gold at stage 2.
 The average line shows overall average (aka merging all the placements). In this case, it will show 2.33 gold at stage 1 and 3 gold at stage 2.
+
 You can use the checkboxes to hide certain lines. If a line doesn't appear even when the box is checked, then you have no games where you ended at that placement. The bottom of the graph shows all possible lines. ss
 
 ### Item Stats
 This page will help you learn which items get you the best results.
-Under "Average Placement by Item", you can enter an item name and view your average final placement when you got that item at a specific stage. For example, in the following screenshot, my average final placement is 2.5 when I got a Tear of the Goddess from stage 4 armory (aka 4-2). sss
+
+Under "Average Placement by Item", you can enter an item name and view your average final placement when you got that item at a specific stage. For example, in the following screenshot, my average final placement is 2.5 when I got a Tear of the Goddess from stage 4 armory (aka 4-2). ss
+
 Under "Best Items", you can view the items that give the highest average final placement. For example, in the following screenshot, when I get a Tear of the Goddess from stage 4 armory I have the highest average placement compared to all other items. 
 
 ### Final Comp Stats
 This page will help you learn which champions perform the best and which team compositions you are successful with.
+
 Under "Average Placement by Trait", you can enter a trait and view your average final placement when your team composition has that trait. It is also divided by trait levels. ss
+
 Under "Best Final Traits", you can view the traits that give the highest average final placement. These are sorted by best placement, count, and the trait level.
+
 Under "Average Placement by Champion", you can enter a champion and view your average final placement when the champion is in your final team. The items that are most successful on the champion are shown. ss
+
 Under "Best Final Champions", you can view the champions that give the highest average final placement. These are sorted by placement, count, star level, carry percentage, and number of items.
 
 ## Coming up
 ### Features
 #### Edit and Delete games
 As a user, I want to edit an existing game. This includes changing a stage's values, adding new stages, and modifying my team.
+
 Acceptance criteria:
 - There are three buttons: Delete, Edit stages, and Edit team
 - When Delete is clicked, a warning popups up for confirmation with text "Are you sure you want to delete the game? All data related to the game will be removed and will not appear in statistic pages.". The popup has two options "Cancel" and "Yes".
 - When Edit stages is clicked, the first stage is loaded (StageFragment). The user can modify the stage. There are buttons to Save, Next Stage, Previous Stage (if applicable), and Exit.
    - Exit should go back to the original page where Edit stages was clicked
 - When Edit team is clicked, the team comp is loaded (FinalCompFragment). Same functionality as before. There is a button "Exit". When the user edits/deletes a champion, the team is immediately updated.
+
 Design options:
 - put Edit and Delete button on Home, next to the team
 - put Edit and Delete button on Game Stats, at bottom of page
@@ -105,6 +116,7 @@ Design options:
 
 #### Home page: support viewing more than 10 games
 As a user, I want the option to view the next 10 games.
+
 Acceptance criteria:
 - next to the label "Last 10 games", there is a selector to go to the next 10 games or select a specific page of games
 - when a page has been selected, the games should update
@@ -112,6 +124,7 @@ Acceptance criteria:
 
 #### Trait UI improvements
 As a user, I want all the trait images to have the same size and be coloured depending on the trait level. (ss)
+
 Acceptance criteria:
 - trait images have the same size. Currently Ironclad is too small
 - On Home page, traits should be coloured depending on trait level.
@@ -119,13 +132,15 @@ Acceptance criteria:
 - On Final Comp Stats page, under "Best Final Traits", remove "Trait" column, 
 the trait image, and add a tooltip as "TraitName TraitLevel"
 - the colouring should match how TFT does it in game
+
 Design:
 - trait images should be replaced with svg that have an outline and a fill
 - the outline and fill colour can be changed based on trait level
 - determine logic for associating a trait level with a colour
 
 #### Final Comp page: display current traits
-As a user, when I add champions to my team I want to see the number of units per trait
+As a user, when I add champions to my team I want to see the number of units per trait.
+
 Acceptance criteria:
 - the trait images are displayed in a row
 - each image is coloured based on trait level. This includes an incomplete trait. For example, if there is 1 Dawnbringer then show the image outline with a transparent fill
@@ -136,6 +151,7 @@ Acceptance criteria:
 
 #### Add a statistics page for stage and round of elimination
 As a user, I want to know my average placement when I die at stage _ round _ .
+
 Acceptance criteria:
 - create a line chart where x-axis is stage and round and y-axis placement
 - y-axis scale is 1-8, with a label at each value
@@ -150,6 +166,7 @@ Acceptance criteria:
 ### Existing Bugs
 #### Using built-in back on a Stage page causes issues
 When inputting stage data, there is a manual "Previous Stage" or "Cancel" button to replace Android back functionality. If Android back is used, the stage will be incorrect. However, Android back does work for all other pages.
+
 Steps:
 1. On Home, click +
 2. Use Android back
