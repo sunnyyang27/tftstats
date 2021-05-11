@@ -20,7 +20,6 @@ import com.e.tftstats.model.Helper.Companion.formatStat
 import com.e.tftstats.model.SpatItem
 import com.e.tftstats.model.Trait
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import kotlin.math.min
 
@@ -94,7 +93,7 @@ class FinalCompStatsFragment : Fragment() {
         for (level in selected.levels) {
             val pair = statsMap[level]
             val statsRow = createRow(
-                arrayOf("$selected $level", pair?.first?.toString() ?: "N/A", pair?.second?.toString() ?: "N/A")
+                arrayOf("$selected $level", pair?.first?.toString() ?: "N/A", pair?.second?.toString() ?: "N/A"), true
             )
             table.addView(statsRow)
         }

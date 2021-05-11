@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.e.tftstats.R
 import com.e.tftstats.model.Helper
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.YAxis
 
 class HealthFragment : StatsFragment() {
     override val title: String

@@ -16,8 +16,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.e.tftstats.database.AppDatabase
 import com.e.tftstats.model.Game
 import com.e.tftstats.model.Helper

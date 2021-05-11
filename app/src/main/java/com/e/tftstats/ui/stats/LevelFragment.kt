@@ -8,7 +8,6 @@ import com.e.tftstats.R
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.LevelTuple
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.YAxis
 
 class LevelFragment : StatsFragment() {
     override val title: String

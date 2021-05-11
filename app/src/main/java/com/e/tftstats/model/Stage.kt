@@ -1,7 +1,6 @@
 package com.e.tftstats.model
 
 import androidx.room.*
-import androidx.room.ColumnInfo
 
 /** Status at end of each stage */
 
