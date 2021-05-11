@@ -12,7 +12,7 @@ TFTStats is a statistics tracker that help players improve by using players' gam
 ### How and when to enter data
 TFTStats requires players to input the game state as it progresses. Since this is difficult to do in the middle of the game, the player only needs to screenshot their game at the start of a few rounds. In particular:
 - Stage 1: screenshot at the start of round 2.
-- Stage 2-4: screenshot at start of round 1, 2, and 4. The screenshot at round 1 will help you fill out the last bit of information from the previous stage.
+- Stages 2-4: screenshot at start of round 1, 2, and 5. The screenshot at round 1 will help you fill out the last bit of information from the previous stage.
 - Stage 5+: screenshot at start of round 1 and 4.
 When you die, it is unlikely you will have time to screenshot your final game state. Instead, go to https://lolchess.gg/leaderboards, select your region and input your username. Find your game and use it input your final game state into the app.
 
@@ -22,13 +22,13 @@ Here's a demo on how to input game results:
 2. Your game has started. You have just picked an item from the carousel. Take a screenshot.(pictures: screenshot of 1-1 and 1-2)
 3. Stage 2 round 1 (2-1) has started. Take a screenshot. Here's what stage 1 should look like: (screenshot of 2-1 and app. circle the numbers on the 2-1 screenshot and match the circle colours onto the app ss)
 4. 2-2 has started. After you select an armory item, take a screenshot.
-5. 2-4 has started. After you select a carousel item, take a screenshot.
+5. 2-5 has started. Since you selected a carousel item in the previous round, take a screenshot.
 6. 3-1 has started. Take a screenshot. Here's what stage 2 should look like:
 7. This continues until 5-1. From 5-2 and onward, there is no armory item so you do not need to screenshot round 2.
-8. 5-4 has started. After you select a carousel item, take a screenshot.
+8. 5-5 has started. Take a screenshot.
 9. 6-1 has started. Take a screenshot. Here's what stage 5 should look like:
-10. The game has ended and you have been eliminated. Go to https://lolchess.gg/leaderboards, input your username and find your game. Depending on when you died, you may or may not have to fill out certain fields. For example, if you died before round 4, you will not have to add carousel or pve items. Here's what your final stage should look like: (ss of ending screen)
-   
+10. Once the game has ended and you have been eliminated, go to https://lolchess.gg/leaderboards, input your username and find your game. Depending on when you died, you may or may not have to fill out certain fields. For example, if you died before round 4, you will not have to add carousel or pve items. Here's what your final stage should look like: (ss of ending screen and lolchess)
+
 ### Functionality
 To change the placement or level, click on the number to open a dropdown.
 After you add an item, you can click on the item to edit it.
