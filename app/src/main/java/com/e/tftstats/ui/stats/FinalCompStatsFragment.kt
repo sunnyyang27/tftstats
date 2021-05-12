@@ -22,6 +22,7 @@ import com.e.tftstats.model.Trait
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import kotlin.math.min
+import kotlin.math.pow
 
 class FinalCompStatsFragment : Fragment() {
 
@@ -224,7 +225,7 @@ class FinalCompStatsFragment : Fragment() {
         val teamCostMap = SparseArray<Pair<Int, Int>>() // key: gameId; teamcost, placement
         for (team in teams) {
             val champ = Helper.getChampion(team.champId)
-            val cost = champ.cost * team.starLevel
+            val cost = champ.cost * 3.0.pow(team.starLevel - 1).toInt()
             val pair = teamCostMap[team.gameId]
             if (pair != null) {
                 teamCostMap[team.gameId] = Pair(pair.first + cost, pair.second)

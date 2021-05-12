@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        db = Room.databaseBuilder(this, AppDatabase::class.java, "tft-set-4")
+        db = Room.databaseBuilder(this, AppDatabase::class.java, "tft-set-5")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
