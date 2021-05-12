@@ -59,7 +59,9 @@ When adding a champion, type in their name to display some suggestions. If you d
 - A champion cannot equip a spat item of an origin that they already are. For example, Katarina, a Forgotten and Assassin, cannot equip a Forgotten or Assassin spat.
 
 ## Viewing statistics
-When you click the top left hamburger, you will see some statistics pages. ss
+When you click the top left hamburger, you will see some statistics pages.
+
+<img src="demo/sidebar.jpg" height="375">
 
 ### Home
 You will see a list of your last 10 games. Each game will show your final placement, final team comp, team traits, and each champion's items.
@@ -69,7 +71,9 @@ Then you will see the items you got from armory, carousel, and pve. You can also
 <img src="demo/Home.jpg" height="375"> <img src="demo/Game Stats.jpg" height="375">
 
 ### Gold, Health, Level, and Placement
-ss
+
+<img src="demo/gold.jpg" height="375">
+
 These pages will show you the average gold/health/level/placement per stage, separated by the end game placement. For example, suppose you had three games, all that only lasted two stages:
 - Game 1: stage 1 had 1 gold, stage 2 had 5 gold, and you placed 2nd.
 - Game 2: stage 1 had 5 gold, stage 2 had 3 gold, and you placed 2nd.
@@ -78,25 +82,43 @@ These pages will show you the average gold/health/level/placement per stage, sep
 Then the red line will show 3 gold at stage 1 and 4 gold at stage 2. The purple line will show 0 gold at stage 1 and 0 gold at stage 2.
 The average line shows overall average (aka merging all the placements). In this case, it will show 2.33 gold at stage 1 and 3 gold at stage 2.
 
-You can use the checkboxes to hide certain lines. If a line doesn't appear even when the box is checked, then you have no games where you ended at that placement. The bottom of the graph shows all possible lines. ss
+You can use the checkboxes to hide certain lines. If a line doesn't appear even when the box is checked, then you have no games where you ended at that placement. The bottom of the graph shows all possible lines.
+
+<img src="demo/gold excluding 2.jpg" height="375">
 
 ### Item Stats
 This page will help you learn which items get you the best results.
 
-Under "Average Placement by Item", you can enter an item name and view your average final placement when you got that item at a specific stage. For example, in the following screenshot, my average final placement is 2.5 when I got a Tear of the Goddess from stage 4 armory (aka 4-2). ss
+Under "Average Placement by Item", you can enter an item name and view your average final placement when you got that item at a specific stage. For example, in the following screenshot, my average final placement is 2 when I got a Tear of the Goddess from stage 2 armory (aka 2-2).
 
-Under "Best Items", you can view the items that give the highest average final placement. For example, in the following screenshot, when I get a Tear of the Goddess from stage 4 armory I have the highest average placement compared to all other items. 
+<img src="demo/avg placement by item.jpg" width="200">
+
+Under "Best Items", you can view the items that give the highest average final placement. For example, in the following screenshot, when I get a Tear of the Goddess from stage 2 armory I have the highest average placement compared to all other items. 
+
+<img src="demo/best items.jpg" width="200">
 
 ### Final Comp Stats
 This page will help you learn which champions perform the best and which team compositions you are successful with.
 
-Under "Average Placement by Trait", you can enter a trait and view your average final placement when your team composition has that trait. It is also divided by trait levels. ss
+Under "Average Placement by Trait", you can enter a trait and view your average final placement when your team composition has that trait. It is also divided by trait levels.
+
+<img src="demo/avg placement by trait.jpg" width="200">
 
 Under "Best Final Traits", you can view the traits that give the highest average final placement. These are sorted by best placement, count, and the trait level.
 
-Under "Average Placement by Champion", you can enter a champion and view your average final placement when the champion is in your final team. The items that are most successful on the champion are shown. ss
+<img src="demo/best final traits.jpg" width="200">
+
+Under "Average Placement by Champion", you can enter a champion and view your average final placement when the champion is in your final team. The items that are most successful on the champion are shown.
+
+<img src="demo/avg placement by champ.jpg" width="200">
 
 Under "Best Final Champions", you can view the champions that give the highest average final placement. These are sorted by placement, count, star level, carry percentage, and number of items.
+
+<img src="demo/best final champs.jpg" width="200">
+
+Under "Average Team Cost Per Placement", you can view a line chart of your final team cost, separated by your final game placement. For example, in the following screenshot my average team cost when I place 2nd is above 71.
+
+<img src="demo/avg team cost per placement.jpg" width="200">
 
 ## Coming up
 ### Features
