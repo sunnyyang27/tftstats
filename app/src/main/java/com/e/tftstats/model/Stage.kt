@@ -105,7 +105,7 @@ interface StageDao {
     fun getMaxStage(): Int
 
     /** Item Stats page */
-    @Query("SELECT MAX(stageNumber) FROM Stage WHERE carouselItem not null or armoryItem not null")
+    @Query("SELECT MAX(stageNumber) FROM Stage WHERE carouselItem != -1 or armoryItem != -1 or pveItems != \"\"")
     fun getMaxStageWithItem(): Int
 
     // Section 1 - not used anymore
