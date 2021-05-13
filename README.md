@@ -68,7 +68,7 @@ You will see a list of your last 10 games. Each game will show your final placem
 To view more information about a game, you can tap anywhere on the game's row. 
 Then you will see the items you got from armory, carousel, and pve. You can also see the progression of gold, health, level, and placements. 
 
-<img src="demo/Home.jpg" height="375"> <img src="demo/Game Stats.jpg" height="375">
+<img src="demo/home.jpg" height="375"> <img src="demo/Game Stats.jpg" height="375">
 
 ### Gold, Health, Level, and Placement
 
@@ -104,7 +104,7 @@ Under "Average Placement by Trait", you can enter a trait and view your average 
 
 <img src="demo/avg placement by trait.jpg" width="200">
 
-Under "Best Final Traits", you can view the traits that give the highest average final placement. These are sorted by best placement, count, and the trait level.
+Under "Best Final Traits", you can view the traits that give the highest average final placement. These are sorted by best placement, count, and the trait level. You can press and hold the trait image to view the trait name and level.
 
 <img src="demo/best final traits.jpg" width="200">
 
@@ -144,22 +144,6 @@ Acceptance criteria:
 - next to the label "Last 10 games", there is a selector to go to the next 10 games or select a specific page of games
 - when a page has been selected, the games should update
 - replace the label with "Games 1-10" and update based on the current page
-
-#### Trait UI improvements
-As a user, I want all the trait images to have the same size and be coloured depending on the trait level. (ss)
-
-Acceptance criteria:
-- trait images have the same size. Currently Ironclad is too small
-- On Home page, traits should be coloured depending on trait level.
-- On Final Comp Stats page, under "Average Placement by Trait", remove the trait image next to the input, replace the first column's rows with the coloured trait image, and add a tooltip as "TraitLevel"
-- On Final Comp Stats page, under "Best Final Traits", remove "Trait" column, 
-the trait image, and add a tooltip as "TraitName TraitLevel"
-- the colouring should match how TFT does it in game
-
-Design:
-- trait images should be replaced with svg that have an outline and a fill
-- the outline and fill colour can be changed based on trait level
-- determine logic for associating a trait level with a colour
 
 #### Final Comp page: display current traits
 As a user, when I add champions to my team I want to see the number of units per trait.
