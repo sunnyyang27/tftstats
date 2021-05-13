@@ -63,7 +63,7 @@ class GameStatsFragment : Fragment() {
         // Item stats
         val itemTable = root.findViewById<TableLayout>(R.id.game_item_table)
         for (stage in stages) {
-            val row = Helper.createRow(context)
+            val row = Helper.createRow(context, 5)
             val label = createTextView(stage.stageNumber.toString(), true)
             row.addView(label)
             // Armory and carousel items
@@ -74,12 +74,12 @@ class GameStatsFragment : Fragment() {
             val linearLayout = LinearLayout(context)
             linearLayout.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
             linearLayout.orientation = LinearLayout.HORIZONTAL
-            val layoutParams = TableRow.LayoutParams(itemSize, itemSize)
-            layoutParams.marginEnd = 3
-            layoutParams.bottomMargin = 3
-            for (item in pve) {
-                if (item == -1) continue
-                val iv = Helper.createImageView(context, Helper.getItem(item).imagePath, layoutParams)
+            val layoutParams = LinearLayout.LayoutParams(itemSize, itemSize)
+            layoutParams.marginEnd = 5
+            for (itemId in pve) {
+                if (itemId == -1) continue
+                val item = Helper.getItem(itemId)
+                val iv = Helper.createImageView(context, item.imagePath, layoutParams, item.name)
                 linearLayout.addView(iv)
             }
             row.addView(linearLayout)
@@ -117,16 +117,18 @@ class GameStatsFragment : Fragment() {
         }
     }
 
-    private fun createTextView(text: String, isBold: Boolean = false) : TextView {
+    private fun createTextView(text: String, isLabel: Boolean = false) : TextView {
         val tv = TextView(context)
         tv.text = text
         tv.textSize = 20f
         tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tv.setTextAppearance(R.style.TextAppearance_AppCompat_Body1)
-        if (isBold) tv.setTypeface(null, Typeface.BOLD)
         val layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
         layoutParams.marginEnd = 10
-        layoutParams.bottomMargin = 5
+        if (isLabel) {
+            tv.setTypeface(null, Typeface.BOLD)
+            layoutParams.bottomMargin = 5
+        }
         tv.layoutParams = layoutParams
         return tv
     }
@@ -136,9 +138,8 @@ class GameStatsFragment : Fragment() {
             createTextView("N/A")
         } else {
             val layoutParams = TableRow.LayoutParams(itemSize, itemSize)
-            layoutParams.marginEnd = 3
-            layoutParams.bottomMargin = 3
-            Helper.createImageView(context, Helper.getItem(itemId).imagePath, layoutParams)
+            val item = Helper.getItem(itemId)
+            Helper.createImageView(context, item.imagePath, layoutParams, item.name)
         }
     }
 }

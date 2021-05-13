@@ -41,15 +41,14 @@ class AddItemFragment : Fragment() {
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
         val shadowItemTable = root.findViewById<TableLayout>(R.id.shadow_item_table)
-        createTable(root, Helper.itemTable, itemTable)
-        createTable(root, Helper.shadowItemTable, shadowItemTable)
+        createTable(Helper.itemTable, itemTable)
+        createTable(Helper.shadowItemTable, shadowItemTable)
 
         if (selectedItemId >= 0) {
             val itemSelectedImage = root.findViewById<ImageView>(R.id.item_selected_image)
             val item = Helper.getItem(selectedItemId)
             itemSelectedImage.setImageResource(item.imagePath)
             itemSelectedImage.tag = selectedItemId
-            root.findViewById<TextView>(R.id.item_selected_name).text = item.name
         }
 
         // Switch
@@ -72,13 +71,13 @@ class AddItemFragment : Fragment() {
         return root
     }
 
-    private fun createTable(root: View, tableSource: Array<Array<Item?>>, champTable: TableLayout) {
+    private fun createTable(tableSource: Array<Array<Item?>>, champTable: TableLayout) {
         // Row 0-9
         for (items in tableSource) {
             val row = Helper.createRow(context)
             for (item in items) {
                 if (item == null) {
-                    row.addView(createImageView(-1, 0))
+                    row.addView(createImageView())
                     continue
                 }
                 row.addView(createImageView(item.id, item.imagePath))
@@ -89,7 +88,7 @@ class AddItemFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun createImageView(itemId: Int, imagePath: Int) : ImageView {
+    private fun createImageView(itemId: Int = -1, imagePath: Int = 0, itemName: String = "") : ImageView {
         val layoutParams = TableRow.LayoutParams(itemSize, TableRow.LayoutParams.WRAP_CONTENT)
         layoutParams.marginEnd = 3
         layoutParams.bottomMargin = 3
@@ -114,20 +113,19 @@ class AddItemFragment : Fragment() {
             }
 
             val itemSelectedImage = root.findViewById<ImageView>(R.id.item_selected_image)
-            val itemSelectedName = root.findViewById<TextView>(R.id.item_selected_name)
             // if this is unselect, don't highlight item, empty item selected and name
             if (currentImageClicked == iv.id) {
                 currentImageClicked = -1
                 itemSelectedImage.setImageResource(0)
                 itemSelectedImage.tag = -1
-                itemSelectedName.text = ""
+                itemSelectedImage.tooltipText = ""
             } else {
                 currentImageClicked = iv.id
 
                 // Update image selected
                 itemSelectedImage.setImageResource(imagePath)
                 itemSelectedImage.tag = itemId
-                itemSelectedName.text = Helper.getItem(itemId).name
+                itemSelectedImage.tooltipText = itemName
             }
             false
         }

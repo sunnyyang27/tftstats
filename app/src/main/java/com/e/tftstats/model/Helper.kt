@@ -238,7 +238,7 @@ class Helper {
             addShadowItem(shadowSpatula)
 
             addShadowItem("Caustic Deathblade", R.drawable.shadowdeathblade, sword, sword)
-            addShadowItem("Evil Giant Slayer", R.drawable.shadowgiantslayer, sword, bow)
+            addShadowItem("Spectral Giant Slayer", R.drawable.shadowgiantslayer, sword, bow)
             addShadowItem("Guardian Fallen Angel", R.drawable.shadowguardianangel, sword, chain, true)
             addShadowItem("Riskthirster", R.drawable.shadowbloodthirster, sword, cloak)
             addShadowItem("Hextech Gunblade Of Immortality", R.drawable.shadowgunblade, sword, rod)
@@ -464,13 +464,14 @@ class Helper {
             return row
         }
 
-        fun createImageView(context: Context?, src: Int, layoutParams: ViewGroup.LayoutParams) : ImageView {
+        fun createImageView(context: Context?, src: Int, layoutParams: ViewGroup.LayoutParams, tooltip: String = "") : ImageView {
             val image = ImageView(context)
             image.layoutParams = layoutParams
             image.adjustViewBounds = true
             image.scaleType = ImageView.ScaleType.FIT_CENTER
             image.setImageResource(src)
             image.tag = src
+            image.tooltipText = tooltip
             return image
         }
 

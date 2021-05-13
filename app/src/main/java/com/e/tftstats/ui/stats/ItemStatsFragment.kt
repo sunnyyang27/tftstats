@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.e.tftstats.MainActivity
 import com.e.tftstats.R
 import com.e.tftstats.model.Helper
-import com.e.tftstats.model.Helper.Companion.formatStat
 import com.e.tftstats.model.Item
 import com.e.tftstats.model.ItemPlacementTuple
 import kotlin.math.min
@@ -146,7 +145,7 @@ class ItemStatsFragment : Fragment() {
                 row.addView(tv)
                 continue
             }
-            val placement = createTextView(formatStat(itemPlacement))
+            val placement = createTextView(Helper.formatStat(itemPlacement))
             row.addView(placement)
         }
         table.addView(row)
@@ -166,7 +165,9 @@ class ItemStatsFragment : Fragment() {
             val layoutParams = TableRow.LayoutParams(itemSize, TableRow.LayoutParams.WRAP_CONTENT)
             layoutParams.marginEnd = 3
             layoutParams.bottomMargin = 3
-            val iv = Helper.createImageView(context, Helper.getItem(itemPlacement.item).imagePath, layoutParams)
+            val item = Helper.getItem(itemPlacement.item)
+            val iv = Helper.createImageView(context, item.imagePath, layoutParams,
+                "${item.name}, ${Helper.formatStat(itemPlacement.avgPlacement)}")
             row.addView(iv)
         }
         table.addView(row)

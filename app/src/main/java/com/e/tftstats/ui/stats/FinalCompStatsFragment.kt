@@ -182,11 +182,11 @@ class FinalCompStatsFragment : Fragment() {
     private fun section4Table() {
         val table = root.findViewById<TableLayout>(R.id.best_champions_table)
         // Header
-        table.addView(createHeaderRow(arrayOf("", "Name", "Count", "Placement", "Star level", "Carry", "Items")))
+        table.addView(createHeaderRow(arrayOf("", "Count", "Placement", "Star level", "Carry", "Items")))
         val top3 = teamDao.getAvgChampStatsTopThree()
         for (champStats in top3) {
             val statsRow = createSection4Row(champStats.champId,
-                arrayOf(Helper.getChampion(champStats.champId).name, champStats.count.toString(), formatStat(champStats.avgPlacement),
+                arrayOf(champStats.count.toString(), formatStat(champStats.avgPlacement),
                 formatStat(champStats.avgStarLevel), formatStat(champStats.carryCount * 100 / champStats.count.toDouble()) + "%"),
                 getMostSuccessfulItems(champStats.champId), true)
             table.addView(statsRow)
@@ -195,11 +195,12 @@ class FinalCompStatsFragment : Fragment() {
 
     private fun createSection4Row(champId: Int, row: Array<String>, items: List<Int>, includeChampImage: Boolean) : TableRow {
         // 1. Stats Row
-        val statsRow = createRow(row, includeChampImage)
+        val statsRow = createRow(row)
         // 2. Champ Image
         if (includeChampImage) {
-            val imageParams = TableRow.LayoutParams(70, TableRow.LayoutParams.WRAP_CONTENT)
-            val champImage = Helper.createImageView(context, Helper.getChampion(champId).imagePath, imageParams)
+            val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
+            val champion = Helper.getChampion(champId)
+            val champImage = Helper.createImageView(context, champion.imagePath, imageParams, champion.name)
             statsRow.addView(champImage, 0)
         }
         // 3. Champ items
@@ -209,9 +210,10 @@ class FinalCompStatsFragment : Fragment() {
             linearLayout.orientation = LinearLayout.HORIZONTAL
             val layoutParams = TableRow.LayoutParams(50, 50)
             layoutParams.marginEnd = 3
-            for (item in items) {
-                if (item == -1) continue
-                val iv = Helper.createImageView(context, Helper.getItem(item).imagePath, layoutParams)
+            for (itemId in items) {
+                if (itemId == -1) continue
+                val item = Helper.getItem(itemId)
+                val iv = Helper.createImageView(context, item.imagePath, layoutParams, item.name)
                 linearLayout.addView(iv)
             }
             statsRow.addView(linearLayout)

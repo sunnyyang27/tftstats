@@ -56,19 +56,6 @@
             android:layout_toEndOf="@+id/item_selected_label"
             android:layout_alignTop="@+id/item_selected_label"
             android:layout_alignBottom="@+id/item_selected_label" />
-
-        <TextView
-            android:id="@+id/item_selected_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textSize="@dimen/text_caption_size"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_vertical"
-            android:layout_toEndOf="@+id/item_selected_image"
-            android:layout_alignTop="@+id/item_selected_image"
-            android:layout_alignBottom="@+id/item_selected_image" />
     </RelativeLayout>
 
     <Button
