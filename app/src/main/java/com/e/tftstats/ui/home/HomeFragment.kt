@@ -1,5 +1,6 @@
 package com.e.tftstats.ui.home
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -189,13 +190,13 @@ class HomeFragment : Fragment() {
             if (origin.key == Champion.Origin.GODKING && origin.value > 1) continue
             val trait = Helper.getTrait(origin.key)
             val levels = trait.levels.reversedArray()
-            for (level in levels) {
+            for ((i, level) in levels.withIndex()) {
                 if (origin.value >= level) {
                     // Create and Add to trait layout
-                    val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 50)
-                    imageParams.marginEnd = 5
+                    val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
                     val traitImage = Helper.createImageView(context, trait.imagePath, imageParams)
                     traitImage.tooltipText = "${Helper.originName(origin.key)} $level"
+                    traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, levels.size), null))
                     traitLayout.addView(traitImage)
                     break
                 }

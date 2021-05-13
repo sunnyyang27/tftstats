@@ -19,4 +19,9 @@
     <color name="orchid">#c441da</color>
     <color name="golden_rod">#edad37</color>
 
+    <color name="trait_bronze">#6f4939</color>
+    <color name="trait_silver">#858585</color>
+    <color name="trait_gold">#a27207</color>
+    <color name="trait_plat">#ddddf8</color>
+
 </resources>

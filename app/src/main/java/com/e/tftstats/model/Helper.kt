@@ -567,6 +567,29 @@ class Helper {
             return s
         }
 
+        // Trait image based on level
+        // 8, 6, 4, 2 -> index = 0, 1, 2, 3
+        // 6, 4, 2 -> 0, 1, 2 -> 1, 2, 3
+        // 4, 2 -> 0, 1 -> 1, 2
+        // 1 -> 0 -> 1
+        fun getTraitTint(index: Int, numLevels: Int) : Int {
+            val colors = arrayOf(R.color.trait_plat, R.color.trait_gold, R.color.trait_silver, R.color.trait_bronze)
+            return when {
+                (numLevels == 4) -> colors[index]
+                else -> colors[index + 1]
+            }
+        }
+
+        // Levels is in decreasing order
+        fun getTraitTint(desiredLevel: Int, levels: Array<Int>) : Int {
+            for ((i, level) in levels.withIndex()) {
+                if (desiredLevel >= level) {
+                    return getTraitTint(i, levels.size)
+                }
+            }
+            return getTraitTint(0, levels.size)
+        }
+
         /** Math helpers */
         fun Double.round(decimals: Int): Double {
             var multiplier = 1.0

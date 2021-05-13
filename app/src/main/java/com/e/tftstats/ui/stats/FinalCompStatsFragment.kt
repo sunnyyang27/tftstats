@@ -1,5 +1,6 @@
 package com.e.tftstats.ui.stats
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -89,17 +90,21 @@ class FinalCompStatsFragment : Fragment() {
             }
         }
         // Create header row
-        table.addView(createHeaderRow(arrayOf("Trait level", "Count", "Placement")))
+        table.addView(createHeaderRow(arrayOf("", "Count", "Placement")))
         // Create row per trait level
-        for (level in selected.levels) {
+        val size = selected.levels.size
+        for ((i, level) in selected.levels.withIndex()) {
             val pair = statsMap[level]
             val statsRow = createRow(
-                arrayOf("$selected $level", pair?.first?.toString() ?: "N/A", pair?.second?.toString() ?: "N/A"), true
+                arrayOf(pair?.first?.toString() ?: "N/A", pair?.second?.toString() ?: "N/A")
             )
+            // Add trait image
+            val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
+            val traitImage = Helper.createImageView(context, selected.imagePath, imageParams, level.toString())
+            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(size - i - 1, size), null))
+            statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }
-        val traitImage = view!!.findViewById<ImageView>(R.id.trait_image)
-        traitImage.setImageResource(selected.imagePath)
     }
 
     private fun section2Table() {
@@ -151,15 +156,18 @@ class FinalCompStatsFragment : Fragment() {
 
         val table = root.findViewById<TableLayout>(R.id.best_traits_table)
         // Header
-        table.addView(createHeaderRow(arrayOf("", "Trait", "Count", "Placement")))
+        table.addView(createHeaderRow(arrayOf("", "Count", "Placement")))
         for (pair in top3) {
-            val stats = arrayOf("${Helper.originName(pair.first)} ${pair.second}",
+            val stats = arrayOf(
                 statsMap[pair]!!.second.toString(),
                 statsMap[pair]!!.first.toString())
-            val statsRow = createRow(stats, true)
+            val statsRow = createRow(stats)
             // Add trait image
-            val imageParams = TableRow.LayoutParams(50, TableRow.LayoutParams.WRAP_CONTENT)
-            val traitImage = Helper.createImageView(context, Helper.getTrait(pair.first).imagePath, imageParams)
+            val trait = Helper.getTrait(pair.first)
+            val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
+            val traitImage = Helper.createImageView(context, trait.imagePath, imageParams,
+                "${Helper.originName(pair.first)} ${pair.second}")
+            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(pair.second, trait.levels.reversedArray()), null))
             statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }
@@ -275,7 +283,7 @@ class FinalCompStatsFragment : Fragment() {
     }
 
     private fun createRow(columns: Array<String>? = null, rowLabel: Boolean = false) : TableRow {
-        val row = Helper.createRow(context)
+        val row = Helper.createRow(context, 5)
         var isBold = rowLabel
         if (columns == null)
             return row

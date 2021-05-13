@@ -19,25 +19,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <AutoCompleteTextView
+            android:id="@+id/trait_name"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <AutoCompleteTextView
-                android:id="@+id/trait_name"
-                android:layout_width="wrap_content"
-                android:minWidth="150dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:hint="Trait name" />
-
-            <ImageView
-                android:id="@+id/trait_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
-
-        </LinearLayout>
+            android:textAlignment="center"
+            android:hint="Trait name" />
 
         <TableLayout
             android:id="@+id/placement_by_trait_table"
