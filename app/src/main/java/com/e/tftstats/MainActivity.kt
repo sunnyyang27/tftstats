@@ -99,9 +99,6 @@ class MainActivity : AppCompatActivity() {
             teamDao.insert(team)
         }
 
-        // Reset currentGame
-        currentGame = GameModel()
-
         // Go back to main page
         val navController = findNavController(R.id.nav_host_fragment)
         val homeId = R.id.nav_home

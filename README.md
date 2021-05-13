@@ -145,17 +145,6 @@ Acceptance criteria:
 - when a page has been selected, the games should update
 - replace the label with "Games 1-10" and update based on the current page
 
-#### Final Comp page: display current traits
-As a user, when I add champions to my team I want to see the number of units per trait.
-
-Acceptance criteria:
-- the trait images are displayed in a row
-- each image is coloured based on trait level. This includes an incomplete trait. For example, if there is 1 Dawnbringer then show the image outline with a transparent fill
-- each image has a tooltip with the exact number of units contributing to the trait. For example, if there are 3 Dawnbringer then the tooltip should show 3
-- as champions are added, edited, or removed, traits should be updated
-- trait images are sorted by level in descending order. For example, Dawnbringer 4 should be left of Coven 3.
-- if there are many traits, the row should not be cut off. Add a horizontal scroll
-
 #### Add a statistics page for stage and round of elimination
 As a user, I want to know my average placement when I die at stage _ round _ .
 

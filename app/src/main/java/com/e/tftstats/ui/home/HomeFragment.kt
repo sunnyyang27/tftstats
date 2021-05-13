@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.e.tftstats.MainActivity
 import com.e.tftstats.R
 import com.e.tftstats.model.*
+import com.e.tftstats.ui.game.GameModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlin.math.*
 
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
 
         val createGame = root.findViewById<FloatingActionButton>(R.id.new_game)
         createGame.setOnClickListener {
+            MainActivity.currentGame = GameModel()
             root.findNavController().navigate(R.id.nav_stage)
         }
 
@@ -71,7 +73,7 @@ class HomeFragment : Fragment() {
                     //Remove the listener before proceeding
                     root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     // measure your views here
-                    val distance = measureDistance(bigScroll, root.findViewById(R.id.new_game))
+                    val distance = Helper.measureDistance(bigScroll, root.findViewById(R.id.new_game))
                     constraintSet.constrainMaxHeight(R.id.games_scroll, distance)
                     constraintSet.applyTo(constraintLayout)
                 }
@@ -194,8 +196,7 @@ class HomeFragment : Fragment() {
                 if (origin.value >= level) {
                     // Create and Add to trait layout
                     val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
-                    val traitImage = Helper.createImageView(context, trait.imagePath, imageParams)
-                    traitImage.tooltipText = "${Helper.originName(origin.key)} $level"
+                    val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} $level")
                     traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, levels.size), null))
                     traitLayout.addView(traitImage)
                     break
@@ -227,14 +228,5 @@ class HomeFragment : Fragment() {
         val horizontalScrollParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         horizontalScrollParams.bottomMargin = 20
         gamesLayout.addView(horizontalScroll, horizontalScrollParams)
-    }
-
-    private fun measureDistance(view1: View, view2: View) : Int {
-        view1.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val location1 = IntArray(2)
-        view1.getLocationInWindow(location1)
-        val location2 = IntArray(2)
-        view2.getLocationInWindow(location2)
-        return abs(location1[1] - location2[1])
     }
 }

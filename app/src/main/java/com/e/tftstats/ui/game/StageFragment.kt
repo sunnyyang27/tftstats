@@ -137,9 +137,6 @@ class StageFragment : Fragment() {
         }
         prevBtn.setOnClickListener {
             currentGame.currentStageDisplayed--
-            if (currentGame.currentStageDisplayed < 1) {
-                MainActivity.currentGame = GameModel()
-            }
             requireActivity().onBackPressed()
         }
         nextBtn.setOnClickListener {

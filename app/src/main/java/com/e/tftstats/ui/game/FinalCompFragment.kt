@@ -1,30 +1,32 @@
 package com.e.tftstats.ui.game
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.e.tftstats.MainActivity
 import com.e.tftstats.R
+import com.e.tftstats.model.Champion
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Team
+import com.google.android.flexbox.FlexboxLayout
 
 class FinalCompFragment : Fragment() {
+    private lateinit var root: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_final_comp, container, false)
-        loadTable(root)
+        root = inflater.inflate(R.layout.fragment_final_comp, container, false)
+        loadTable()
+        loadTraitsRow()
 
         // Button listeners
         val addRowBtn = root.findViewById<Button>(R.id.add_row)
@@ -34,14 +36,14 @@ class FinalCompFragment : Fragment() {
         return root
     }
 
-    private fun loadTable(root: View) {
+    private fun loadTable() {
         // Load table
         for (team in MainActivity.currentGame.teamComp) {
-            loadTeam(team.key, team.value, root)
+            loadTeam(team.key, team.value)
         }
     }
 
-    private fun loadTeam(id: Int, team: Team, root: View) {
+    private fun loadTeam(id: Int, team: Team) {
         // In row, create "edit" and "delete" button
         val champ = Helper.getChampion(team.champId)
 
@@ -73,8 +75,9 @@ class FinalCompFragment : Fragment() {
         // Delete button
         val delete = createButton(root.context, getString(R.string.delete))
         delete.setOnClickListener {
-            MainActivity.currentGame.teamComp.remove(tv.id)
+            MainActivity.currentGame.teamComp.remove(id)
             champTable.removeView(row)
+            loadTraitsRow()
         }
 
         // Stars
@@ -103,6 +106,36 @@ class FinalCompFragment : Fragment() {
         row.addView(delete)
 
         champTable.addView(row, TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT))
+    }
+
+    private fun loadTraitsRow() {
+        // Evaluate traits
+        val traitLayout = root.findViewById<FlexboxLayout>(R.id.team_traits_layout)
+        traitLayout.removeAllViews()
+        val traitMap = Helper.calculateTeamsTraits(MainActivity.currentGame.teamComp.values.toList())
+        val sortedTraitMap = traitMap.map { (key, value ) -> key to value}.sortedByDescending { (_, value) -> value }.toMap()
+        val imageParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, 100)
+        for (origin in sortedTraitMap) {
+            val trait = Helper.getTrait(origin.key)
+            val traitImage = Helper.createImageView(context, trait.imagePath, imageParams)
+            traitImage.alpha = 0.1f
+
+            var fullLevel = trait.levels[0]             // default to first in case no level is met
+            if (origin.key != Champion.Origin.GODKING || origin.value == 1) {
+                val levels = trait.levels.reversedArray()
+                for ((i, level) in levels.withIndex()) {
+                    if (origin.value >= level) {
+                        traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, levels.size), null))
+                        traitImage.alpha = 1f
+                        fullLevel = level
+                        break
+                    }
+                }
+            }
+            val tooltip = "${Helper.originName(origin.key)} ${origin.value}/$fullLevel"
+            traitImage.tooltipText = tooltip
+            traitLayout.addView(traitImage)
+        }
     }
 
     private fun onEditChamp(id: Int, champId: Int) {

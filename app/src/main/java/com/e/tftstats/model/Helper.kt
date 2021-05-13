@@ -23,6 +23,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 class Helper {
@@ -425,9 +426,16 @@ class Helper {
         }
 
         fun calculateTeamsTraits(teamComp: List<Team>) : Map<Origin, Int> {
+            val distinctChamps = teamComp.groupingBy { it.champId }.aggregate {key, accumulator: StringBuilder?, element, first ->
+                if (first)
+                    StringBuilder().append(element.items)
+                else
+                    accumulator!!.append(",").append(element.items)
+            }
+
             val traitMap = HashMap<Origin, Int>() // Trait, count
-            for (team in teamComp) {
-                val champ = getChampion(team.champId)
+            for (team in distinctChamps) {
+                val champ = getChampion(team.key)
                 champ.origins.forEach {
                     val count = traitMap[it]
                     if (count == null)
@@ -436,7 +444,7 @@ class Helper {
                         traitMap[it] = count + 1
                 }
                 // Spat item check
-                val items = team.items.split(",").map { if (it.toInt() == -1) null else getItem(it.toInt()) }
+                val items = team.value!!.split(",").map { if (it.toInt() == -1) null else getItem(it.toInt()) }
                     .filter { item -> item != null && item is SpatItem }
                 items.forEach {
                     if (it != null && it is SpatItem) {
@@ -613,6 +621,15 @@ class Helper {
         fun getLevelXp(level: Int, xp: Int) : Double {
             val maxXp = xpTable[level - 1]
             return level + if (maxXp > 0) (xp.toDouble() / maxXp) else 0.0
+        }
+
+        fun measureDistance(view1: View, view2: View) : Int {
+            view1.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+            val location1 = IntArray(2)
+            view1.getLocationInWindow(location1)
+            val location2 = IntArray(2)
+            view2.getLocationInWindow(location2)
+            return abs(location1[1] - location2[1])
         }
     }
 }
