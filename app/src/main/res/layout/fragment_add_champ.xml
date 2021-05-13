@@ -8,173 +8,196 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
+        <LinearLayout
+            android:id="@+id/image_trait_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/champ_image"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="121dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+            <TableLayout
+                android:id="@+id/champ_trait_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp">
+            </TableLayout>
+        </LinearLayout>
+
         <AutoCompleteTextView
             android:id="@+id/champ_name"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_trait_layout"
+            android:layout_centerInParent="true"
             android:minWidth="150dp"
-            android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:hint="Name"
-            android:layout_alignParentTop="true" />
+            android:hint="Name" />
 
-        <ImageView
-            android:id="@+id/champ_image"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/champ_name"/>
-
-        <TableLayout
-            android:id="@+id/champ_trait_table"
+        <LinearLayout
+            android:id="@+id/star_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/champ_image">
-        </TableLayout>
-
-        <TextView
-            android:id="@+id/star_label"
-            android:layout_width="@dimen/text_width"
-            android:layout_height="@dimen/text_height"
-            android:gravity="center_vertical"
-            android:text="Star level:"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="@dimen/text_body_size"
-            android:layout_below="@+id/champ_name"/>
-
-        <Spinner
-            android:id="@+id/star_spin"
-            android:layout_width="@dimen/spin_width"
-            android:layout_height="@dimen/text_height"
-            android:background="@android:color/transparent"
-            android:textAlignment="center"
             android:layout_below="@+id/champ_name"
-            android:layout_toEndOf="@+id/star_label" />
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/star_label"
+                android:layout_width="@dimen/text_width"
+                android:layout_height="@dimen/text_height"
+                android:gravity="center_vertical"
+                android:text="Star level:"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="@dimen/text_body_size" />
+
+            <Spinner
+                android:id="@+id/star_spin"
+                android:layout_width="@dimen/spin_width"
+                android:layout_height="@dimen/text_height"
+                android:background="@android:color/transparent"
+                android:textAlignment="center" />
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/carry_check"
             android:layout_width="@dimen/text_width"
             android:layout_height="@dimen/text_height"
+            android:layout_below="@+id/star_layout"
+            android:layout_centerInParent="true"
             android:text="Carry?"
-            android:textSize="@dimen/text_body_size"
-            android:layout_below="@+id/star_spin" />
+            android:textSize="@dimen/text_body_size" />
 
     <!--    Items-->
-        <TextView
-            android:id="@+id/champ_items_label"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/text_height"
-            android:gravity="center_vertical"
-            android:text="Items: "
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="@dimen/text_body_size"
-            android:layout_below="@+id/carry_check" />
-
-        <TableLayout
-            android:id="@+id/champ_items_table"
+        <LinearLayout
+            android:id="@+id/item_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/carry_check"
-            android:layout_toEndOf="@+id/champ_items_label" >
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
-            <TableRow>
-                <Button
-                    android:id="@+id/champ_item_1_button"
-                    android:layout_width="@dimen/input_width"
-                    android:layout_height="@dimen/text_height"
-                    android:background="@android:color/transparent"
-                    android:text="+"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_green_light"/>
-                <ImageView
-                    android:id="@+id/champ_item_1_image"
-                    android:layout_width="@dimen/item_size"
-                    android:layout_height="@dimen/item_size"
-                    android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_gravity="center"/>
-                <Button
-                    android:id="@+id/champ_item_1_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clear"
-                    android:visibility="gone"/>
-            </TableRow>
-            <TableRow>
-                <Button
-                    android:id="@+id/champ_item_2_button"
-                    android:layout_width="@dimen/input_width"
-                    android:layout_height="@dimen/text_height"
-                    android:background="@android:color/transparent"
-                    android:text="+"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_green_light" />
-                <ImageView
-                    android:id="@+id/champ_item_2_image"
-                    android:layout_width="@dimen/item_size"
-                    android:layout_height="@dimen/item_size"
-                    android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_gravity="center"/>
-                <Button
-                    android:id="@+id/champ_item_2_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clear"
-                    android:visibility="gone"/>
-            </TableRow>
-            <TableRow>
-                <Button
-                    android:id="@+id/champ_item_3_button"
-                    android:layout_width="@dimen/input_width"
-                    android:layout_height="@dimen/text_height"
-                    android:background="@android:color/transparent"
-                    android:text="+"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_green_light"/>
-                <ImageView
-                    android:id="@+id/champ_item_3_image"
-                    android:layout_width="@dimen/item_size"
-                    android:layout_height="@dimen/item_size"
-                    android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:layout_gravity="center"/>
-                <Button
-                    android:id="@+id/champ_item_3_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clear"
-                    android:visibility="gone"/>
-            </TableRow>
-        </TableLayout>
+            <TextView
+                android:id="@+id/champ_items_label"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/text_height"
+                android:gravity="center_vertical"
+                android:text="Items: "
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="@dimen/text_body_size" />
+
+            <TableLayout
+                android:id="@+id/champ_items_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TableRow>
+                    <Button
+                        android:id="@+id/champ_item_1_button"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="@dimen/text_height"
+                        android:background="@android:color/transparent"
+                        android:text="+"
+                        android:textSize="30sp"
+                        android:textColor="@android:color/holo_green_light"/>
+                    <ImageView
+                        android:id="@+id/champ_item_1_image"
+                        android:layout_width="@dimen/item_size"
+                        android:layout_height="@dimen/item_size"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:visibility="gone"
+                        android:focusable="true"
+                        android:clickable="true"/>
+                    <Button
+                        android:id="@+id/champ_item_1_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clear"
+                        android:visibility="gone"/>
+                </TableRow>
+                <TableRow>
+                    <Button
+                        android:id="@+id/champ_item_2_button"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="@dimen/text_height"
+                        android:background="@android:color/transparent"
+                        android:text="+"
+                        android:textSize="30sp"
+                        android:textColor="@android:color/holo_green_light" />
+                    <ImageView
+                        android:id="@+id/champ_item_2_image"
+                        android:layout_width="@dimen/item_size"
+                        android:layout_height="@dimen/item_size"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:visibility="gone"
+                        android:focusable="true"
+                        android:clickable="true"/>
+                    <Button
+                        android:id="@+id/champ_item_2_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clear"
+                        android:visibility="gone"/>
+                </TableRow>
+                <TableRow>
+                    <Button
+                        android:id="@+id/champ_item_3_button"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="@dimen/text_height"
+                        android:background="@android:color/transparent"
+                        android:text="+"
+                        android:textSize="30sp"
+                        android:textColor="@android:color/holo_green_light"/>
+                    <ImageView
+                        android:id="@+id/champ_item_3_image"
+                        android:layout_width="@dimen/item_size"
+                        android:layout_height="@dimen/item_size"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:visibility="gone"
+                        android:focusable="true"
+                        android:clickable="true"/>
+                    <Button
+                        android:id="@+id/champ_item_3_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clear"
+                        android:visibility="gone"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </RelativeLayout>
 
     <Button
         android:id="@+id/addchamp_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:text="Add" />
 
     <Button
         android:id="@+id/addchamp_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:visibility="gone"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -181,12 +181,10 @@ class AddChampFragment : Fragment() {
         // Update image and trait name
         for (origin in selected.origins) {
             val row = Helper.createRow(context, 10)
-            var layoutParams = TableRow.LayoutParams(100, 100)
+            val layoutParams = TableRow.LayoutParams(100, 100)
             val traitImage = Helper.createImageView(context, Helper.getTrait(origin).imagePath, layoutParams)
 
             val traitLabel = TextView(context)
-            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, 100)
-            traitLabel.layoutParams = layoutParams
             traitLabel.text = Helper.getTrait(origin).toString()
             traitLabel.setTextAppearance(R.style.TextAppearance_AppCompat_Caption)
             traitLabel.textSize = 14f
