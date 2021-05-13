@@ -10,7 +10,7 @@ import com.github.mikephil.charting.charts.LineChart
 
 class HealthFragment : StatsFragment() {
     override val title: String
-        get() = "Health"
+        get() = getString(R.string.menu_health)
 
     override fun onCreateView(
         inflater: LayoutInflater,

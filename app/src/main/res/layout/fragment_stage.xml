@@ -19,7 +19,7 @@
         android:layout_width="@dimen/text_width"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="Gold:"
+        android:text="@string/gold_colon"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_body_size"
@@ -41,7 +41,7 @@
         android:layout_width="@dimen/text_width"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="Health:"
+        android:text="@string/health_colon"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_body_size"
@@ -64,7 +64,7 @@
         android:layout_height="@dimen/text_height"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
-        android:text="Placement:"
+        android:text="@string/placement_colon"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_body_size"
@@ -86,7 +86,7 @@
         android:layout_height="@dimen/text_height"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
-        android:text="Level:"
+        android:text="@string/level_colon"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_body_size"
@@ -107,7 +107,7 @@
         android:layout_width="@dimen/text_width"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="XP:"
+        android:text="@string/xp_colon"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_body_size"
@@ -128,7 +128,7 @@
         android:id="@+id/died_check"
         android:layout_width="@dimen/text_width"
         android:layout_height="@dimen/text_height"
-        android:text="Died?"
+        android:text="@string/died"
         android:textSize="@dimen/text_body_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/xp_label" />
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Round died:"
+            android:text="@string/round_died"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size" />
@@ -174,7 +174,7 @@
             android:layout_height="@dimen/text_height"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
-            android:text="Armory item:"
+            android:text="@string/armory_item"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size" />
@@ -184,7 +184,7 @@
             android:layout_width="@dimen/input_width"
             android:layout_height="@dimen/text_height"
             android:background="@android:color/transparent"
-            android:text="+"
+            android:text="@string/plus"
             android:textSize="30sp"
             android:textColor="@android:color/holo_green_light" />
 
@@ -212,7 +212,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="Carousel item:"
+            android:text="@string/carousel_item"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size"
@@ -223,7 +223,7 @@
             android:layout_width="@dimen/input_width"
             android:layout_height="@dimen/text_height"
             android:background="@android:color/transparent"
-            android:text="+"
+            android:text="@string/plus"
             android:textSize="30sp"
             android:textColor="@android:color/holo_green_light" />
 
@@ -251,7 +251,7 @@
             android:layout_height="@dimen/text_height"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
-            android:text="PVE items:"
+            android:text="@string/pve_items"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size" />
@@ -267,7 +267,7 @@
                     android:layout_width="@dimen/input_width"
                     android:layout_height="@dimen/text_height"
                     android:background="@android:color/transparent"
-                    android:text="+"
+                    android:text="@string/plus"
                     android:textSize="30sp"
                     android:textColor="@android:color/holo_green_light" />
             </TableRow>
@@ -278,7 +278,7 @@
         android:id="@+id/prev_stage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Previous Stage"
+        android:text="@string/previous_stage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -286,7 +286,7 @@
         android:id="@+id/next_stage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next Stage"
+        android:text="@string/next_stage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -294,7 +294,7 @@
         android:id="@+id/final_comp_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Final Comp"
+        android:text="@string/final_comp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

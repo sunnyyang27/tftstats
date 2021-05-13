@@ -65,20 +65,18 @@ class FinalCompFragment : Fragment() {
         row.addView(tv)
 
         // Edit button
-        val edit = createButton(root.context, "Edit")
+        val edit = createButton(root.context, getString(R.string.edit))
         edit.setOnClickListener {
             onEditChamp(id, team.champId)
         }
 
         // Delete button
-        val delete = createButton(root.context, "Delete")
+        val delete = createButton(root.context, getString(R.string.delete))
         delete.setOnClickListener {
             MainActivity.currentGame.teamComp.remove(tv.id)
             champTable.removeView(row)
         }
 
-//        val size = (MainActivity.screenWidth
-//                - tv.measuredWidth - edit.measuredWidth - delete.measuredWidth - 9) / 6 // resources.getDimensionPixelSize(R.dimen.activity_horizontal_margin) * 2
         // Stars
         for (i in 1..team.starLevel) {
             val layoutParams = TableRow.LayoutParams(size, TableRow.LayoutParams.WRAP_CONTENT)

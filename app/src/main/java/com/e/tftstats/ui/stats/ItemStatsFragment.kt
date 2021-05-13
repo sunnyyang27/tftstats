@@ -39,9 +39,9 @@ class ItemStatsFragment : Fragment() {
         // Section 2
         val section2Table = root.findViewById<TableLayout>(R.id.best_items_table)
         createHeaderRow(section2Table, "Item\\Stage")
-        createSection2Row(section2Table, "Armory", stageDao::getArmoryItemWithMaxPlacementPerStage)
-        createSection2Row(section2Table, "Carousel", stageDao::getCarouselItemWithMaxPlacementPerStage)
-        createSection2Row(section2Table, "PVE", ::getPveItemWithMaxPlacementPerStage)
+        createSection2Row(section2Table, getString(R.string.armory), stageDao::getArmoryItemWithMaxPlacementPerStage)
+        createSection2Row(section2Table, getString(R.string.carousel), stageDao::getCarouselItemWithMaxPlacementPerStage)
+        createSection2Row(section2Table, getString(R.string.pve), ::getPveItemWithMaxPlacementPerStage)
 
         return root
     }
@@ -128,9 +128,9 @@ class ItemStatsFragment : Fragment() {
             val table = root.findViewById<TableLayout>(R.id.placement_by_item_table)
             table.removeAllViews()
             createHeaderRow(table, "Placement\\Stage")
-            createSection1Row(table, selected.id, "Armory", stageDao::getAvgPlacementPerArmoryAndStage)
-            createSection1Row(table, selected.id, "Carousel", stageDao::getAvgPlacementPerCarouselAndStage)
-            createSection1Row(table, selected.id, "PVE", ::getAvgPlacementPerPveAndStage)
+            createSection1Row(table, selected.id, getString(R.string.armory), stageDao::getAvgPlacementPerArmoryAndStage)
+            createSection1Row(table, selected.id, getString(R.string.carousel), stageDao::getAvgPlacementPerCarouselAndStage)
+            createSection1Row(table, selected.id, getString(R.string.pve), ::getAvgPlacementPerPveAndStage)
         }
     }
 

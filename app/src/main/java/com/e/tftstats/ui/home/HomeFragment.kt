@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
 
         // Avg placement
         val avgPlacementLabel = root.findViewById<TextView>(R.id.avg_placement)
-        avgPlacementLabel.text = "Avg placement: ${Helper.getPlacement(gameDao.getAvgPlacement().roundToInt(), resources)}"
+        avgPlacementLabel.text = getString(R.string.avg_placement, Helper.getPlacement(gameDao.getAvgPlacement().roundToInt(), resources))
 
         // Avg stage of death
         val avgStageLabel = root.findViewById<TextView>(R.id.avg_stage_of_death)
@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
         val avg = if (games.isNotEmpty()) total / games.size else 0.0
         val stage = truncate(avg).toInt()
         val round = ((avg - stage) * 7).roundToInt()
-        avgStageLabel.text = "Avg death: stage ${stage}-${round}"
+        avgStageLabel.text = getString(R.string.avg_death, stage, round)
 
         // Last 10 games
         for (i in 0 until min(10, games.size)) {

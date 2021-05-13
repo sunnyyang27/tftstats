@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Average Placement by Trait"
+            android:text="@string/avg_placement_by_trait"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
@@ -25,7 +25,7 @@
             android:minWidth="150dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:hint="Trait name" />
+            android:hint="@string/name" />
 
         <TableLayout
             android:id="@+id/placement_by_trait_table"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Best Final Traits"
+            android:text="@string/best_final_traits"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Average Placement by Champion"
+            android:text="@string/avg_placement_by_champ"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
@@ -70,7 +70,7 @@
                 android:minWidth="200dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:hint="Champion name" />
+                android:hint="@string/name" />
 
             <ImageView
                 android:id="@+id/champion_image"
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Best Final Champions"
+            android:text="@string/best_final_champs"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
-            android:text="Average Team Cost Per Placement"
+            android:text="@string/avg_team_cost_per_placement"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />

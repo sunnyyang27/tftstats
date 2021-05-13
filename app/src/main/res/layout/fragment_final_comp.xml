@@ -24,7 +24,7 @@
             android:id="@+id/add_row"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add row"
+            android:text="@string/add_row"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/champ_table_scroll"/>
     </RelativeLayout>
@@ -33,7 +33,7 @@
         android:id="@+id/finish_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish Game"
+        android:text="@string/finish_game"
         android:onClick="onFinishGameClicked"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>

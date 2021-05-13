@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="Average Placement by Item"
+        android:text="@string/avg_placement_by_item"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/text_title_size"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:minWidth="200dp"
-        android:hint="Item name"
+        android:hint="@string/name"
         android:layout_below="@+id/placement_by_item_label" />
 
     <TableLayout
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
-        android:text="Best Items"
+        android:text="@string/best_items"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/text_title_size"

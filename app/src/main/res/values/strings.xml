@@ -46,5 +46,50 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+    <string name="name">Name</string>
+    <string name="star_level">Star level:</string>
+    <string name="carry">Carry?</string>
+    <string name="items">"Items: "</string>
+    <string name="plus">+</string>
+    <string name="clear">Clear</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="item_selected">"Item selected: "</string>
+    <string name="shadow_items">"Shadow Items "</string>
+    <string name="add_row">Add row</string>
+    <string name="finish_game">Finish game</string>
+    <string name="avg_placement_by_trait">Average Placement by Trait</string>
+    <string name="avg_placement_by_champ">Average Placement by Champion</string>
+    <string name="best_final_traits">Best Final Traits</string>
+    <string name="best_final_champs">Best Final Champions</string>
+    <string name="avg_team_cost_per_placement">Average Team Cost Per Placement</string>
+    <string name="stage_item_table">Stage \\ Item</string>
+    <string name="armory">Armory</string>
+    <string name="carousel">Carousel</string>
+    <string name="pve">PVE</string>
+    <string name="show_stat">"Show stat: "</string>
+    <string name="last_10_games">Last 10 games</string>
+    <string name="avg_placement_by_item">Average Placement by Item</string>
+    <string name="best_items">Best Items</string>
+    <string name="gold_colon">Gold:</string>
+    <string name="health_colon">Health:</string>
+    <string name="placement_colon">Placement:</string>
+    <string name="level_colon">Level:</string>
+    <string name="xp_colon">XP:</string>
+    <string name="armory_item">Armory item:</string>
+    <string name="carousel_item">Carousel item:</string>
+    <string name="pve_items">PVE items:</string>
+    <string name="died">Died?</string>
+    <string name="round_died">Round died:</string>
+    <string name="previous_stage">Previous Stage</string>
+    <string name="next_stage">Next Stage</string>
+    <string name="final_comp">Final Comp</string>
+    <string name="stage_number">Stage %1$d</string>
+    <string name="cancel">Cancel</string>
+    <string name="avg_placement">Avg placement: %1$s</string>
+    <string name="avg_death">Avg death: stage %1$d-%2$d</string>
+    <string name="placement_game">Placement: %1$s</string>
 
 </resources>

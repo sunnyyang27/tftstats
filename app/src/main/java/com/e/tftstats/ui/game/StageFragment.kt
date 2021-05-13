@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.e.tftstats.MainActivity
@@ -29,7 +28,7 @@ class StageFragment : Fragment() {
 
         // Title
         val textView = root.findViewById<TextView>(R.id.text_stage)
-        textView.text = "Stage $currentStage"
+        textView.text = getString(R.string.stage_number, currentStage)
 
         // Placement
         val placementSpin = root.findViewById<Spinner>(R.id.placement_spin)
@@ -134,7 +133,7 @@ class StageFragment : Fragment() {
         // Buttons
         val prevBtn = root.findViewById<Button>(R.id.prev_stage)
         if (currentStage == 1) {
-            prevBtn.text = "Cancel"
+            prevBtn.text = getString(R.string.cancel)
         }
         prevBtn.setOnClickListener {
             currentGame.currentStageDisplayed--
@@ -169,8 +168,6 @@ class StageFragment : Fragment() {
             MainActivity.currentGame.stages.add(Stage())
             createPveItemsTable(emptyMap())
         }
-
-//        createBackPressed()
 
         return root
     }
@@ -278,7 +275,7 @@ class StageFragment : Fragment() {
 
             // Clear
             val clear = Button(context)
-            clear.text = "Clear"
+            clear.text = getString(R.string.clear)
             clear.setOnClickListener {
                 currentGame.stages[currentGame.currentStageDisplayed - 1].pveItemsMap.remove(entry.key)
                 pveTable.removeView(row)
@@ -295,21 +292,5 @@ class StageFragment : Fragment() {
             args.putDouble("itemType", 4.0)
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_additem, args)
         }
-    }
-
-    private fun createBackPressed() {
-        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
-            override fun handleOnBackPressed() {
-                currentGame.currentStageDisplayed--
-                if (currentGame.currentStageDisplayed < 1) {
-                    MainActivity.currentGame = GameModel()
-                }
-                if (isEnabled) {
-                    isEnabled = false
-                    requireActivity().onBackPressed()
-                }
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 }

@@ -37,7 +37,7 @@ class GameStatsFragment : Fragment() {
         // Placement
         val placement = arguments!!.getInt("placement", 0)
         val placementTv = root.findViewById<TextView>(R.id.game_placement)
-        placementTv.text = "Placement: ${Helper.getPlacement(placement, resources, placementTv)}"
+        placementTv.text = getString(R.string.placement_game, Helper.getPlacement(placement, resources, placementTv))
 
         // Initialize radio buttons
         createRadioButtonListener(R.id.gold_radio, R.id.gold_chart)

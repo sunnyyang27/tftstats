@@ -11,7 +11,7 @@ import com.github.mikephil.charting.charts.LineChart
 
 class LevelFragment : StatsFragment() {
     override val title: String
-        get() = "Level"
+        get() = getString(R.string.menu_level)
 
     override fun onCreateView(
         inflater: LayoutInflater,

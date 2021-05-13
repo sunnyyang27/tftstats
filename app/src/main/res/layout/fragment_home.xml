@@ -45,7 +45,7 @@
                 android:id="@+id/last_games_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Last 10 games"
+                android:text="@string/last_10_games"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textSize="@dimen/text_title_size" />
 

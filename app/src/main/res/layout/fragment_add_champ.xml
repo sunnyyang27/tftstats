@@ -23,7 +23,7 @@
                 android:layout_gravity="center"
                 android:minHeight="121dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"/>
 
             <TableLayout
                 android:id="@+id/champ_trait_table"
@@ -41,7 +41,7 @@
             android:layout_centerInParent="true"
             android:minWidth="150dp"
             android:textAlignment="center"
-            android:hint="Name" />
+            android:hint="@string/name" />
 
         <LinearLayout
             android:id="@+id/star_layout"
@@ -57,7 +57,7 @@
                 android:layout_width="@dimen/text_width"
                 android:layout_height="@dimen/text_height"
                 android:gravity="center_vertical"
-                android:text="Star level:"
+                android:text="@string/star_level"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="@dimen/text_body_size" />
@@ -76,7 +76,7 @@
             android:layout_height="@dimen/text_height"
             android:layout_below="@+id/star_layout"
             android:layout_centerInParent="true"
-            android:text="Carry?"
+            android:text="@string/carry"
             android:textSize="@dimen/text_body_size" />
 
     <!--    Items-->
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/text_height"
                 android:gravity="center_vertical"
-                android:text="Items: "
+                android:text="@string/items"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="@dimen/text_body_size" />
@@ -110,7 +110,7 @@
                         android:layout_width="@dimen/input_width"
                         android:layout_height="@dimen/text_height"
                         android:background="@android:color/transparent"
-                        android:text="+"
+                        android:text="@string/plus"
                         android:textSize="30sp"
                         android:textColor="@android:color/holo_green_light"/>
                     <ImageView
@@ -126,7 +126,7 @@
                         android:id="@+id/champ_item_1_clear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clear"
+                        android:text="@string/clear"
                         android:visibility="gone"/>
                 </TableRow>
                 <TableRow>
@@ -135,7 +135,7 @@
                         android:layout_width="@dimen/input_width"
                         android:layout_height="@dimen/text_height"
                         android:background="@android:color/transparent"
-                        android:text="+"
+                        android:text="@string/plus"
                         android:textSize="30sp"
                         android:textColor="@android:color/holo_green_light" />
                     <ImageView
@@ -151,7 +151,7 @@
                         android:id="@+id/champ_item_2_clear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clear"
+                        android:text="@string/clear"
                         android:visibility="gone"/>
                 </TableRow>
                 <TableRow>
@@ -160,7 +160,7 @@
                         android:layout_width="@dimen/input_width"
                         android:layout_height="@dimen/text_height"
                         android:background="@android:color/transparent"
-                        android:text="+"
+                        android:text="@string/plus"
                         android:textSize="30sp"
                         android:textColor="@android:color/holo_green_light"/>
                     <ImageView
@@ -176,7 +176,7 @@
                         android:id="@+id/champ_item_3_clear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clear"
+                        android:text="@string/clear"
                         android:visibility="gone"/>
                 </TableRow>
             </TableLayout>
@@ -189,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="Add" />
+        android:text="@string/add" />
 
     <Button
         android:id="@+id/addchamp_save"
@@ -197,7 +197,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="Save"
+        android:text="@string/save"
         android:visibility="gone" />
 
 </RelativeLayout>

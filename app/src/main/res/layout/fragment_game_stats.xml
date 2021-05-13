@@ -21,28 +21,28 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:text="Stage \\ Item"
+                android:text="@string/stage_item_table"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
                 android:layout_marginEnd="15dp"/>
 
             <TextView
-                android:text="Armory"
+                android:text="@string/armory"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
                 android:layout_marginEnd="10dp"/>
 
             <TextView
-                android:text="Carousel"
+                android:text="@string/carousel"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
                 android:layout_marginEnd="10dp"/>
 
             <TextView
-                android:text="PVE"
+                android:text="@string/pve"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
             android:id="@+id/stat_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show stat:" />
+            android:text="@string/show_stat" />
 
         <HorizontalScrollView
             android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.e.tftstats.ui.stats
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
@@ -310,13 +311,14 @@ class FinalCompStatsFragment : Fragment() {
         val adapter = ArrayAdapter<T>(requireContext(), android.R.layout.simple_list_item_1, adapterItems)
         auto.setAdapter(adapter)
         auto.onItemClickListener = AdapterView.OnItemClickListener { arg0, _, arg2, _ ->
-            val selected = arg0.adapter.getItem(arg2) as T
+            @Suppress("UNCHECKED_CAST") val selected = arg0.adapter.getItem(arg2) as T
             val table = root.findViewById<TableLayout>(tableId)
             table.removeAllViews()
             onClick(selected, table)
         }
     }
 
+    @SuppressLint("UseSparseArrays")
     private fun getMostSuccessfulItems(champId: Int) : List<Int> {
         val top3 : MutableList<Int> = ArrayList()
         val itemsTuple = teamDao.getItemsAndPlacementByChamp(champId)

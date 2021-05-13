@@ -10,7 +10,7 @@ import com.github.mikephil.charting.charts.LineChart
 
 class PlacementFragment : StatsFragment() {
     override val title: String
-        get() = "Placement"
+        get() = getString(R.string.menu_placement)
 
     override fun onCreateView(
         inflater: LayoutInflater,

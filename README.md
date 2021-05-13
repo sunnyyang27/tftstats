@@ -165,11 +165,6 @@ Acceptance criteria:
 - x-axis scale depends on the most late stage/round.
 - since each stage is only 7 rounds, each x value should be a decimal of stage + (round / 7).
 
-#### Tech Debt: move all hardcoded strings to strings.xml
-Acceptance criteria:
-- All xml files should not have hardcoded texts
-- All Kotlin fragment files should not have hardcoded texts
-
 ### Existing Bugs
 #### Using built-in back on a Stage page causes issues
 When inputting stage data, there is a manual "Previous Stage" or "Cancel" button to replace Android back functionality. If Android back is used, the stage will be incorrect. However, Android back does work for all other pages.
