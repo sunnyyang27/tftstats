@@ -8,6 +8,9 @@ The gameplay is split into stages, each having seven rounds. Stage 1 is special 
 ## What is TFT Stats?
 TFTStats is a statistics tracker that help players improve by using players' game results to display meaningful statistics for all areas of the game.
 
+## How to use TFT Stats?
+If you cannot view any images below, please open TFT Stats Description.pdf. Otherwise, continue reading.
+
 ## Entering data
 ### How and when to enter data
 TFTStats requires players to input the game state as it progresses. Since this is difficult to do in the middle of the game, the player only needs to screenshot their game at the start of a few rounds. In particular:
