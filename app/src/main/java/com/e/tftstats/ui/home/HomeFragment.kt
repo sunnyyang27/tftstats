@@ -41,22 +41,13 @@ class HomeFragment : Fragment() {
         }
 
         // Avg placement
-        val avgPlacementLabel = root.findViewById<TextView>(R.id.avg_placement)
-        avgPlacementLabel.text = getString(R.string.avg_placement, Helper.getPlacement(gameDao.getAvgPlacement().roundToInt(), resources))
+        updateAvgPlacement()
 
         // Avg stage of death
-        val avgStageLabel = root.findViewById<TextView>(R.id.avg_stage_of_death)
-        val games = gameDao.getAll()
-        var total = 0.0
-        for (game in games) {
-            total += game.stageDied + (game.roundDied.toDouble() / 7)
-        }
-        val avg = if (games.isNotEmpty()) total / games.size else 0.0
-        val stage = truncate(avg).toInt()
-        val round = ((avg - stage) * 7).roundToInt()
-        avgStageLabel.text = getString(R.string.avg_death, stage, round)
+        updateAvgDeath()
 
         // Last 10 games
+        val games = gameDao.getAll()
         for (i in 0 until min(10, games.size)) {
             createGameRow(games[i])
         }
@@ -182,12 +173,18 @@ class HomeFragment : Fragment() {
             itemRow.addView(itemsLayout)
         }
 
+        // Add rows to table
+        val gameTable = TableLayout(context)
+        gameTable.addView(starRow)
+        gameTable.addView(championRow)
+        gameTable.addView(itemRow)
+
         // Traits: sort by level, then add to row
         val traitLayout = LinearLayout(context)
         traitLayout.orientation = LinearLayout.HORIZONTAL
         traitLayout.gravity = Gravity.CENTER_VERTICAL
         val traitMap = Helper.calculateTeamsTraits(teamComp)
-        val traitImageMap = HashMap<ImageView, Pair<Double, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
+        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (levelRank, actualLevel)
         for (origin in traitMap) {
             if (origin.key == Champion.Origin.GODKING && origin.value > 1) continue
             val trait = Helper.getTrait(origin.key)
@@ -199,13 +196,13 @@ class HomeFragment : Fragment() {
                     val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
                     val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} ${levels[i]}")
                     traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
-                    traitImageMap[traitImage] = Pair((i.toDouble() + 1) / numLevels, levels[i])
+                    traitImageMap[traitImage] = Pair(Helper.getTraitRank(i, numLevels), levels[i])
                     break
                 }
             }
         }
         // Sort images by levelRank then actualLevel
-        val imageComparator = Comparator<Pair<ImageView, Pair<Double, Int>>> { a, b ->
+        val imageComparator = Comparator<Pair<ImageView, Pair<Int, Int>>> { a, b ->
             when {
                 // levelRank
                 (a.second.first > b.second.first) -> -1
@@ -223,12 +220,6 @@ class HomeFragment : Fragment() {
             traitLayout.addView(it)
         }
 
-        // Add rows to table
-        val gameTable = TableLayout(context)
-        gameTable.addView(starRow)
-        gameTable.addView(championRow)
-        gameTable.addView(itemRow)
-
         // Add table and traits to vertical layout
         val teamLayout = LinearLayout(context)
         teamLayout.orientation = LinearLayout.VERTICAL
@@ -238,14 +229,43 @@ class HomeFragment : Fragment() {
         // Add vertical layout to horizontal row
         row.addView(teamLayout)
 
-        // Add row to horizontal scroll
+        // Add delete button
+        val gamesLayout = root.findViewById<LinearLayout>(R.id.games_layout)
         val horizontalScroll = HorizontalScrollView(context)
+        val deleteBtn = Button(context)
+        deleteBtn.text = getString(R.string.delete)
+        deleteBtn.setOnClickListener {
+            gameDao.deleteGames(game)
+            gamesLayout.removeView(horizontalScroll)
+            updateAvgPlacement()
+            updateAvgDeath()
+        }
+        row.addView(deleteBtn)
+
+        // Add row to horizontal scroll
         horizontalScroll.addView(row)
 
         // Add scroll to games_layout
-        val gamesLayout = root.findViewById<LinearLayout>(R.id.games_layout)
         val horizontalScrollParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         horizontalScrollParams.bottomMargin = 20
         gamesLayout.addView(horizontalScroll, horizontalScrollParams)
+    }
+
+    private fun updateAvgPlacement() {
+        val avgPlacementLabel = root.findViewById<TextView>(R.id.avg_placement)
+        avgPlacementLabel.text = getString(R.string.avg_placement, Helper.getPlacement(gameDao.getAvgPlacement().roundToInt(), resources))
+    }
+
+    private fun updateAvgDeath() {
+        val avgStageLabel = root.findViewById<TextView>(R.id.avg_stage_of_death)
+        val games = gameDao.getAll()
+        var total = 0.0
+        for (game in games) {
+            total += game.stageDied + (game.roundDied.toDouble() / 7)
+        }
+        val avg = if (games.isNotEmpty()) total / games.size else 0.0
+        val stage = truncate(avg).toInt()
+        val round = ((avg - stage) * 7).roundToInt()
+        avgStageLabel.text = getString(R.string.avg_death, stage, round)
     }
 }

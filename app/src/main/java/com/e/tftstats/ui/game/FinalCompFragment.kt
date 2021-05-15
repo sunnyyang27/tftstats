@@ -114,7 +114,7 @@ class FinalCompFragment : Fragment() {
         traitLayout.removeAllViews()
         val traitMap = Helper.calculateTeamsTraits(MainActivity.currentGame.teamComp.values.toList())
         // Get levels per trait
-        val traitImageMap = HashMap<ImageView, Pair<Double, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
+        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
         val imageParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, 100)
         for (origin in traitMap) {
             val trait = Helper.getTrait(origin.key)
@@ -122,7 +122,7 @@ class FinalCompFragment : Fragment() {
             traitImage.alpha = 0.1f
 
             var fullLevel = trait.levels[0]             // default to first in case no level is met
-            var levelRank = 0.0
+            var levelRank = 0
             if (origin.key != Champion.Origin.GODKING || origin.value == 1) {
                 val numLevels = trait.levels.size
                 val levels = trait.levels
@@ -131,7 +131,7 @@ class FinalCompFragment : Fragment() {
                         traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
                         traitImage.alpha = 1f
                         fullLevel = levels[i]
-                        levelRank = (i.toDouble() + 1) / numLevels
+                        levelRank = Helper.getTraitRank(i, numLevels)
                         break
                     }
                 }
@@ -142,7 +142,7 @@ class FinalCompFragment : Fragment() {
         }
 
         // Sort images by levelRank then actualLevel
-        val custom = Comparator<Pair<ImageView, Pair<Double, Int>>> { a, b ->
+        val custom = Comparator<Pair<ImageView, Pair<Int, Int>>> { a, b ->
             when {
                 // levelRank
                 (a.second.first > b.second.first) -> -1

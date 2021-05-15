@@ -582,11 +582,7 @@ class Helper {
         // 1 -> 0 -> 2
         fun getTraitTint(index: Int, numLevels: Int) : Int {
             val colors = arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
-            return when {
-                (numLevels == 2) -> colors[index + 1]
-                (numLevels == 1) -> colors[2]
-                else -> colors[index]
-            }
+            return colors[getTraitRank(index, numLevels) - 1]
         }
 
         // Levels is in decreasing order
@@ -598,6 +594,18 @@ class Helper {
                 }
             }
             return getTraitTint(0, levels.size)
+        }
+
+        // Rank trait level. For example, 8/(8 6 4 2) is the highest rank (4). 3/(3 2 1) is rank 3. 6/(8 6 4 2) is rank 3. 1/1 is rank 3.
+        // 2/4 is rank 2. 2/(8 6 4 2) is rank 1. 0/1 or 1/(8 6 4 2) is rank 0
+        // Index is the completed level out of all the levels. For example, if the trait has levels 2, 4, 6, 8 and 6 was complete, then
+        // index = 2
+        fun getTraitRank(index: Int, numLevels: Int) : Int {
+            return when {
+                (numLevels == 2) -> index + 2
+                (numLevels == 1) -> 3
+                else -> index + 1
+            }
         }
 
         /** Math helpers */
