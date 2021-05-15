@@ -24,7 +24,7 @@ Here's a demo on how to input game results:
 1. On the Home page, click the + button.
 2. Your game has started. You have just picked an item from the carousel. Take a screenshot.
 
-    <img src="demo/1-2.png" width="300">
+    <img src="https://github.com/sunnyyang27/tftstats/blob/master/demo/1-2.png" width="300">
 3. Stage 2 round 1 (2-1) has started. Take a screenshot. Here's what stage 1 should look like:
 
     <img src="demo/2-1.png" width="600"> <img src="demo/Stage 1.jpg" height="375">
