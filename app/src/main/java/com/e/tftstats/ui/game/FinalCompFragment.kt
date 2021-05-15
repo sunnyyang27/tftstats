@@ -113,28 +113,51 @@ class FinalCompFragment : Fragment() {
         val traitLayout = root.findViewById<FlexboxLayout>(R.id.team_traits_layout)
         traitLayout.removeAllViews()
         val traitMap = Helper.calculateTeamsTraits(MainActivity.currentGame.teamComp.values.toList())
-        val sortedTraitMap = traitMap.map { (key, value ) -> key to value}.sortedByDescending { (_, value) -> value }.toMap()
+        // Get levels per trait
+        val traitImageMap = HashMap<ImageView, Pair<Double, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
         val imageParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, 100)
-        for (origin in sortedTraitMap) {
+        for (origin in traitMap) {
             val trait = Helper.getTrait(origin.key)
             val traitImage = Helper.createImageView(context, trait.imagePath, imageParams)
             traitImage.alpha = 0.1f
 
             var fullLevel = trait.levels[0]             // default to first in case no level is met
+            var levelRank = 0.0
             if (origin.key != Champion.Origin.GODKING || origin.value == 1) {
-                val levels = trait.levels.reversedArray()
-                for ((i, level) in levels.withIndex()) {
-                    if (origin.value >= level) {
-                        traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, levels.size), null))
+                val numLevels = trait.levels.size
+                val levels = trait.levels
+                for (i in numLevels - 1 downTo 0) {
+                    if (origin.value >= levels[i]) {
+                        traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
                         traitImage.alpha = 1f
-                        fullLevel = level
+                        fullLevel = levels[i]
+                        levelRank = (i.toDouble() + 1) / numLevels
                         break
                     }
                 }
             }
             val tooltip = "${Helper.originName(origin.key)} ${origin.value}/$fullLevel"
             traitImage.tooltipText = tooltip
-            traitLayout.addView(traitImage)
+            traitImageMap[traitImage] = Pair(levelRank, fullLevel)
+        }
+
+        // Sort images by levelRank then actualLevel
+        val custom = Comparator<Pair<ImageView, Pair<Double, Int>>> { a, b ->
+            when {
+                // levelRank
+                (a.second.first > b.second.first) -> -1
+                (a.second.first < b.second.first) -> 1
+                // actualLevel
+                (a.second.second > b.second.first) -> -1
+                (a.second.second < b.second.first) -> 1
+                else -> 0
+            }
+        }
+        val sortedImages = traitImageMap.toList().sortedWith(custom).map { it.first }
+
+        // Add to traitlayout
+        sortedImages.forEach {
+            traitLayout.addView(it)
         }
     }
 

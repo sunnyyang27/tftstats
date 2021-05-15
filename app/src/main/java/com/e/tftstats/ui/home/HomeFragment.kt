@@ -187,21 +187,40 @@ class HomeFragment : Fragment() {
         traitLayout.orientation = LinearLayout.HORIZONTAL
         traitLayout.gravity = Gravity.CENTER_VERTICAL
         val traitMap = Helper.calculateTeamsTraits(teamComp)
-        val sortedTraitMap = traitMap.map { (key, value ) -> key to value}.sortedByDescending { (_, value) -> value }.toMap()
-        for (origin in sortedTraitMap) {
+        val traitImageMap = HashMap<ImageView, Pair<Double, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
+        for (origin in traitMap) {
             if (origin.key == Champion.Origin.GODKING && origin.value > 1) continue
             val trait = Helper.getTrait(origin.key)
-            val levels = trait.levels.reversedArray()
-            for ((i, level) in levels.withIndex()) {
-                if (origin.value >= level) {
+            val numLevels = trait.levels.size
+            val levels = trait.levels
+            for (i in numLevels - 1 downTo 0) {
+                if (origin.value >= levels[i]) {
                     // Create and Add to trait layout
                     val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
-                    val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} $level")
-                    traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, levels.size), null))
-                    traitLayout.addView(traitImage)
+                    val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} ${levels[i]}")
+                    traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
+                    traitImageMap[traitImage] = Pair((i.toDouble() + 1) / numLevels, levels[i])
                     break
                 }
             }
+        }
+        // Sort images by levelRank then actualLevel
+        val imageComparator = Comparator<Pair<ImageView, Pair<Double, Int>>> { a, b ->
+            when {
+                // levelRank
+                (a.second.first > b.second.first) -> -1
+                (a.second.first < b.second.first) -> 1
+                // actualLevel
+                (a.second.second > b.second.first) -> -1
+                (a.second.second < b.second.first) -> 1
+                else -> 0
+            }
+        }
+        val sortedImages = traitImageMap.toList().sortedWith(imageComparator).map { it.first }
+
+        // Add to traitlayout
+        sortedImages.forEach {
+            traitLayout.addView(it)
         }
 
         // Add rows to table
