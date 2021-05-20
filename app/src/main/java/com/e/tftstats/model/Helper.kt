@@ -7,10 +7,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
+import android.widget.*
 import com.e.tftstats.R
 import com.e.tftstats.model.Champion.Origin
 import com.github.mikephil.charting.charts.LineChart
@@ -112,7 +109,7 @@ class Helper {
 
             champions.add(Champion("Nautilus", Origin.IRONCLAD, Origin.KNIGHT, 2, R.drawable.nautilus))
             champions.add(Champion("Jax", Origin.IRONCLAD, Origin.SKIRMISHER, 4, R.drawable.jax))
-            champions.add(Champion("Rell", Origin.IRONCLAD, Origin.CAVALIER, 4, R.drawable.rell))
+            champions.add(Champion("Rell", Origin.REDEEMED, Origin.IRONCLAD, 4, R.drawable.rell, Origin.CAVALIER))
 
             champions.add(Champion("Vladimir", Origin.NIGHTBRINGER, Origin.RENEWER, 1, R.drawable.vladimir))
             champions.add(Champion("Sejuani", Origin.NIGHTBRINGER, Origin.CAVALIER, 2, R.drawable.sejuani))
@@ -481,6 +478,18 @@ class Helper {
             image.tag = src
             image.tooltipText = tooltip
             return image
+        }
+
+        fun createSmallButton(context: Context?, text: String) : Button {
+            val btn = Button(context)
+            btn.text = text
+            btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
+            btn.textSize = 12f
+            btn.minimumWidth = 0
+            btn.minWidth = 0
+            btn.minimumHeight = 0
+            btn.minHeight = 0
+            return btn
         }
 
         // Line chart
