@@ -74,6 +74,7 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    // placement, table, buttons
     private fun createGameRow(game: Game) {
         // Horizontal linear layout
         val row = LinearLayout(context)
@@ -86,7 +87,7 @@ class HomeFragment : Fragment() {
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_game_stats, args)
         }
 
-        // Placement
+        // 1. Placement
         val placement = TextView(context)
         placement.textSize = 30f
         placement.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
@@ -95,9 +96,8 @@ class HomeFragment : Fragment() {
         val placementParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         placementParams.marginEnd = 20
         placement.layoutParams = placementParams
-        row.addView(placement)
 
-        // Three rows for stars, champion images, and items
+        // 2.1 Three rows for stars, champion images, and items
         val starRow = Helper.createRow(context, 3)
         val championRow = Helper.createRow(context, 3)
         val itemRow = Helper.createRow(context, 3)
@@ -179,7 +179,7 @@ class HomeFragment : Fragment() {
         gameTable.addView(championRow)
         gameTable.addView(itemRow)
 
-        // Traits: sort by level, then add to row
+        // 2.2 Traits: sort by level, then add to row
         val traitLayout = LinearLayout(context)
         traitLayout.orientation = LinearLayout.HORIZONTAL
         traitLayout.gravity = Gravity.CENTER_VERTICAL
@@ -195,8 +195,10 @@ class HomeFragment : Fragment() {
                     // Create and Add to trait layout
                     val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
                     val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} ${levels[i]}")
-                    traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
-                    traitImageMap[traitImage] = Pair(Helper.getTraitRank(i, numLevels), levels[i])
+                    val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
+                    traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(
+                        Helper.getTraitTint(i + offset, numLevels + offset), null))
+                    traitImageMap[traitImage] = Pair(Helper.getTraitRank(i + offset, numLevels + offset), levels[i])
                     break
                 }
             }
@@ -214,33 +216,47 @@ class HomeFragment : Fragment() {
             }
         }
         val sortedImages = traitImageMap.toList().sortedWith(imageComparator).map { it.first }
-
         // Add to traitlayout
         sortedImages.forEach {
             traitLayout.addView(it)
         }
 
-        // Add table and traits to vertical layout
+        // 2.3 Add table and traits to vertical layout
         val teamLayout = LinearLayout(context)
         teamLayout.orientation = LinearLayout.VERTICAL
         teamLayout.addView(gameTable)
         teamLayout.addView(traitLayout)
 
-        // Add vertical layout to horizontal row
-        row.addView(teamLayout)
+        // 3. Create buttons
+        // 3.1 Add edit button
+        val editBtn = Helper.createSmallButton(context, getString(R.string.edit))
+        editBtn.setOnClickListener {
+            val args = Bundle()
+            args.putInt("gameId", game.id)
+            root.findNavController().navigate(R.id.nav_game_edit, args)
+        }
 
-        // Add delete button
+        // 3.2 Add delete button
         val gamesLayout = root.findViewById<LinearLayout>(R.id.games_layout)
         val horizontalScroll = HorizontalScrollView(context)
-        val deleteBtn = Button(context)
-        deleteBtn.text = getString(R.string.delete)
+        val deleteBtn = Helper.createSmallButton(context, getString(R.string.delete))
         deleteBtn.setOnClickListener {
             gameDao.deleteGames(game)
             gamesLayout.removeView(horizontalScroll)
             updateAvgPlacement()
             updateAvgDeath()
         }
-        row.addView(deleteBtn)
+        // 3.3 Create and add to button layout
+        val buttonLayout = LinearLayout(context)
+        buttonLayout.orientation = LinearLayout.VERTICAL
+        buttonLayout.gravity = Gravity.CENTER_HORIZONTAL
+        buttonLayout.addView(editBtn)
+        buttonLayout.addView(deleteBtn)
+
+        // 4. Add children to row: placement, team layout, button layout
+        row.addView(placement)
+        row.addView(teamLayout)
+        row.addView(buttonLayout)
 
         // Add row to horizontal scroll
         horizontalScroll.addView(row)

@@ -15,6 +15,7 @@ class GameModel {
     var stages: MutableList<Stage> = ArrayList()
     var stageDied: Int = -1                     // set when deathbtn pressed, overwritten if died is changed
     var roundDied: Int = -1                     // set when deathbtn pressed
+    var tmpRoundDied: Int = -1                  // set when round died selector changes, used when editing Game
     var teamComp: HashMap<Int, Team> = hashMapOf()
     var teamItems = mutableListOf(-1, -1, -1)   // set when Edit pressed or when AddItemFragment.save. cleared when AddChamp.save or AddChamp.cancel
     var champCounter: Int = 0
@@ -68,8 +69,8 @@ class GameModel {
             return error.toString()
         }
 
-        // PVE items cleared if roundDied == 7
-        if (roundDied == 7) {
+        // PVE items cleared if roundDied < 7
+        if (roundDied in 1..6) {
             s.pveItemsMap.clear()
         } else {
             s.pveItems = Helper.sortAndJoin(s.pveItemsMap)
@@ -84,6 +85,7 @@ class GameModel {
             // Died in this stage
             stageDied = currentStageDisplayed
             this.roundDied = roundDied
+            this.tmpRoundDied = -1
             if (stages.size > stageDied) stages.subList(stageDied, stages.size).clear()
         } else if (stageDied == currentStageDisplayed) {
             // if this stage was supposed to be the time I died, then fix it

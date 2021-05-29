@@ -102,7 +102,8 @@ class FinalCompStatsFragment : Fragment() {
             // Add trait image
             val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
             val traitImage = Helper.createImageView(context, selected.imagePath, imageParams, level.toString())
-            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, size), null))
+            val offset = if (selected.origin == Champion.Origin.ABOMINATION) 1 else 0
+            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i + offset, size + offset), null))
             statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }
@@ -168,7 +169,9 @@ class FinalCompStatsFragment : Fragment() {
             val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
             val traitImage = Helper.createImageView(context, trait.imagePath, imageParams,
                 "${Helper.originName(pair.first)} ${pair.second}")
-            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(pair.second, trait.levels), null))
+            val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
+            traitImage.imageTintList = ColorStateList.valueOf(
+                resources.getColor(Helper.getTraitTint(pair.second, trait.levels, offset), null))
             statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }

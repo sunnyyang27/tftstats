@@ -53,9 +53,15 @@
 
     <fragment
         android:id="@+id/nav_game_stats"
-        android:name="com.e.tftstats.ui.stats.GameStatsFragment"
+        android:name="com.e.tftstats.ui.home.GameStatsFragment"
         android:label="@string/menu_game_stats"
         tools:layout="@layout/fragment_game_stats" />
+
+    <fragment
+        android:id="@+id/nav_game_edit"
+        android:name="com.e.tftstats.ui.home.GameEditFragment"
+        android:label="@string/menu_game_edit"
+        tools:layout="@layout/fragment_game_edit" />
 
     <fragment
         android:id="@+id/nav_stage"

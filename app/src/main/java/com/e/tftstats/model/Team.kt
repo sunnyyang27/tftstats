@@ -109,13 +109,16 @@ interface TeamDao {
     fun getChampCostAndPlacement() : List<ChampCostAndPlacementTuple>
 
     @Update
-    fun updateTeams(vararg teams: Team)
+    fun updateTeams(teams: List<Team>)
 
     @Insert
     fun insert(vararg teams: Team)
 
+    @Insert
+    fun insertTeams(teams: List<Team>)
+
     @Delete
-    fun deleteTeams(vararg teams: Team)
+    fun deleteTeams(teams: List<Team>)
 
     @Query("DELETE FROM Team")
     fun deleteAll()

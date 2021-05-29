@@ -595,20 +595,22 @@ class Helper {
         }
 
         // Levels is in decreasing order
-        fun getTraitTint(desiredLevel: Int, levels: Array<Int>) : Int {
+        fun getTraitTint(desiredLevel: Int, levels: Array<Int>, offset: Int) : Int {
             val numLevels = levels.size
             for (i in numLevels - 1 downTo 0) {
                 if (desiredLevel >= levels[i]) {
-                    return getTraitTint(i, levels.size)
+                    return getTraitTint(i + offset, levels.size + offset)
                 }
             }
-            return getTraitTint(0, levels.size)
+            return getTraitTint(offset, levels.size + offset)
         }
 
-        // Rank trait level. For example, 8/(8 6 4 2) is the highest rank (4). 3/(3 2 1) is rank 3. 6/(8 6 4 2) is rank 3. 1/1 is rank 3.
-        // 2/4 is rank 2. 2/(8 6 4 2) is rank 1. 0/1 or 1/(8 6 4 2) is rank 0
-        // Index is the completed level out of all the levels. For example, if the trait has levels 2, 4, 6, 8 and 6 was complete, then
-        // index = 2
+        /** Rank trait level. For example, 8/(8 6 4 2) is the highest rank (4). 3/(3 2 1) is rank 3. 6/(8 6 4 2) is rank 3. 1/1 is rank 3.
+         2/4 is rank 2. 2/(8 6 4 2) is rank 1. 0/1 or 1/(8 6 4 2) is rank 0
+         Index is the completed level out of all the levels. For example, if the trait has levels 2, 4, 6, 8 and 6 was complete, then
+         index = 2
+         Abomination is a special case where 5/(5 4 3) should have a higher rank. Increment both by 1
+        */
         fun getTraitRank(index: Int, numLevels: Int) : Int {
             return when {
                 (numLevels == 2) -> index + 2

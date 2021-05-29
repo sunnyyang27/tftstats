@@ -91,5 +91,7 @@
     <string name="avg_placement">Avg placement: %1$s</string>
     <string name="avg_death">Avg death: stage %1$d-%2$d</string>
     <string name="placement_game">Placement: %1$s</string>
+    <string name="done">Done</string>
+    <string name="menu_game_edit">Edit Game</string>
 
 </resources>

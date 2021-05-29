@@ -1,6 +1,5 @@
 package com.e.tftstats.ui.game
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +13,13 @@ import com.e.tftstats.R
 import com.e.tftstats.model.Champion
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Team
+import com.e.tftstats.model.TeamDao
 import com.google.android.flexbox.FlexboxLayout
 
 class FinalCompFragment : Fragment() {
     private lateinit var root: View
+    private lateinit var teamDao: TeamDao
+    private var gameId = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +27,11 @@ class FinalCompFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root = inflater.inflate(R.layout.fragment_final_comp, container, false)
+        if (arguments != null) {
+            gameId = arguments!!.getInt("gameId", -1)
+        }
+        teamDao = MainActivity.db!!.teamDao()
+
         loadTable()
         loadTraitsRow()
 
@@ -32,6 +39,28 @@ class FinalCompFragment : Fragment() {
         val addRowBtn = root.findViewById<Button>(R.id.add_row)
         addRowBtn.setOnClickListener {
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_addchamp)
+        }
+
+        // Change button to save
+        if (gameId != -1) {
+            val saveBtn = root.findViewById<Button>(R.id.finish_game)
+            saveBtn.text = getString(R.string.save)
+            saveBtn.setOnClickListener {
+                val originalTeam = teamDao.getTeamByGame(gameId).toMutableList()
+                val updatedTeam = MainActivity.currentGame.teamComp.values.toList()
+                // 1. Get new champs: remove champs from updated that are not in original
+                val newChamps = updatedTeam.filter { new -> !originalTeam.any { original -> original.id == new.id } }
+                newChamps.forEach {
+                    it.gameId = gameId
+                }
+                // 2. Get deleted champs: remove champs from original that are still in updated. The leftover is what to delete
+                originalTeam.removeIf { original -> updatedTeam.any { updated -> updated.id == original.id } }
+                // 3. Add new champs, update champs, and delete
+                teamDao.insertTeams(newChamps)
+                teamDao.updateTeams(updatedTeam)
+                teamDao.deleteTeams(originalTeam)
+                requireActivity().onBackPressed()
+            }
         }
         return root
     }
@@ -48,7 +77,7 @@ class FinalCompFragment : Fragment() {
         val champ = Helper.getChampion(team.champId)
 
         val champTable = root.findViewById<TableLayout>(R.id.champ_table)
-        val row = Helper.createRow(root.context)
+        val row = Helper.createRow(context)
 
         val size = 75
 
@@ -59,7 +88,7 @@ class FinalCompFragment : Fragment() {
         row.addView(image)
 
         // Champ name
-        val tv = TextView(root.context)
+        val tv = TextView(context)
         tv.text = champ.name
         tv.textSize = 18f
         tv.setTextAppearance(R.style.TextAppearance_AppCompat_Body1)
@@ -67,13 +96,13 @@ class FinalCompFragment : Fragment() {
         row.addView(tv)
 
         // Edit button
-        val edit = createButton(root.context, getString(R.string.edit))
+        val edit = Helper.createSmallButton(context, getString(R.string.edit))
         edit.setOnClickListener {
             onEditChamp(id, team.champId)
         }
 
         // Delete button
-        val delete = createButton(root.context, getString(R.string.delete))
+        val delete = Helper.createSmallButton(context, getString(R.string.delete))
         delete.setOnClickListener {
             MainActivity.currentGame.teamComp.remove(id)
             champTable.removeView(row)
@@ -83,12 +112,12 @@ class FinalCompFragment : Fragment() {
         // Stars
         for (i in 1..team.starLevel) {
             val layoutParams = TableRow.LayoutParams(size, TableRow.LayoutParams.WRAP_CONTENT)
-            val star = Helper.createImageView(root.context, R.drawable.ic_star, layoutParams)
+            val star = Helper.createImageView(context, R.drawable.ic_star, layoutParams)
             row.addView(star)
         }
         for (i in team.starLevel until 3) {
             val layoutParams = TableRow.LayoutParams(size, TableRow.LayoutParams.WRAP_CONTENT)
-            val star = Helper.createImageView(root.context, R.drawable.ic_star_empty, layoutParams)
+            val star = Helper.createImageView(context, R.drawable.ic_star_empty, layoutParams)
             row.addView(star)
         }
 
@@ -128,10 +157,12 @@ class FinalCompFragment : Fragment() {
                 val levels = trait.levels
                 for (i in numLevels - 1 downTo 0) {
                     if (origin.value >= levels[i]) {
-                        traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i, numLevels), null))
+                        val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
+                        traitImage.imageTintList = ColorStateList.valueOf(
+                            resources.getColor(Helper.getTraitTint(i + offset, numLevels + offset), null))
                         traitImage.alpha = 1f
                         fullLevel = levels[i]
-                        levelRank = Helper.getTraitRank(i, numLevels)
+                        levelRank = Helper.getTraitRank(i + offset, numLevels + offset)
                         break
                     }
                 }
@@ -167,17 +198,5 @@ class FinalCompFragment : Fragment() {
         args.putInt("teamId", id)
         args.putInt("champId", champId)
         requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_addchamp, args)
-    }
-
-    private fun createButton(context: Context, text: String) : Button {
-        val btn = Button(context)
-        btn.text = text
-        btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
-        btn.textSize = 12f
-        btn.minimumWidth = 0
-        btn.minWidth = 0
-        btn.minimumHeight = 0
-        btn.minHeight = 0
-        return btn
     }
 }

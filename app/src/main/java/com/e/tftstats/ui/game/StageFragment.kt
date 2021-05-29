@@ -12,12 +12,12 @@ import com.e.tftstats.R
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Stage
 
-
 class StageFragment : Fragment() {
 
     private lateinit var root: View
     private val currentGame = MainActivity.currentGame
     private val currentStage = currentGame.currentStageDisplayed
+    private var gameId = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +25,9 @@ class StageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         root = inflater.inflate(R.layout.fragment_stage, container, false)
+        if (arguments != null) {
+            gameId = arguments!!.getInt("gameId", -1)
+        }
 
         // Title
         val textView = root.findViewById<TextView>(R.id.text_stage)
@@ -94,6 +97,7 @@ class StageFragment : Fragment() {
                 Helper.setVisible(carouselLayout, position >= 3)
                 Helper.setVisible(armoryLayout, position >= 1 && currentStage < 5)
                 Helper.setVisible(pveLayout, position >= 6)
+                currentGame.tmpRoundDied = position + 1
             }
         }
 
@@ -107,9 +111,10 @@ class StageFragment : Fragment() {
             Helper.setVisible(finalCompBtn, isChecked)
             Helper.setVisible(nextBtn, !isChecked)
             Helper.setVisible(roundLayout, isChecked)
-            Helper.setVisible(carouselLayout, !(isChecked && roundSpin.selectedItemPosition < 3))
-            Helper.setVisible(armoryLayout, !(isChecked && roundSpin.selectedItemPosition < 1) && currentStage < 5)
-            Helper.setVisible(pveLayout, !(isChecked && roundSpin.selectedItemPosition < 6))
+            val roundSelected = roundSpin.selectedItemPosition
+            Helper.setVisible(carouselLayout, !(isChecked && roundSelected < 3))
+            Helper.setVisible(armoryLayout, !(isChecked && roundSelected < 1) && currentStage < 5)
+            Helper.setVisible(pveLayout, !(isChecked && roundSelected < 6))
             if (!isChecked && currentStage == MainActivity.currentGame.stageDied) {
                 MainActivity.currentGame.stageDied = -1
             }
@@ -136,26 +141,43 @@ class StageFragment : Fragment() {
             prevBtn.text = getString(R.string.cancel)
         }
         prevBtn.setOnClickListener {
-            currentGame.currentStageDisplayed--
+            if (gameId == -1)
+                currentGame.currentStageDisplayed--
             requireActivity().onBackPressed()
         }
+        val stageDao = MainActivity.db!!.stageDao()
         nextBtn.setOnClickListener {
             val errors = currentGame.addStage(requireActivity(), -1)
             if (errors.isNotEmpty()) {
                 Helper.showErrorDialog(errors.removeSuffix("\n"), context)
             } else {
-                currentGame.currentStageDisplayed++
-                requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_stage)
+                if (gameId == -1) {
+                    currentGame.currentStageDisplayed++
+                    requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_stage)
+                } else {
+                    stageDao.updateStages(currentGame.stages[currentStage - 1])
+                    requireActivity().onBackPressed()
+                }
             }
         }
         finalCompBtn.setOnClickListener {
-            val roundDied = Integer.parseInt(roundSpin.selectedItem.toString())
-            val errors = currentGame.addStage(requireActivity(), roundDied)
+            val errors = currentGame.addStage(requireActivity(), currentGame.tmpRoundDied)
             if (errors.isNotEmpty()) {
                 Helper.showErrorDialog(errors.removeSuffix("\n"), context)
             } else {
-                requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_final_comp)
+                if (gameId == -1) {
+                    requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_final_comp)
+                } else {
+                    stageDao.updateStages(currentGame.stages[currentStage - 1])
+                    MainActivity.db!!.gameDao().updateGameRoundDied(gameId, currentGame.roundDied)
+                    requireActivity().onBackPressed()
+                }
             }
+        }
+        if (gameId != -1) {
+            nextBtn.text = getString(R.string.save)
+            finalCompBtn.text = getString(R.string.save)
+            prevBtn.text = getString(R.string.cancel)
         }
 
         // Load fragment
@@ -170,17 +192,17 @@ class StageFragment : Fragment() {
     }
 
     private fun loadStageFragment(minLevel: Int) {
-        val gameModel = MainActivity.currentGame
-        val s: Stage = gameModel.stages[gameModel.currentStageDisplayed - 1]
+        val s: Stage = currentGame.stages[currentStage - 1]
         root.findViewById<EditText>(R.id.gold_input).setText(s.gold.toString())
         root.findViewById<EditText>(R.id.health_input).setText(s.health.toString())
         root.findViewById<Spinner>(R.id.placement_spin).setSelection(s.placement - 1)
         root.findViewById<Spinner>(R.id.level_spin).setSelection(s.level - minLevel)
         root.findViewById<EditText>(R.id.xp_input).setText(s.xp.toString())
 
+        var roundDied = if (currentGame.tmpRoundDied == -1) currentGame.roundDied else currentGame.tmpRoundDied
         // Armory image - hide if roundDied < 2
         // If died, hide everything. Otherwise, don't set image if == 0
-        if (gameModel.stageDied == gameModel.currentStageDisplayed && gameModel.roundDied == 1) {
+        if (currentGame.stageDied == currentStage && roundDied == 1) {
             // Hide armory item
             root.findViewById<LinearLayout>(R.id.armory_layout).visibility = View.GONE
         } else {
@@ -194,7 +216,7 @@ class StageFragment : Fragment() {
         }
 
         // Carousel image - hide if roundDied < 4
-        if (gameModel.stageDied == gameModel.currentStageDisplayed && gameModel.roundDied <= 3) {
+        if (currentGame.stageDied == currentGame.currentStageDisplayed && roundDied <= 3) {
             root.findViewById<LinearLayout>(R.id.carousel_layout).visibility = View.GONE
         } else {
             if (s.carouselItem >= 0) {
@@ -208,14 +230,19 @@ class StageFragment : Fragment() {
 
         val diedCheck = root.findViewById<CheckBox>(R.id.died_check)
 
-        if (gameModel.stageDied == gameModel.currentStageDisplayed) {
+        if (currentGame.stageDied == currentStage) {
             // Update died and round died
             diedCheck.isChecked = true
             if (s.health == 0) {
                 diedCheck.isChecked = true
                 diedCheck.isEnabled = false
             }
-            root.findViewById<Spinner>(R.id.round_spin).setSelection(gameModel.roundDied - 1)
+            root.findViewById<Spinner>(R.id.round_spin).setSelection(roundDied - 1)
+        }
+
+        // If editing, diedCheck cannot be changed
+        if (gameId != -1) {
+            diedCheck.isEnabled = false
         }
 
         createPveItemsTable(s.pveItemsMap)

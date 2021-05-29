@@ -15,8 +15,14 @@ interface GameDao {
     @Query("SELECT * FROM Game ORDER BY id desc")
     fun getAll(): List<Game>
 
+    @Query("SELECT * FROM Game where id = :gameId")
+    fun getGame(gameId: Int): Game
+
     @Query("SELECT AVG(placement) from Game")
     fun getAvgPlacement(): Double
+
+    @Query("UPDATE Game SET roundDied = :roundDied where id = :gameId")
+    fun updateGameRoundDied(gameId: Int, roundDied: Int)
 
     @Update
     fun updateGames(vararg games: Game)
