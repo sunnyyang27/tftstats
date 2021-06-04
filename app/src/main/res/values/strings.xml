@@ -78,9 +78,9 @@
     <string name="placement_colon">Placement:</string>
     <string name="level_colon">Level:</string>
     <string name="xp_colon">XP:</string>
-    <string name="armory_item">Armory item:</string>
-    <string name="carousel_item">Carousel item:</string>
-    <string name="pve_items">PVE items:</string>
+    <string name="armory_colon">Armory:</string>
+    <string name="carousel_colon">Carousel:</string>
+    <string name="pve_colon">PVE:</string>
     <string name="died">Died?</string>
     <string name="round_died">Round died:</string>
     <string name="previous_stage">Previous Stage</string>
