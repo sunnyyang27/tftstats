@@ -30,12 +30,12 @@ class AddItemFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_add_item, container, false)
         if (arguments != null) {
-            selectedItemId = arguments!!.getInt("itemId", -1)
-            itemType = arguments!!.getDouble("itemType", 0.0)
-            pveRowId = arguments!!.getInt("rowId", -1)
+            selectedItemId = requireArguments().getInt("itemId", -1)
+            itemType = requireArguments().getDouble("itemType", 0.0)
+            pveRowId = requireArguments().getInt("rowId", -1)
         }
 
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
@@ -108,7 +108,7 @@ class AddItemFragment : Fragment() {
                 iv.setColorFilter(Color.argb(80, 255, 255, 0))
             }
             if (currentImageClicked > -1) {
-                val currentItemClicked: ImageView = view!!.findViewById(currentImageClicked)
+                val currentItemClicked: ImageView = requireView().findViewById(currentImageClicked)
                 currentItemClicked.setColorFilter(Color.argb(0, 0, 0, 0))
             }
 

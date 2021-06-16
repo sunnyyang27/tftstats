@@ -26,12 +26,12 @@ class AddChampFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_add_champ, container, false)
 
         if (arguments != null) {
-            teamId = arguments!!.getInt("teamId", -1)
-            champId = arguments!!.getInt("champId", -1)
+            teamId = requireArguments().getInt("teamId", -1)
+            champId = requireArguments().getInt("champId", -1)
         }
         // Champ name
         val tv = root.findViewById<AutoCompleteTextView>(R.id.champ_name)
@@ -205,6 +205,6 @@ class AddChampFragment : Fragment() {
                 }
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }

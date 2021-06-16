@@ -36,7 +36,7 @@ class FinalCompStatsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_final_comp_stats, container, false)
 
         // Section 1
@@ -93,7 +93,6 @@ class FinalCompStatsFragment : Fragment() {
         // Create header row
         table.addView(createHeaderRow(arrayOf("", "Count", "Placement")))
         // Create row per trait level
-        val size = selected.levels.size
         for ((i, level) in selected.levels.withIndex()) {
             val pair = statsMap[level]
             val statsRow = createRow(
@@ -102,15 +101,14 @@ class FinalCompStatsFragment : Fragment() {
             // Add trait image
             val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
             val traitImage = Helper.createImageView(context, selected.imagePath, imageParams, level.toString())
-            val offset = if (selected.origin == Champion.Origin.ABOMINATION) 1 else 0
-            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(Helper.getTraitTint(i + offset, size + offset), null))
+            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(selected.traitColor(i), null))
             statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }
     }
 
     private fun section2Table() {
-        val statsMap = HashMap<Pair<Champion.Origin, Int>, Pair<Int, Int>>()    // Origin, Trait level, Placement, Count
+        val statsMap = HashMap<Pair<Champion.Origin, Int>, Pair<Int, Int>>()    // Origin, Trait level index, Placement, Count
         // Iterate through all games
         val games = gameDao.getAll()
         for (game in games) {
@@ -121,11 +119,12 @@ class FinalCompStatsFragment : Fragment() {
             // For each trait, calculate its trait levels
             for (trait in traitMap) {
                 if (trait.key == Champion.Origin.GODKING && trait.value > 1) continue
-                val levels = Helper.getTrait(trait.key).levels.reversedArray()
-                for (level in levels) {
-                    if (trait.value >= level) {
+                val levels = Helper.getTrait(trait.key).levels
+                val numLevels = levels.size
+                for (i in numLevels - 1 downTo 0) {
+                    if (trait.value >= levels[i]) {
                         // Add or update map
-                        val pairKey = Pair(trait.key, level)
+                        val pairKey = Pair(trait.key, i)
                         val pair = statsMap[pairKey]
                         if (pair != null) {
                             statsMap[pairKey] = Pair(pair.first + game.placement, pair.second + 1)
@@ -139,6 +138,10 @@ class FinalCompStatsFragment : Fragment() {
         }
         // toList returns Pair<key, Pair<Int, Int>>
         val custom = Comparator<Pair<Pair<Champion.Origin, Int>, Pair<Int, Int>>> { a, b ->
+            val traita = Helper.getTrait(a.first.first)
+            val traitb = Helper.getTrait(b.first.first)
+            val alevel = traita.levels[a.first.second]
+            val blevel = traitb.levels[b.first.second]
             when {
                 // Placement
                 (a.second.first < b.second.first) -> -1
@@ -147,31 +150,30 @@ class FinalCompStatsFragment : Fragment() {
                 (a.second.second > b.second.second) -> -1
                 (a.second.second < b.second.second) -> 1
                 // Trait level
-                (a.first.second > b.first.second) -> -1
-                (a.first.second < b.first.second) -> 1
+                (alevel > blevel) -> -1
+                (alevel < blevel) -> 1
                 else -> 0
             }
         }
         val sortedMap = statsMap.toList().sortedWith(custom).toMap()
-        val top3 : MutableList<Pair<Champion.Origin, Int>> = ArrayList()
+        val top3 : MutableList<Pair<Champion.Origin, Int>> = ArrayList()                // origin, trait level index
         top3.addAll(sortedMap.keys.toList().subList(0, min(3, sortedMap.size)))
 
         val table = root.findViewById<TableLayout>(R.id.best_traits_table)
         // Header
         table.addView(createHeaderRow(arrayOf("", "Count", "Placement")))
         for (pair in top3) {
+            val trait = Helper.getTrait(pair.first)
+            val traitLevel = trait.levels[pair.second]
             val stats = arrayOf(
-                statsMap[pair]!!.second.toString(),
-                statsMap[pair]!!.first.toString())
+                statsMap[pair]!!.second.toString(),         // count
+                statsMap[pair]!!.first.toString())          // placement
             val statsRow = createRow(stats)
             // Add trait image
-            val trait = Helper.getTrait(pair.first)
             val imageParams = TableRow.LayoutParams(100, TableRow.LayoutParams.WRAP_CONTENT)
             val traitImage = Helper.createImageView(context, trait.imagePath, imageParams,
-                "${Helper.originName(pair.first)} ${pair.second}")
-            val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
-            traitImage.imageTintList = ColorStateList.valueOf(
-                resources.getColor(Helper.getTraitTint(pair.second, trait.levels, offset), null))
+                "${Helper.originName(pair.first)} $traitLevel")
+            traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(trait.traitColor(pair.second), null))
             statsRow.addView(traitImage, 0)
             table.addView(statsRow)
         }
@@ -187,7 +189,7 @@ class FinalCompStatsFragment : Fragment() {
             formatStat(champStats.avgStarLevel), formatStat(champStats.carryCount * 100 / champStats.count.toDouble()) + "%"),
             getMostSuccessfulItems(selected.id), false)
         table.addView(statsRow)
-        val champImage = view!!.findViewById<ImageView>(R.id.champion_image)
+        val champImage = requireView().findViewById<ImageView>(R.id.champion_image)
         champImage.setImageResource(selected.imagePath)
     }
 

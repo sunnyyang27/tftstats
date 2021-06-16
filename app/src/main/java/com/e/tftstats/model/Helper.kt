@@ -49,6 +49,9 @@ class Helper {
         var tgId: Int = -1
         var shadowTgId: Int = -1
 
+        // Used in Home, ItemStats, FinalComp
+        val traitColors = arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
+
         private var itemNum: Int = 1
 
         fun loadAssets() {
@@ -351,37 +354,38 @@ class Helper {
         }
 
         private fun loadTraitsMap() {
-            addTrait(Origin.ABOMINATION, arrayOf(3, 4, 5), R.drawable.abomination)
-            addTrait(Origin.COVEN, arrayOf(3), R.drawable.coven)
-            addTrait(Origin.DAWNBRINGER, arrayOf(2, 4, 6, 8), R.drawable.dawnbringer)
-            addTrait(Origin.DRACONIC, arrayOf(3, 5), R.drawable.draconic)
-            addTrait(Origin.DRAGONSLAYER, arrayOf(2, 4), R.drawable.dragonslayer)
-            addTrait(Origin.ETERNAL, arrayOf(1), R.drawable.eternal)
-            addTrait(Origin.FORGOTTEN, arrayOf(3, 6, 9), R.drawable.forgotten)
-            addTrait(Origin.HELLION, arrayOf(3, 5, 7), R.drawable.hellion)
-            addTrait(Origin.IRONCLAD, arrayOf(2, 4), R.drawable.ironclad)
-            addTrait(Origin.NIGHTBRINGER, arrayOf(2, 4, 6, 8), R.drawable.nightbringer)
-            addTrait(Origin.REDEEMED, arrayOf(3, 6, 9), R.drawable.redeemed)
-            addTrait(Origin.REVENANT, arrayOf(2, 3), R.drawable.revenant)
-            addTrait(Origin.VERDANT, arrayOf(2, 3), R.drawable.verdant)
-            addTrait(Origin.ASSASSIN, arrayOf(2, 4, 6), R.drawable.assassin)
-            addTrait(Origin.BRAWLER, arrayOf(2, 4), R.drawable.brawler)
-            addTrait(Origin.CARETAKER, arrayOf(1), R.drawable.caretaker)
-            addTrait(Origin.CAVALIER, arrayOf(2, 3, 4), R.drawable.cavalier)
-            addTrait(Origin.CRUEL, arrayOf(1), R.drawable.cruel)
-            addTrait(Origin.GODKING, arrayOf(1), R.drawable.godking)
-            addTrait(Origin.INVOKER, arrayOf(2, 4), R.drawable.invoker)
-            addTrait(Origin.KNIGHT, arrayOf(2, 4, 6), R.drawable.knight)
-            addTrait(Origin.LEGIONNAIRE, arrayOf(2, 4, 6, 8), R.drawable.legionnaire)
-            addTrait(Origin.MYSTIC, arrayOf(2, 3, 4), R.drawable.mystic)
-            addTrait(Origin.RANGER, arrayOf(2, 4), R.drawable.ranger)
-            addTrait(Origin.RENEWER, arrayOf(2, 4), R.drawable.renewer)
-            addTrait(Origin.SKIRMISHER, arrayOf(3, 6), R.drawable.skirmisher)
-            addTrait(Origin.SPELLWEAVER, arrayOf(2, 4), R.drawable.spellweaver)
+            // arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
+            addTrait(Origin.ABOMINATION, arrayOf(3, 4, 5), arrayOf(1, 2, 3), R.drawable.abomination)
+            addTrait(Origin.COVEN, arrayOf(3), arrayOf(2), R.drawable.coven)
+            addTrait(Origin.DAWNBRINGER, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.dawnbringer)
+            addTrait(Origin.DRACONIC, arrayOf(3, 5), arrayOf(0, 2), R.drawable.draconic)
+            addTrait(Origin.DRAGONSLAYER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.dragonslayer)
+            addTrait(Origin.ETERNAL, arrayOf(1), arrayOf(2), R.drawable.eternal)
+            addTrait(Origin.FORGOTTEN, arrayOf(3, 6, 9), arrayOf(0, 1, 2), R.drawable.forgotten)
+            addTrait(Origin.HELLION, arrayOf(3, 5, 7), arrayOf(0, 2, 3), R.drawable.hellion)
+            addTrait(Origin.IRONCLAD, arrayOf(2, 3, 4), arrayOf(0, 2, 3), R.drawable.ironclad)
+            addTrait(Origin.NIGHTBRINGER, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.nightbringer)
+            addTrait(Origin.REDEEMED, arrayOf(3, 6, 9), arrayOf(0, 2, 3), R.drawable.redeemed)
+            addTrait(Origin.REVENANT, arrayOf(2, 3, 4), arrayOf(0, 2, 3), R.drawable.revenant)
+            addTrait(Origin.VERDANT, arrayOf(2, 3), arrayOf(0, 2), R.drawable.verdant)
+            addTrait(Origin.ASSASSIN, arrayOf(2, 4, 6), arrayOf(0, 1, 2), R.drawable.assassin)
+            addTrait(Origin.BRAWLER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.brawler)
+            addTrait(Origin.CARETAKER, arrayOf(1), arrayOf(2), R.drawable.caretaker)
+            addTrait(Origin.CAVALIER, arrayOf(2, 3, 4), arrayOf(0, 1, 2), R.drawable.cavalier)
+            addTrait(Origin.CRUEL, arrayOf(1), arrayOf(2), R.drawable.cruel)
+            addTrait(Origin.GODKING, arrayOf(1), arrayOf(2), R.drawable.godking)
+            addTrait(Origin.INVOKER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.invoker)
+            addTrait(Origin.KNIGHT, arrayOf(2, 4, 6), arrayOf(0, 1, 2), R.drawable.knight)
+            addTrait(Origin.LEGIONNAIRE, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.legionnaire)
+            addTrait(Origin.MYSTIC, arrayOf(2, 3, 4), arrayOf(0, 1, 2), R.drawable.mystic)
+            addTrait(Origin.RANGER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.ranger)
+            addTrait(Origin.RENEWER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.renewer)
+            addTrait(Origin.SKIRMISHER, arrayOf(3, 6, 9), arrayOf(0, 2, 3), R.drawable.skirmisher)
+            addTrait(Origin.SPELLWEAVER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.spellweaver)
         }
 
-        private fun addTrait(origin: Origin, levels: Array<Int>, imagePath: Int = 0) {
-            traitMap[origin] = Trait(origin, levels, imagePath)
+        private fun addTrait(origin: Origin, levels: Array<Int>, colors: Array<Int>, imagePath: Int = 0) {
+            traitMap[origin] = Trait(origin, levels, colors, imagePath)
         }
 
         fun isInitialized() : Boolean {
@@ -582,41 +586,6 @@ class Helper {
                 }
             }
             return s
-        }
-
-        // Trait image based on level
-        // 2, 4, 6, 8 -> index = 0, 1, 2, 3
-        // 2, 4, 6 -> 0, 1, 2 -> 0, 1, 2
-        // 2, 4 -> 0, 1 -> 1, 2
-        // 1 -> 0 -> 2
-        fun getTraitTint(index: Int, numLevels: Int) : Int {
-            val colors = arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
-            return colors[getTraitRank(index, numLevels) - 1]
-        }
-
-        // Levels is in decreasing order
-        fun getTraitTint(desiredLevel: Int, levels: Array<Int>, offset: Int) : Int {
-            val numLevels = levels.size
-            for (i in numLevels - 1 downTo 0) {
-                if (desiredLevel >= levels[i]) {
-                    return getTraitTint(i + offset, levels.size + offset)
-                }
-            }
-            return getTraitTint(offset, levels.size + offset)
-        }
-
-        /** Rank trait level. For example, 8/(8 6 4 2) is the highest rank (4). 3/(3 2 1) is rank 3. 6/(8 6 4 2) is rank 3. 1/1 is rank 3.
-         2/4 is rank 2. 2/(8 6 4 2) is rank 1. 0/1 or 1/(8 6 4 2) is rank 0
-         Index is the completed level out of all the levels. For example, if the trait has levels 2, 4, 6, 8 and 6 was complete, then
-         index = 2
-         Abomination is a special case where 5/(5 4 3) should have a higher rank. Increment both by 1
-        */
-        fun getTraitRank(index: Int, numLevels: Int) : Int {
-            return when {
-                (numLevels == 2) -> index + 2
-                (numLevels == 1) -> 3
-                else -> index + 1
-            }
         }
 
         /** Math helpers */

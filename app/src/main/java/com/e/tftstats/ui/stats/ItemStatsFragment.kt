@@ -26,7 +26,7 @@ class ItemStatsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val root = inflater.inflate(R.layout.fragment_item_stats, container, false)
 
         // Initialize PVE items

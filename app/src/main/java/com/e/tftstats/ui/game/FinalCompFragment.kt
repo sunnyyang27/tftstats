@@ -25,10 +25,10 @@ class FinalCompFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_final_comp, container, false)
         if (arguments != null) {
-            gameId = arguments!!.getInt("gameId", -1)
+            gameId = requireArguments().getInt("gameId", -1)
         }
         teamDao = MainActivity.db!!.teamDao()
 
@@ -143,7 +143,7 @@ class FinalCompFragment : Fragment() {
         traitLayout.removeAllViews()
         val traitMap = Helper.calculateTeamsTraits(MainActivity.currentGame.teamComp.values.toList())
         // Get levels per trait
-        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (levelIndex / levels.size, actualLevel)
+        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (colourIndex, actualLevel)
         val imageParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, 100)
         for (origin in traitMap) {
             val trait = Helper.getTrait(origin.key)
@@ -151,18 +151,17 @@ class FinalCompFragment : Fragment() {
             traitImage.alpha = 0.1f
 
             var fullLevel = trait.levels[0]             // default to first in case no level is met
-            var levelRank = 0
+            var levelRank = -1
             if (origin.key != Champion.Origin.GODKING || origin.value == 1) {
                 val numLevels = trait.levels.size
                 val levels = trait.levels
                 for (i in numLevels - 1 downTo 0) {
                     if (origin.value >= levels[i]) {
-                        val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
                         traitImage.imageTintList = ColorStateList.valueOf(
-                            resources.getColor(Helper.getTraitTint(i + offset, numLevels + offset), null))
+                            resources.getColor(trait.traitColor(i), null))
                         traitImage.alpha = 1f
                         fullLevel = levels[i]
-                        levelRank = Helper.getTraitRank(i + offset, numLevels + offset)
+                        levelRank = trait.colors[i]
                         break
                     }
                 }

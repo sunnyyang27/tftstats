@@ -99,6 +99,6 @@ abstract class StatsFragment : Fragment() {
 
     private fun updateLineChart(placement: Int, checked: Boolean) {
         dataSets[placement]!!.isVisible = checked
-        Helper.setLineChartData(view!!.findViewById(R.id.stats_linechart), dataSets.values.toList())
+        Helper.setLineChartData(requireView().findViewById(R.id.stats_linechart), dataSets.values.toList())
     }
 }

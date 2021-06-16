@@ -24,13 +24,13 @@ class GameEditFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_game_edit, container, false)
         gameDao = MainActivity.db!!.gameDao()
         stageDao = MainActivity.db!!.stageDao()
         teamDao = MainActivity.db!!.teamDao()
         if (arguments != null) {
-            gameId = arguments!!.getInt("gameId", -1)
+            gameId = requireArguments().getInt("gameId", -1)
         }
 
         val btnLayout = root.findViewById<LinearLayout>(R.id.edit_game_buttons)

@@ -31,11 +31,11 @@ class GameStatsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         root = inflater.inflate(R.layout.fragment_game_stats, container, false)
-        gameId = arguments!!.getInt("gameId", -1)
+        gameId = requireArguments().getInt("gameId", -1)
         itemSize = resources.getDimensionPixelSize(R.dimen.item_size)
 
         // Placement
-        val placement = arguments!!.getInt("placement", 0)
+        val placement = requireArguments().getInt("placement", 0)
         val placementTv = root.findViewById<TextView>(R.id.game_placement)
         placementTv.text = getString(R.string.placement_game, Helper.getPlacement(placement, resources, placementTv))
 

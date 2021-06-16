@@ -23,10 +23,10 @@ class StageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_stage, container, false)
         if (arguments != null) {
-            gameId = arguments!!.getInt("gameId", -1)
+            gameId = requireArguments().getInt("gameId", -1)
         }
 
         // Title
@@ -199,7 +199,7 @@ class StageFragment : Fragment() {
         root.findViewById<Spinner>(R.id.level_spin).setSelection(s.level - minLevel)
         root.findViewById<EditText>(R.id.xp_input).setText(s.xp.toString())
 
-        var roundDied = if (currentGame.tmpRoundDied == -1) currentGame.roundDied else currentGame.tmpRoundDied
+        val roundDied = if (currentGame.tmpRoundDied == -1) currentGame.roundDied else currentGame.tmpRoundDied
         // Armory image - hide if roundDied < 2
         // If died, hide everything. Otherwise, don't set image if == 0
         if (currentGame.stageDied == currentStage && roundDied == 1) {

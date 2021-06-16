@@ -195,10 +195,9 @@ class HomeFragment : Fragment() {
                     // Create and Add to trait layout
                     val imageParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 75)
                     val traitImage = Helper.createImageView(context, trait.imagePath, imageParams, "${Helper.originName(origin.key)} ${levels[i]}")
-                    val offset = if (trait.origin == Champion.Origin.ABOMINATION) 1 else 0
                     traitImage.imageTintList = ColorStateList.valueOf(resources.getColor(
-                        Helper.getTraitTint(i + offset, numLevels + offset), null))
-                    traitImageMap[traitImage] = Pair(Helper.getTraitRank(i + offset, numLevels + offset), levels[i])
+                        trait.traitColor(i), null))
+                    traitImageMap[traitImage] = Pair(trait.colors[i], levels[i])
                     break
                 }
             }
