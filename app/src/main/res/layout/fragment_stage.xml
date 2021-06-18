@@ -45,7 +45,6 @@
                     android:layout_height="@dimen/text_height"
                     android:gravity="center_vertical"
                     android:text="@string/round_died"
-                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="@dimen/text_body_size" />
 
@@ -64,8 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/died_check"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_alignEnd="@id/carousel_layout" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:id="@+id/armory_label"
@@ -74,7 +72,6 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="center_vertical"
                     android:text="@string/armory_colon"
-                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="@dimen/text_body_size" />
 
@@ -111,7 +108,6 @@
                     android:layout_height="@dimen/text_height"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:text="@string/carousel_colon"
-                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="@dimen/text_body_size"
                     android:gravity="center_vertical" />
@@ -150,7 +146,6 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="center_vertical"
                     android:text="@string/pve_colon"
-                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="@dimen/text_body_size" />
 

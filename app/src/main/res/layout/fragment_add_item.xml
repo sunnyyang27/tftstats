@@ -44,7 +44,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/item_selected"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size"
             android:layout_below="@+id/table" />

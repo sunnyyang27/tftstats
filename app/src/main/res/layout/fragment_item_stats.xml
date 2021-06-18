@@ -9,7 +9,6 @@
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
         android:text="@string/avg_placement_by_item"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/text_title_size"
         android:layout_alignParentTop="true" />
@@ -36,7 +35,6 @@
         android:layout_height="@dimen/text_height"
         android:gravity="center_vertical"
         android:text="@string/best_items"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="@dimen/text_title_size"
         android:layout_below="@+id/placement_by_item_table" />

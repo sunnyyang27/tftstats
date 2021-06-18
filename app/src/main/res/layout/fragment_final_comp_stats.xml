@@ -15,7 +15,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/avg_placement_by_trait"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 
@@ -39,7 +38,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/best_final_traits"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 
@@ -55,7 +53,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/avg_placement_by_champ"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 
@@ -92,7 +89,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/best_final_champs"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 
@@ -114,7 +110,6 @@
             android:layout_height="@dimen/text_height"
             android:gravity="center_vertical"
             android:text="@string/avg_team_cost_per_placement"
-            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textSize="@dimen/text_title_size" />
 

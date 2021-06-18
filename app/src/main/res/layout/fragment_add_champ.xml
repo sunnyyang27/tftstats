@@ -58,7 +58,6 @@
                 android:layout_height="@dimen/text_height"
                 android:gravity="center_vertical"
                 android:text="@string/star_level"
-                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="@dimen/text_body_size" />
 
@@ -95,7 +94,6 @@
                 android:layout_height="@dimen/text_height"
                 android:gravity="center_vertical"
                 android:text="@string/items"
-                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="@dimen/text_body_size" />
 

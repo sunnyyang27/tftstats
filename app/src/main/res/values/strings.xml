@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">TFT Stats</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle">User</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -56,8 +54,8 @@
     <string name="delete">Delete</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
-    <string name="item_selected">"Item selected: "</string>
-    <string name="shadow_items">"Shadow Items "</string>
+    <string name="item_selected">Item selected: </string>
+    <string name="shadow_items">Shadow Items </string>
     <string name="add_row">Add row</string>
     <string name="finish_game">Finish game</string>
     <string name="avg_placement_by_trait">Average Placement by Trait</string>
@@ -93,5 +91,6 @@
     <string name="placement_game">Placement: %1$s</string>
     <string name="done">Done</string>
     <string name="menu_game_edit">Edit Game</string>
+    <string name="changes_saved">Changes made are automatically saved.</string>
 
 </resources>
