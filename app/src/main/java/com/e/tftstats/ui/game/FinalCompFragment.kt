@@ -143,7 +143,7 @@ class FinalCompFragment : Fragment() {
         traitLayout.removeAllViews()
         val traitMap = Helper.calculateTeamsTraits(MainActivity.currentGame.teamComp.values.toList())
         // Get levels per trait
-        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (colourIndex, actualLevel)
+        val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (levelRank, actualLevel)
         val imageParams = FlexboxLayout.LayoutParams(FlexboxLayout.LayoutParams.WRAP_CONTENT, 100)
         for (origin in traitMap) {
             val trait = Helper.getTrait(origin.key)
@@ -168,7 +168,7 @@ class FinalCompFragment : Fragment() {
             }
             val tooltip = "${Helper.originName(origin.key)} ${origin.value}/$fullLevel"
             traitImage.tooltipText = tooltip
-            traitImageMap[traitImage] = Pair(levelRank, fullLevel)
+            traitImageMap[traitImage] = Pair(levelRank, origin.value)
         }
 
         // Sort images by levelRank then actualLevel
@@ -178,11 +178,12 @@ class FinalCompFragment : Fragment() {
                 (a.second.first > b.second.first) -> -1
                 (a.second.first < b.second.first) -> 1
                 // actualLevel
-                (a.second.second > b.second.first) -> -1
-                (a.second.second < b.second.first) -> 1
+                (a.second.second > b.second.second) -> -1
+                (a.second.second < b.second.second) -> 1
                 else -> 0
             }
         }
+
         val sortedImages = traitImageMap.toList().sortedWith(custom).map { it.first }
 
         // Add to traitlayout

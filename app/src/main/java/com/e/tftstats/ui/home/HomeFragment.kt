@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         root = inflater.inflate(R.layout.fragment_home, container, false)
         gameDao = MainActivity.db!!.gameDao()
         teamDao = MainActivity.db!!.teamDao()
@@ -209,8 +209,8 @@ class HomeFragment : Fragment() {
                 (a.second.first > b.second.first) -> -1
                 (a.second.first < b.second.first) -> 1
                 // actualLevel
-                (a.second.second > b.second.first) -> -1
-                (a.second.second < b.second.first) -> 1
+                (a.second.second > b.second.second) -> -1
+                (a.second.second < b.second.second) -> 1
                 else -> 0
             }
         }
