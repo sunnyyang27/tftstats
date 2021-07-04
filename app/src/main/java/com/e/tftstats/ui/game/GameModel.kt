@@ -44,11 +44,12 @@ class GameModel {
         }
 
         // Armory item: must exist if stage >= 2 and roundDied >= 2
-        if ((roundDied < 2 && roundDied > -1) || currentStageDisplayed == 1 || currentStageDisplayed >= 5)
+        if ((roundDied < 2 && roundDied > -1) || currentStageDisplayed == 1)
             s.armoryItem = -1
         else {
             s.armoryItem = activity.findViewById<ImageView>(R.id.armory_image).tag as? Int ?: -1
-            if (s.armoryItem == -1) {
+            // If stage 4+, armory may or may not appear
+            if (s.armoryItem == -1 && currentStageDisplayed <= 3) {
                 error.append("Missing armory item.\n")
             }
         }

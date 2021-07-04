@@ -73,7 +73,7 @@ class StageFragment : Fragment() {
         val pveLayout = root.findViewById<LinearLayout>(R.id.pve_layout)
 
         // Hide armory and died stuff if stage = 1
-        Helper.setVisible(armoryLayout, currentStage in 2..4)
+        Helper.setVisible(armoryLayout, currentStage > 1)
         val diedCheck = root.findViewById<CheckBox>(R.id.died_check)
         Helper.setVisible(diedCheck, currentStage > 1)
 
@@ -95,7 +95,7 @@ class StageFragment : Fragment() {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Helper.setVisible(carouselLayout, position >= 3)
-                Helper.setVisible(armoryLayout, position >= 1 && currentStage < 5)
+                Helper.setVisible(armoryLayout, position >= 1)
                 Helper.setVisible(pveLayout, position >= 6)
                 currentGame.tmpRoundDied = position + 1
             }
@@ -113,7 +113,7 @@ class StageFragment : Fragment() {
             Helper.setVisible(roundLayout, isChecked)
             val roundSelected = roundSpin.selectedItemPosition
             Helper.setVisible(carouselLayout, !(isChecked && roundSelected < 3))
-            Helper.setVisible(armoryLayout, !(isChecked && roundSelected < 1) && currentStage < 5)
+            Helper.setVisible(armoryLayout, !(isChecked && roundSelected < 1))
             Helper.setVisible(pveLayout, !(isChecked && roundSelected < 6))
             if (!isChecked && currentStage == MainActivity.currentGame.stageDied) {
                 MainActivity.currentGame.stageDied = -1
@@ -212,11 +212,12 @@ class StageFragment : Fragment() {
                 armoryImage.tag = s.armoryItem
                 armoryImage.visibility = View.VISIBLE
                 root.findViewById<Button>(R.id.armory_button).visibility = View.GONE
+                root.findViewById<Button>(R.id.clear_armory_button).visibility = View.VISIBLE
             }
         }
 
         // Carousel image - hide if roundDied < 4
-        if (currentGame.stageDied == currentGame.currentStageDisplayed && roundDied <= 3) {
+        if (currentGame.stageDied == currentStage && roundDied <= 3) {
             root.findViewById<LinearLayout>(R.id.carousel_layout).visibility = View.GONE
         } else {
             if (s.carouselItem >= 0) {
@@ -262,6 +263,13 @@ class StageFragment : Fragment() {
             args.putDouble("itemType", 1.0)
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_additem, args)
         }
+        val clearArmoryBtn = root.findViewById<Button>(R.id.clear_armory_button)
+        clearArmoryBtn.setOnClickListener {
+            armoryBtn.visibility = View.VISIBLE
+            armoryImage.visibility = View.GONE
+            clearArmoryBtn.visibility = View.GONE
+            currentGame.stages[currentStage - 1].armoryItem = -1
+        }
         val carouselBtn = root.findViewById<Button>(R.id.carousel_button)
         carouselBtn.setOnClickListener {
             val args = Bundle()
@@ -301,7 +309,7 @@ class StageFragment : Fragment() {
             val clear = Button(context)
             clear.text = getString(R.string.clear)
             clear.setOnClickListener {
-                currentGame.stages[currentGame.currentStageDisplayed - 1].pveItemsMap.remove(entry.key)
+                currentGame.stages[currentStage - 1].pveItemsMap.remove(entry.key)
                 pveTable.removeView(row)
             }
             row.addView(clear)

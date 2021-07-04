@@ -29,6 +29,7 @@ class Helper {
         const val numRows = 10
         val itemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
         val shadowItemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
+        val consumableItems: Array<Array<Item?>> = Array(1) { arrayOfNulls<Item>(4) }
 
         // Used by AddChampFragment and MainActivity.AddChamp
         private val championIdMap: MutableMap<Int, Champion> = HashMap()
@@ -58,6 +59,7 @@ class Helper {
             loadChampions()
             loadItems()
             loadShadowItems()
+            loadConsumables()
             loadChampionsHashmap()
             loadTraitsMap()
             initialized = true
@@ -291,6 +293,17 @@ class Helper {
             addShadowItem("Abomination Emblem", R.drawable.abominationspat, glove, shadowSpatula, origin = Origin.ABOMINATION)
 
             addShadowItem("Force of Darkness", R.drawable.fod, shadowSpatula, shadowSpatula)
+        }
+
+        private fun loadConsumables() {
+            consumableItems[0][0] = Item("Neeko's Help", R.drawable.neekohelp, true)
+            consumableItems[0][1] = Item("Reforger", R.drawable.reforger, true)
+            consumableItems[0][2] = Item("Magnetic Remover", R.drawable.remover, true)
+            consumableItems[0][3] = Item("Loaded Dice", R.drawable.loadeddice, true)
+            itemIdMap[consumableItems[0][0]!!.id] = consumableItems[0][0]!!
+            itemIdMap[consumableItems[0][1]!!.id] = consumableItems[0][1]!!
+            itemIdMap[consumableItems[0][2]!!.id] = consumableItems[0][2]!!
+            itemIdMap[consumableItems[0][3]!!.id] = consumableItems[0][3]!!
         }
 
         private fun addItem(item: Item) {

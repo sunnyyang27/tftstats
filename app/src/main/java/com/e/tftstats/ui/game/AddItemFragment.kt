@@ -41,8 +41,12 @@ class AddItemFragment : Fragment() {
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
         val shadowItemTable = root.findViewById<TableLayout>(R.id.shadow_item_table)
+        val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
         createTable(Helper.itemTable, itemTable)
         createTable(Helper.shadowItemTable, shadowItemTable)
+        // Don't show consumable for champion items
+        if (itemType < 3 || itemType >= 4)
+            createTable(Helper.consumableItems, consumableTable)
 
         if (selectedItemId >= 0) {
             val itemSelectedImage = root.findViewById<ImageView>(R.id.item_selected_image)
@@ -80,10 +84,9 @@ class AddItemFragment : Fragment() {
                     row.addView(createImageView())
                     continue
                 }
-                row.addView(createImageView(item.id, item.imagePath))
+                row.addView(createImageView(item.id, item.imagePath, item.name))
             }
             champTable.addView(row)
-            if (itemType == 1.0) break
         }
     }
 

@@ -92,6 +92,14 @@
                     android:visibility="gone"
                     android:focusable="true"
                     android:clickable="true"/>
+
+                <Button
+                    android:id="@+id/clear_armory_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="@string/clear"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
