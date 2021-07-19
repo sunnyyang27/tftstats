@@ -43,7 +43,7 @@ class AddItemFragment : Fragment() {
         val shadowItemTable = root.findViewById<TableLayout>(R.id.shadow_item_table)
         val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
         createTable(Helper.itemTable, itemTable)
-        createTable(Helper.shadowItemTable, shadowItemTable)
+        createTable(Helper.radiantItemTable, shadowItemTable)
         // Don't show consumable for champion items
         if (itemType < 3 || itemType >= 4)
             createTable(Helper.consumableItems, consumableTable)
