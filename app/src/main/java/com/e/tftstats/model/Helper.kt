@@ -69,11 +69,7 @@ class Helper {
             champions.add(Champion("Kalista", Origin.ABOMINATION, Origin.LEGIONNAIRE, 1, R.drawable.kalista))
             champions.add(Champion("Brand", Origin.ABOMINATION, Origin.SPELLWEAVER, 2, R.drawable.brand))
             champions.add(Champion("Nunu & Willump", Origin.ABOMINATION, Origin.BRAWLER, 3, R.drawable.nunu))
-            champions.add(Champion("Ryze", Origin.ABOMINATION, Origin.FORGOTTEN, 4, R.drawable.ryze, Origin.MYSTIC))
-
-            champions.add(Champion("Lissandra", Origin.COVEN, Origin.RENEWER, 1, R.drawable.lissandra))
-            champions.add(Champion("Leblanc", Origin.COVEN, Origin.ASSASSIN, 2, R.drawable.leblanc))
-            champions.add(Champion("Morgana", Origin.COVEN, Origin.NIGHTBRINGER, 3, R.drawable.morgana, Origin.MYSTIC))
+            champions.add(Champion("Fiddlesticks", Origin.ABOMINATION, Origin.REVENANT, 4, R.drawable.fiddlesticks, Origin.MYSTIC))
 
             champions.add(Champion("Gragas", Origin.DAWNBRINGER, Origin.BRAWLER, 1, R.drawable.gragas))
             champions.add(Champion("Khazix", Origin.DAWNBRINGER, Origin.ASSASSIN, 1, R.drawable.khazix))
@@ -81,27 +77,19 @@ class Helper {
             champions.add(Champion("Nidalee", Origin.DAWNBRINGER, Origin.SKIRMISHER, 3, R.drawable.nidalee))
             champions.add(Champion("Riven", Origin.DAWNBRINGER, Origin.LEGIONNAIRE, 3, R.drawable.riven))
             champions.add(Champion("Karma", Origin.DAWNBRINGER, Origin.INVOKER, 4, R.drawable.karma))
-            champions.add(Champion("Garen", Origin.DAWNBRINGER, Origin.KNIGHT, 5, R.drawable.garen, Origin.GODKING))
+            champions.add(Champion("Garen", Origin.DAWNBRINGER, Origin.KNIGHT, 5, R.drawable.garen, Origin.VICTORIOUS))
 
             champions.add(Champion("Udyr", Origin.DRACONIC, Origin.SKIRMISHER, 1, R.drawable.udyr))
             champions.add(Champion("Sett", Origin.DRACONIC, Origin.BRAWLER, 2, R.drawable.sett))
-            champions.add(Champion("Ashe", Origin.VERDANT, Origin.DRACONIC, 3, R.drawable.ashe, Origin.RANGER))
+            champions.add(Champion("Ashe", Origin.DRACONIC, Origin.RANGER, 3, R.drawable.ashe))
             champions.add(Champion("Zyra", Origin.DRACONIC, Origin.SPELLWEAVER, 3, R.drawable.zyra))
+            champions.add(Champion("Galio", Origin.DRACONIC, Origin.SENTINEL, 4, R.drawable.galio, Origin.KNIGHT))
             champions.add(Champion("Heimerdinger", Origin.DRACONIC, Origin.CARETAKER, 5, R.drawable.heimerdinger, Origin.RENEWER))
 
-            champions.add(Champion("Trundle", Origin.DRAGONSLAYER, Origin.SKIRMISHER, 2, R.drawable.trundle))
-            champions.add(Champion("Pantheon", Origin.DRAGONSLAYER, Origin.SKIRMISHER, 3, R.drawable.pantheon))
-            champions.add(Champion("Diana", Origin.DRAGONSLAYER, Origin.NIGHTBRINGER, 4, R.drawable.diana, Origin.ASSASSIN))
-            champions.add(Champion("Mordekaiser", Origin.DRAGONSLAYER, Origin.LEGIONNAIRE, 4, R.drawable.mordekaiser))
-
-            champions.add(Champion("Kindred", Origin.ETERNAL, Origin.MYSTIC, 5, R.drawable.kindred, Origin.RANGER))
-
-            champions.add(Champion("Warwick", Origin.FORGOTTEN, Origin.BRAWLER, 1, R.drawable.warwick))
             champions.add(Champion("Vayne", Origin.FORGOTTEN, Origin.RANGER, 1, R.drawable.vayne))
             champions.add(Champion("Hecarim", Origin.FORGOTTEN, Origin.CAVALIER, 2, R.drawable.hecarim))
             champions.add(Champion("Thresh", Origin.FORGOTTEN, Origin.KNIGHT, 2, R.drawable.thresh))
-            champions.add(Champion("Viktor", Origin.FORGOTTEN, Origin.SPELLWEAVER, 2, R.drawable.viktor))
-            champions.add(Champion("Katarina", Origin.FORGOTTEN, Origin.ASSASSIN, 3, R.drawable.katarina))
+            champions.add(Champion("Miss Fortune", Origin.FORGOTTEN, Origin.CANNONEER, 3, R.drawable.missfortune))
             champions.add(Champion("Draven", Origin.FORGOTTEN, Origin.LEGIONNAIRE, 4, R.drawable.draven))
             champions.add(Champion("Viego", Origin.FORGOTTEN, Origin.ASSASSIN, 5, R.drawable.viego, Origin.SKIRMISHER))
 
@@ -109,8 +97,11 @@ class Helper {
             champions.add(Champion("Poppy", Origin.HELLION, Origin.KNIGHT, 1, R.drawable.poppy))
             champions.add(Champion("Ziggs", Origin.HELLION, Origin.SPELLWEAVER, 1, R.drawable.ziggs))
             champions.add(Champion("Kennen", Origin.HELLION, Origin.SKIRMISHER, 2, R.drawable.kennen))
+            champions.add(Champion("Tristana", Origin.HELLION, Origin.CANNONEER, 2, R.drawable.tristana))
             champions.add(Champion("Lulu", Origin.HELLION, Origin.MYSTIC, 3, R.drawable.lulu))
             champions.add(Champion("Teemo", Origin.HELLION, Origin.CRUEL, 5, R.drawable.teemo, Origin.INVOKER))
+
+            champions.add(Champion("Gwen", Origin.INANIMATE, Origin.MYSTIC, 5, R.drawable.gwen))
 
             champions.add(Champion("Nautilus", Origin.IRONCLAD, Origin.KNIGHT, 2, R.drawable.nautilus))
             champions.add(Champion("Jax", Origin.IRONCLAD, Origin.SKIRMISHER, 4, R.drawable.jax))
@@ -121,7 +112,7 @@ class Helper {
             champions.add(Champion("Lee Sin", Origin.NIGHTBRINGER, Origin.SKIRMISHER, 3, R.drawable.leesin))
             champions.add(Champion("Yasuo", Origin.NIGHTBRINGER, Origin.LEGIONNAIRE, 3, R.drawable.yasuo))
             champions.add(Champion("Aphelios", Origin.NIGHTBRINGER, Origin.RANGER, 4, R.drawable.aphelios))
-            champions.add(Champion("Darius", Origin.NIGHTBRINGER, Origin.KNIGHT, 5, R.drawable.darius, Origin.GODKING))
+            champions.add(Champion("Diana", Origin.NIGHTBRINGER, Origin.ASSASSIN, 4, R.drawable.diana))
 
             champions.add(Champion("Aatrox", Origin.REDEEMED, Origin.LEGIONNAIRE, 1, R.drawable.aatrox))
             champions.add(Champion("Leona", Origin.REDEEMED, Origin.KNIGHT, 1, R.drawable.leona))
@@ -129,13 +120,19 @@ class Helper {
             champions.add(Champion("Varus", Origin.REDEEMED, Origin.RANGER, 2, R.drawable.varus))
             champions.add(Champion("Lux", Origin.REDEEMED, Origin.MYSTIC, 3, R.drawable.lux))
             champions.add(Champion("Vel'koz", Origin.REDEEMED, Origin.SPELLWEAVER, 4, R.drawable.velkoz))
-            champions.add(Champion("Kayle", Origin.REDEEMED, Origin.VERDANT, 5, R.drawable.kayle, Origin.LEGIONNAIRE))
+            champions.add(Champion("Kayle", Origin.REDEEMED, Origin.LEGIONNAIRE, 5, R.drawable.kayle))
 
             champions.add(Champion("Nocturne", Origin.REVENANT, Origin.ASSASSIN, 3, R.drawable.nocturne))
             champions.add(Champion("Ivern", Origin.REVENANT, Origin.INVOKER, 4, R.drawable.ivern, Origin.RENEWER))
             champions.add(Champion("Volibear", Origin.REVENANT, Origin.BRAWLER, 5, R.drawable.volibear))
 
-            champions.add(Champion("Taric", Origin.VERDANT, Origin.KNIGHT, 4, R.drawable.taric))
+            champions.add(Champion("Senna", Origin.SENTINEL, Origin.CANNONEER, 1, R.drawable.senna))
+            champions.add(Champion("Olaf", Origin.SENTINEL, Origin.SKIRMISHER, 1, R.drawable.olaf))
+            champions.add(Champion("Pyke", Origin.SENTINEL, Origin.ASSASSIN, 2, R.drawable.pyke))
+            champions.add(Champion("Irelia", Origin.SENTINEL, Origin.LEGIONNAIRE, 2, R.drawable.irelia, Origin.SKIRMISHER))
+            champions.add(Champion("Rakan", Origin.SENTINEL, Origin.RENEWER, 3, R.drawable.rakan))
+            champions.add(Champion("Lucian", Origin.SENTINEL, Origin.CANNONEER, 4, R.drawable.lucian))
+            champions.add(Champion("Akshan", Origin.SENTINEL, Origin.RANGER, 5, R.drawable.akshan))
         }
 
         private fun loadItems() {
