@@ -43,8 +43,8 @@ class GameModel {
             }
         }
 
-        // Armory item: must exist if stage >= 2 and roundDied >= 2
-        if ((roundDied < 2 && roundDied > -1) || currentStageDisplayed == 1)
+        // Armory item
+        if (!hasArmoryItem(roundDied))
             s.armoryItem = -1
         else {
             s.armoryItem = activity.findViewById<ImageView>(R.id.armory_image).tag as? Int ?: -1
@@ -182,5 +182,17 @@ class GameModel {
         }
 
         return error.toString()
+    }
+
+    /** Return false if armory item is not required. */
+    private fun hasArmoryItem(roundDied: Int) : Boolean {
+        // Stage 1: no
+        if (currentStageDisplayed == 1) return false
+        // Stage 2 or 4: yes if roundDied >= 2
+        if (currentStageDisplayed == 2 || currentStageDisplayed == 4) return roundDied >= 2 || roundDied == -1
+        // Stage 3: yes if roundDied >= 6
+        if (currentStageDisplayed == 3) return roundDied >= 6 || roundDied == -1
+        // Stage 5+: maybe
+        return true
     }
 }
