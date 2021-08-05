@@ -31,6 +31,7 @@ class Helper {
         val itemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
         val radiantItemTable: Array<Array<Item?>> = Array(radiantRows) { arrayOfNulls<Item>(radiantRows) }
         val consumableItems: Array<Array<Item?>> = Array(1) { arrayOfNulls<Item>(4) }
+        val emblemItems: Array<Array<Item?>> = Array(1) { arrayOfNulls<Item>(14) }
 
         // Used by AddChampFragment and MainActivity.AddChamp
         private val championIdMap: MutableMap<Int, Champion> = HashMap()
@@ -61,6 +62,7 @@ class Helper {
             loadItems()
             loadRadiantItems()
             loadConsumables()
+            loadEmblems()
             loadChampionsHashmap()
             loadTraitsMap()
             initialized = true
@@ -176,7 +178,7 @@ class Helper {
             addItem("Statikk Shiv", R.drawable.shiv, bow, tear)
             addItem("Zz'Rot Portal", R.drawable.zzrot, bow, belt)
             addItem("Last Whisper", R.drawable.lastwhisper, bow, glove, true)
-            addItem("Legionnaire Emblem", R.drawable.legionnairespat, bow, spatula, origin = Origin.LEGIONNAIRE)
+            addItem("Hellion Emblem", R.drawable.hellionspat, bow, spatula, origin = Origin.HELLION)
 
             addItem("Bramble Vest", R.drawable.bramble, chain, chain)
             addItem("Gargoyle Stoneplate", R.drawable.gargoyle, chain, cloak)
@@ -184,7 +186,7 @@ class Helper {
             addItem("Frozen Heart", R.drawable.frozenheart, chain, tear, true)
             addItem("Sunfire Cape", R.drawable.sunfire, chain, belt, true)
             addItem("Shroud of Stillness", R.drawable.shroud, chain, glove, true)
-            addItem("Ironclad Emblem", R.drawable.ironcladspat, chain, spatula, origin = Origin.IRONCLAD)
+            addItem("Cavalier Emblem", R.drawable.cavalierspat, chain, spatula, origin = Origin.CAVALIER)
 
             addItem("Dragon's Claw", R.drawable.dclaw, cloak, cloak)
             addItem("Ionic Spark", R.drawable.spark, cloak, rod)
@@ -292,6 +294,9 @@ class Helper {
             itemIdMap[consumableItems[0][3]!!.id] = consumableItems[0][3]!!
         }
 
+        private fun loadEmblems() {
+        }
+
         private fun addItem(item: Item) {
             itemTable[0][itemNum] = item
             itemTable[itemNum][0] = item
@@ -345,6 +350,10 @@ class Helper {
             radiantItemTable[itemNum % radiantRows][itemNum / radiantRows] = item
             itemNum++
         }
+
+//        private fun addEmblem(name: String, imagePath: Int, origin: Origin) {
+//            val item = SpatItem(name, imagePath, , null, origin)
+//        }
 
         private fun loadChampionsHashmap() {
             for (champ in champions) {

@@ -19,6 +19,7 @@ class AddItemFragment : Fragment() {
     private lateinit var root: View
 
     private var itemSize: Int = 0
+    private var radiantItemSize: Int = 0
     private var imageId: Int = 0                       // imageId counter
     private var currentImageClicked: Int = -1          // imageView ID, not item ID
     private var selectedItemId: Int = -1
@@ -39,11 +40,12 @@ class AddItemFragment : Fragment() {
         }
 
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
+        radiantItemSize = (MainActivity.screenWidth - 16) / (Helper.radiantRows + 1)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
-        val shadowItemTable = root.findViewById<TableLayout>(R.id.shadow_item_table)
+        val radiantItemTable = root.findViewById<TableLayout>(R.id.radiant_item_table)
         val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
         createTable(Helper.itemTable, itemTable)
-        createTable(Helper.radiantItemTable, shadowItemTable)
+        createTable(Helper.radiantItemTable, radiantItemTable, true)
         // Don't show consumable for champion items
         if (itemType < 3 || itemType >= 4)
             createTable(Helper.consumableItems, consumableTable)
@@ -59,7 +61,7 @@ class AddItemFragment : Fragment() {
         val itemSwitch = root.findViewById<Switch>(R.id.item_type_switch)
         itemSwitch.setOnCheckedChangeListener { _, isChecked ->
             Helper.setVisible(itemTable, !isChecked)
-            Helper.setVisible(shadowItemTable, isChecked)
+            Helper.setVisible(radiantItemTable, isChecked)
         }
 
         // Button listeners
@@ -75,7 +77,7 @@ class AddItemFragment : Fragment() {
         return root
     }
 
-    private fun createTable(tableSource: Array<Array<Item?>>, champTable: TableLayout) {
+    private fun createTable(tableSource: Array<Array<Item?>>, champTable: TableLayout, isRadiant: Boolean = false) {
         // Row 0-9
         for (items in tableSource) {
             val row = Helper.createRow(context)
@@ -84,15 +86,16 @@ class AddItemFragment : Fragment() {
                     row.addView(createImageView())
                     continue
                 }
-                row.addView(createImageView(item.id, item.imagePath, item.name))
+                row.addView(createImageView(item.id, item.imagePath, item.name, isRadiant))
             }
             champTable.addView(row)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun createImageView(itemId: Int = -1, imagePath: Int = 0, itemName: String = "") : ImageView {
-        val layoutParams = TableRow.LayoutParams(itemSize, TableRow.LayoutParams.WRAP_CONTENT)
+    private fun createImageView(itemId: Int = -1, imagePath: Int = 0, itemName: String = "", isRadiant: Boolean = false) : ImageView {
+        val layoutParams = TableRow.LayoutParams(if (isRadiant) radiantItemSize else itemSize,
+            TableRow.LayoutParams.WRAP_CONTENT)
         layoutParams.marginEnd = 3
         layoutParams.bottomMargin = 3
         val iv = Helper.createImageView(context, imagePath, layoutParams)

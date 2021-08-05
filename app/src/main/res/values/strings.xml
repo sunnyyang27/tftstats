@@ -55,7 +55,7 @@
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="item_selected">Item selected: </string>
-    <string name="shadow_items">Shadow Items </string>
+    <string name="radiant_items">Radiant Items </string>
     <string name="add_row">Add row</string>
     <string name="finish_game">Finish game</string>
     <string name="avg_placement_by_trait">Average Placement by Trait</string>
