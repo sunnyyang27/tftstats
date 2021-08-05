@@ -186,7 +186,6 @@ class HomeFragment : Fragment() {
         val traitMap = Helper.calculateTeamsTraits(teamComp)
         val traitImageMap = HashMap<ImageView, Pair<Int, Int>>() // ImageView, (levelRank, actualLevel)
         for (origin in traitMap) {
-            if (origin.key == Champion.Origin.GODKING && origin.value > 1) continue
             val trait = Helper.getTrait(origin.key)
             val numLevels = trait.levels.size
             val levels = trait.levels

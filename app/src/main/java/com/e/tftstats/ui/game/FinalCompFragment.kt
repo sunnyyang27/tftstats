@@ -152,18 +152,16 @@ class FinalCompFragment : Fragment() {
 
             var fullLevel = trait.levels[0]             // default to first in case no level is met
             var levelRank = -1
-            if (origin.key != Champion.Origin.GODKING || origin.value == 1) {
-                val numLevels = trait.levels.size
-                val levels = trait.levels
-                for (i in numLevels - 1 downTo 0) {
-                    if (origin.value >= levels[i]) {
-                        traitImage.imageTintList = ColorStateList.valueOf(
-                            resources.getColor(trait.traitColor(i), null))
-                        traitImage.alpha = 1f
-                        fullLevel = levels[i]
-                        levelRank = trait.colors[i]
-                        break
-                    }
+            val numLevels = trait.levels.size
+            val levels = trait.levels
+            for (i in numLevels - 1 downTo 0) {
+                if (origin.value >= levels[i]) {
+                    traitImage.imageTintList = ColorStateList.valueOf(
+                        resources.getColor(trait.traitColor(i), null))
+                    traitImage.alpha = 1f
+                    fullLevel = levels[i]
+                    levelRank = trait.colors[i]
+                    break
                 }
             }
             val tooltip = "${Helper.originName(origin.key)} ${origin.value}/$fullLevel"

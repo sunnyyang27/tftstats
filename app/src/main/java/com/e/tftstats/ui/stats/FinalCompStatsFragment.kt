@@ -76,7 +76,6 @@ class FinalCompStatsFragment : Fragment() {
                     items.isNotEmpty()
                 }
             }.size
-            if (selected.origin == Champion.Origin.GODKING && numChamps > 1) continue
             for (level in selected.levels.reversedArray()) {
                 if (numChamps >= level) {
                     // Add or update map
@@ -118,7 +117,6 @@ class FinalCompStatsFragment : Fragment() {
             val traitMap = Helper.calculateTeamsTraits(teamComp)
             // For each trait, calculate its trait levels
             for (trait in traitMap) {
-                if (trait.key == Champion.Origin.GODKING && trait.value > 1) continue
                 val levels = Helper.getTrait(trait.key).levels
                 val numLevels = levels.size
                 for (i in numLevels - 1 downTo 0) {

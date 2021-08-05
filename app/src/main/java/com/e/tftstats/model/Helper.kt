@@ -27,8 +27,9 @@ class Helper {
     companion object {
         // Used by AddItemFragment
         const val numRows = 10
+        const val radiantRows = 9;
         val itemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
-        val radiantItemTable: Array<Array<Item?>> = Array(numRows - 1) { arrayOfNulls<Item>(numRows - 1) }
+        val radiantItemTable: Array<Array<Item?>> = Array(radiantRows) { arrayOfNulls<Item>(radiantRows) }
         val consumableItems: Array<Array<Item?>> = Array(1) { arrayOfNulls<Item>(4) }
 
         // Used by AddChampFragment and MainActivity.AddChamp
@@ -58,7 +59,7 @@ class Helper {
         fun loadAssets() {
             loadChampions()
             loadItems()
-            loadradiantItems()
+            loadRadiantItems()
             loadConsumables()
             loadChampionsHashmap()
             loadTraitsMap()
@@ -213,15 +214,15 @@ class Helper {
             addItem("Force of Nature", R.drawable.fon, spatula, spatula)
         }
 
-        private fun loadradiantItems() {
-            val sword = Item("radiant B.F. Sword", R.drawable.radiantbfsword)
-            val bow = Item("radiant Recurve Bow", R.drawable.radiantbow)
-            val chain = Item("radiant Chain Vest", R.drawable.radiantchainvest)
-            val cloak = Item("radiant Negatron Cloak", R.drawable.radiantcloak)
-            val rod = Item("radiant Needlessly Large Rod", R.drawable.radiantrod)
-            val tear = Item("radiant Tear of the Goddess", R.drawable.radianttear)
-            val belt = Item("radiant Giant's Belt", R.drawable.radiantbelt)
-            val glove = Item("radiant Sparring Gloves", R.drawable.radiantglove)
+        private fun loadRadiantItems() {
+            val sword = Item("Radiant B.F. Sword", R.drawable.radiantbfsword)
+            val bow = Item("Radiant Recurve Bow", R.drawable.radiantbow)
+            val chain = Item("Radiant Chain Vest", R.drawable.radiantchainvest)
+            val cloak = Item("Radiant Negatron Cloak", R.drawable.radiantcloak)
+            val rod = Item("Radiant Needlessly Large Rod", R.drawable.radiantrod)
+            val tear = Item("Radiant Tear of the Goddess", R.drawable.radianttear)
+            val belt = Item("Radiant Giant's Belt", R.drawable.radiantbelt)
+            val glove = Item("Radiant Sparring Gloves", R.drawable.radiantglove)
 
             itemNum = 1
             radiantItemTable[0][0] = null
@@ -278,8 +279,6 @@ class Helper {
             addRadiantItem("Banshee's Silence", R.drawable.radianttrapclaw, belt, glove, true)
 
             addRadiantItem("Rascal's Gloves", R.drawable.radiantthiefs, glove, glove, true)
-
-
         }
 
         private fun loadConsumables() {
@@ -335,15 +334,15 @@ class Helper {
             }
             itemIdMap[item.id] = item
             if (item1.id == item2.id) {
-                itemNum += itemNum / numRows
+                itemNum += itemNum / radiantRows
             }
-            radiantItemTable[itemNum / numRows][itemNum % numRows] = item
+            radiantItemTable[itemNum / radiantRows][itemNum % radiantRows] = item
             if (item.imagePath == R.drawable.radiantthiefs) radiantTgId = item.id
             if (item1.id == item2.id) {
                 itemNum++
                 return
             }
-            radiantItemTable[itemNum % numRows][itemNum / numRows] = item
+            radiantItemTable[itemNum % radiantRows][itemNum / radiantRows] = item
             itemNum++
         }
 

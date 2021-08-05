@@ -139,8 +139,8 @@ class GameModel {
         var tgId = -1
         if (teamItems.contains(Helper.tgId)) {
             tgId = Helper.tgId
-        } else if (teamItems.contains(Helper.shadowTgId)) {
-            tgId = Helper.shadowTgId
+        } else if (teamItems.contains(Helper.radiantTgId)) {
+            tgId = Helper.radiantTgId
         }
 
         val tgMsg = StringBuilder()
@@ -160,7 +160,7 @@ class GameModel {
                 hasExtraItems = true
             }
             // Base component
-            if (Helper.itemTable[0].contains(item) || Helper.shadowItemTable[0].contains(item)) {
+            if (Helper.itemTable[0].contains(item) || Helper.radiantItemTable[0].contains(item)) {
                 numComponents++
                 components.append(item.name)
                 components.append(", ")
