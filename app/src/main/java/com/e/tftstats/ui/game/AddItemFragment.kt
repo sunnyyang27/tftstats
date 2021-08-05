@@ -41,14 +41,22 @@ class AddItemFragment : Fragment() {
 
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
         radiantItemSize = (MainActivity.screenWidth - 16) / (Helper.radiantRows + 1)
+        val itemSwitch = root.findViewById<Switch>(R.id.item_type_switch)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
         val radiantItemTable = root.findViewById<TableLayout>(R.id.radiant_item_table)
         val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
+        val emblemTable = root.findViewById<TableLayout>(R.id.emblem_table)
         createTable(Helper.itemTable, itemTable)
-        createTable(Helper.radiantItemTable, radiantItemTable, true)
+        // Only show radiant items on 3-6 armory or champion items
+        if (isChampionItem() || (MainActivity.currentGame.currentStageDisplayed == 3 && itemType == 1.0)) {
+            createTable(Helper.radiantItemTable, radiantItemTable, true)
+        } else {
+            itemSwitch.visibility = View.GONE
+        }
         // Don't show consumable for champion items
-        if (itemType < 3 || itemType >= 4)
+        if (!isChampionItem())
             createTable(Helper.consumableItems, consumableTable)
+        createTable(Helper.emblemItems, emblemTable)
 
         if (selectedItemId >= 0) {
             val itemSelectedImage = root.findViewById<ImageView>(R.id.item_selected_image)
@@ -58,7 +66,6 @@ class AddItemFragment : Fragment() {
         }
 
         // Switch
-        val itemSwitch = root.findViewById<Switch>(R.id.item_type_switch)
         itemSwitch.setOnCheckedChangeListener { _, isChecked ->
             Helper.setVisible(itemTable, !isChecked)
             Helper.setVisible(radiantItemTable, isChecked)
@@ -167,5 +174,9 @@ class AddItemFragment : Fragment() {
 
         requireActivity().onBackPressed()
         itemType = 0.0
+    }
+
+    private fun isChampionItem() : Boolean {
+        return itemType >= 3 && itemType < 4;
     }
 }

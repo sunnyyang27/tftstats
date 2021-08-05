@@ -52,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_alignStart="@+id/table"
+            android:layout_alignEnd="@+id/table"
             android:layout_below="@+id/consumable_table">
         </TableLayout>
 
@@ -72,8 +74,9 @@
             android:layout_width="@dimen/big_item_size"
             android:layout_height="@dimen/big_item_size"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginStart="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/consumable_table"/>
+            android:layout_below="@+id/emblem_table"/>
     </RelativeLayout>
 
     <Button
