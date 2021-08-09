@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/item_type_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +76,8 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginStart="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/emblem_table"/>
+            android:layout_below="@+id/emblem_table"
+            android:contentDescription="@string/item_selected_desc"/>
     </RelativeLayout>
 
     <Button

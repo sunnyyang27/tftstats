@@ -13,6 +13,7 @@ import com.e.tftstats.MainActivity
 import com.e.tftstats.R
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Item
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class AddItemFragment : Fragment() {
 
@@ -41,7 +42,7 @@ class AddItemFragment : Fragment() {
 
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
         radiantItemSize = (MainActivity.screenWidth - 16) / (Helper.radiantRows + 1)
-        val itemSwitch = root.findViewById<Switch>(R.id.item_type_switch)
+        val itemSwitch = root.findViewById<SwitchMaterial>(R.id.item_type_switch)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
         val radiantItemTable = root.findViewById<TableLayout>(R.id.radiant_item_table)
         val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
@@ -74,11 +75,11 @@ class AddItemFragment : Fragment() {
         // Button listeners
         val addBtn = root.findViewById<Button>(R.id.additem_add)
         addBtn.setOnClickListener {
-            updateItem(it)
+            updateItem()
         }
         val saveBtn = root.findViewById<Button>(R.id.additem_save)
         saveBtn.setOnClickListener {
-            updateItem(it)
+            updateItem()
         }
 
         return root
@@ -146,7 +147,7 @@ class AddItemFragment : Fragment() {
         return iv
     }
 
-    private fun updateItem(view: View) {
+    private fun updateItem() {
         // Get selected item
         val selectedItem = root.findViewById<ImageView>(R.id.item_selected_image)
         val tag = selectedItem.tag as? Int ?: -1
@@ -177,6 +178,6 @@ class AddItemFragment : Fragment() {
     }
 
     private fun isChampionItem() : Boolean {
-        return itemType >= 3 && itemType < 4;
+        return itemType >= 3 && itemType < 4
     }
 }

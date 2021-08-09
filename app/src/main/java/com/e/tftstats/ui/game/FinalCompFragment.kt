@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.e.tftstats.MainActivity
 import com.e.tftstats.R
-import com.e.tftstats.model.Champion
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Team
 import com.e.tftstats.model.TeamDao

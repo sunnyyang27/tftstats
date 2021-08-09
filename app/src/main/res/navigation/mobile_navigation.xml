@@ -54,37 +54,37 @@
     <fragment
         android:id="@+id/nav_game_stats"
         android:name="com.e.tftstats.ui.home.GameStatsFragment"
-        android:label="@string/menu_game_stats"
+        android:label="@string/fragment_game_stats"
         tools:layout="@layout/fragment_game_stats" />
 
     <fragment
         android:id="@+id/nav_game_edit"
         android:name="com.e.tftstats.ui.home.GameEditFragment"
-        android:label="@string/menu_game_edit"
+        android:label="@string/fragment_game_edit"
         tools:layout="@layout/fragment_game_edit" />
 
     <fragment
         android:id="@+id/nav_stage"
         android:name="com.e.tftstats.ui.game.StageFragment"
-        android:label="@string/menu_game"
+        android:label="@string/fragment_new_game"
         tools:layout="@layout/fragment_stage" />
 
     <fragment
         android:id="@+id/nav_final_comp"
         android:name="com.e.tftstats.ui.game.FinalCompFragment"
-        android:label="@string/menu_final_comp"
+        android:label="@string/fragment_final_comp"
         tools:layout="@layout/fragment_final_comp" />
 
     <fragment
         android:id="@+id/nav_addchamp"
         android:name="com.e.tftstats.ui.game.AddChampFragment"
-        android:label="@string/menu_addchamp"
+        android:label="@string/fragment_addchamp"
         tools:layout="@layout/fragment_add_champ" />
 
     <fragment
         android:id="@+id/nav_additem"
         android:name="com.e.tftstats.ui.game.AddItemFragment"
-        android:label="@string/menu_additem"
+        android:label="@string/fragment_add_item"
         tools:layout="@layout/fragment_add_item" />
 
 </navigation>
