@@ -77,6 +77,16 @@ class StageFragment : Fragment() {
         val diedCheck = root.findViewById<CheckBox>(R.id.died_check)
         Helper.setVisible(diedCheck, currentStage > 1)
 
+        // If stage 3, put armory below carousel
+        if (currentStage == 3) {
+            val carouselRl = carouselLayout.layoutParams as RelativeLayout.LayoutParams
+            carouselRl.addRule(RelativeLayout.BELOW, R.id.died_check)
+            val armoryRl = armoryLayout.layoutParams as RelativeLayout.LayoutParams
+            armoryRl.addRule(RelativeLayout.BELOW, R.id.carousel_layout)
+            val pveRl = pveLayout.layoutParams as RelativeLayout.LayoutParams
+            pveRl.addRule(RelativeLayout.BELOW, R.id.armory_layout)
+        }
+
         // Add item listeners
         setItemListeners()
 
@@ -95,7 +105,8 @@ class StageFragment : Fragment() {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Helper.setVisible(carouselLayout, position >= 3)
-                Helper.setVisible(armoryLayout, position >= 1)
+                Helper.setVisible(armoryLayout, (currentStage != 3 && position >= 1)
+                        || (currentStage == 3 && position >= 5))
                 Helper.setVisible(pveLayout, position >= 6)
                 currentGame.tmpRoundDied = position + 1
             }
@@ -112,8 +123,10 @@ class StageFragment : Fragment() {
             Helper.setVisible(nextBtn, !isChecked)
             Helper.setVisible(roundLayout, isChecked)
             val roundSelected = roundSpin.selectedItemPosition
+            // Don't show when user died and died before a specific round (indexed at 0)
             Helper.setVisible(carouselLayout, !(isChecked && roundSelected < 3))
-            Helper.setVisible(armoryLayout, !(isChecked && roundSelected < 1))
+            Helper.setVisible(armoryLayout, !(isChecked && ((currentStage != 3 && roundSelected < 1)
+                    || (currentStage == 3 && roundSelected < 5))))
             Helper.setVisible(pveLayout, !(isChecked && roundSelected < 6))
             if (!isChecked && currentStage == MainActivity.currentGame.stageDied) {
                 MainActivity.currentGame.stageDied = -1
@@ -212,7 +225,10 @@ class StageFragment : Fragment() {
                 armoryImage.tag = s.armoryItem
                 armoryImage.visibility = View.VISIBLE
                 root.findViewById<Button>(R.id.armory_button).visibility = View.GONE
-                root.findViewById<Button>(R.id.clear_armory_button).visibility = View.VISIBLE
+                // Show clear armory button if stage >= 4
+                if (currentStage >= 4) {
+                    root.findViewById<Button>(R.id.clear_armory_button).visibility = View.VISIBLE
+                }
             }
         }
 
