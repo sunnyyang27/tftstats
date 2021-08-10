@@ -87,14 +87,20 @@ class AddItemFragment : Fragment() {
 
     private fun createTable(tableSource: Array<Array<Item?>>, champTable: TableLayout, isRadiant: Boolean = false) {
         // Row 0-9
-        for (items in tableSource) {
+        for (i in tableSource.indices) {
             val row = Helper.createRow(context)
-            for (item in items) {
+            for (j in tableSource[i].indices) {
+                val item = tableSource[i][j]
                 if (item == null) {
                     row.addView(createImageView())
                     continue
                 }
-                row.addView(createImageView(item.id, item.imagePath, item.name, isRadiant))
+                // Don't allow selection of radiant components - row 0 or column 0
+                if (isRadiant && (i == 0 || j == 0)) {
+                    row.addView(createImageView(-1, item.imagePath, item.name, isRadiant))
+                } else {
+                    row.addView(createImageView(item.id, item.imagePath, item.name, isRadiant))
+                }
             }
             champTable.addView(row)
         }
