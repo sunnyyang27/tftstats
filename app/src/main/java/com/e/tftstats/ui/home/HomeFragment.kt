@@ -1,11 +1,9 @@
 package com.e.tftstats.ui.home
 
+import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -227,7 +225,7 @@ class HomeFragment : Fragment() {
 
         // 3. Create buttons
         // 3.1 Add edit button
-        val editBtn = Helper.createSmallButton(context, getString(R.string.edit))
+        val editBtn = Helper.createSmallButton(ContextThemeWrapper(context, R.style.normal_button), getString(R.string.edit))
         editBtn.setOnClickListener {
             val args = Bundle()
             args.putInt("gameId", game.id)
@@ -237,12 +235,20 @@ class HomeFragment : Fragment() {
         // 3.2 Add delete button
         val gamesLayout = root.findViewById<LinearLayout>(R.id.games_layout)
         val horizontalScroll = HorizontalScrollView(context)
-        val deleteBtn = Helper.createSmallButton(context, getString(R.string.delete))
+        val deleteBtn = Helper.createSmallButton(ContextThemeWrapper(context, R.style.normal_pink_button), getString(R.string.delete))
         deleteBtn.setOnClickListener {
-            gameDao.deleteGames(game)
-            gamesLayout.removeView(horizontalScroll)
-            updateAvgPlacement()
-            updateAvgDeath()
+            // Warning
+            AlertDialog.Builder(context)
+                .setMessage(R.string.delete_warning)
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    gameDao.deleteGames(game)
+                    gamesLayout.removeView(horizontalScroll)
+                    updateAvgPlacement()
+                    updateAvgDeath()
+                }
+                .setNeutralButton(android.R.string.cancel, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
         }
         // 3.3 Create and add to button layout
         val buttonLayout = LinearLayout(context)

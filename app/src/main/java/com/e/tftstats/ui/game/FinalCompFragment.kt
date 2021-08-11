@@ -2,6 +2,7 @@ package com.e.tftstats.ui.game
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,13 +96,13 @@ class FinalCompFragment : Fragment() {
         row.addView(tv)
 
         // Edit button
-        val edit = Helper.createSmallButton(context, getString(R.string.edit))
+        val edit = Helper.createSmallButton(ContextThemeWrapper(context, R.style.normal_button), getString(R.string.edit))
         edit.setOnClickListener {
             onEditChamp(id, team.champId)
         }
 
         // Delete button
-        val delete = Helper.createSmallButton(context, getString(R.string.delete))
+        val delete = Helper.createSmallButton(ContextThemeWrapper(context, R.style.normal_pink_button), getString(R.string.delete))
         delete.setOnClickListener {
             MainActivity.currentGame.teamComp.remove(id)
             champTable.removeView(row)

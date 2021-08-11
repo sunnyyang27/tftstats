@@ -1,6 +1,7 @@
 package com.e.tftstats.ui.home
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,7 @@ class GameEditFragment : Fragment() {
         // Stages
         val stages = stageDao.getByGame(gameId)
         for (stage in stages) {
-            val stageBtn = Button(context)
+            val stageBtn = Button(ContextThemeWrapper(context, R.style.normal_pink_button))
             stageBtn.text = getString(R.string.stage_number, stage.stageNumber)
             stageBtn.setOnClickListener {
                 MainActivity.currentGame.currentStageDisplayed = stage.stageNumber
@@ -49,7 +50,7 @@ class GameEditFragment : Fragment() {
         }
 
         // Team comp
-        val teamBtn = Button(context)
+        val teamBtn = Button(ContextThemeWrapper(context, R.style.normal_pink_button))
         teamBtn.text = getString(R.string.final_comp)
         teamBtn.setOnClickListener {
             val args = Bundle()

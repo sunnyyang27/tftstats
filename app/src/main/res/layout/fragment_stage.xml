@@ -148,7 +148,7 @@
                         <Button
                             android:id="@+id/pve_button"
                             style="@style/plus_button"
-                            android:layout_marginTop="15dp"/>
+                            android:layout_marginTop="12dp"/>
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
@@ -264,23 +264,20 @@
 
     <Button
         android:id="@+id/prev_stage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:text="@string/previous_stage"
         android:layout_alignParentBottom="true"/>
 
     <Button
         android:id="@+id/next_stage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:text="@string/next_stage"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/final_comp_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:text="@string/final_comp"
         android:visibility="gone"
         android:layout_alignParentEnd="true"

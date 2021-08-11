@@ -17,7 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-<!--    Images -->
+    <!--    Images -->
     <style name="item_image">
         <item name="android:layout_width">@dimen/item_size</item>
         <item name="android:layout_height">@dimen/item_size</item>
@@ -26,7 +26,7 @@
         <item name="android:clickable">true</item>
     </style>
 
-<!--    Buttons -->
+    <!--    Buttons -->
     <style name="plus_button" >
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
@@ -34,6 +34,18 @@
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_marginEnd">10dp</item>
         <item name="android:backgroundTint">@color/colorTertiary</item>
+    </style>
+
+    <style name="normal_button" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+    </style>
+
+    <style name="normal_pink_button" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="clear_button" >

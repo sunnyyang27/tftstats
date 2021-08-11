@@ -23,8 +23,7 @@
 
     <Button
         android:id="@+id/gameedit_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:text="@string/done"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>

@@ -166,16 +166,14 @@
 
     <Button
         android:id="@+id/addchamp_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="@string/add" />
 
     <Button
         android:id="@+id/addchamp_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/normal_button"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:text="@string/save"
