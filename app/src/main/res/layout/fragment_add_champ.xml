@@ -102,80 +102,63 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
 
-                <TableRow>
+                <TableRow
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <Button
                         android:id="@+id/champ_item_1_button"
-                        android:layout_width="@dimen/input_width"
-                        android:layout_height="@dimen/text_height"
-                        android:background="@android:color/transparent"
-                        android:text="@string/plus"
-                        android:textSize="30sp"
-                        android:textColor="@android:color/holo_green_light"/>
+                        style="@style/plus_button"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"/>
                     <ImageView
                         android:id="@+id/champ_item_1_image"
-                        android:layout_width="@dimen/item_size"
-                        android:layout_height="@dimen/item_size"
-                        android:layout_gravity="center"
+                        style="@style/item_image"
                         android:layout_marginStart="5dp"
-                        android:visibility="gone"
-                        android:focusable="true"
-                        android:clickable="true"/>
+                        android:visibility="gone"/>
                     <Button
                         android:id="@+id/champ_item_1_clear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clear"
-                        android:visibility="gone"/>
+                        style="@style/clear_button"
+                        android:visibility="invisible" />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <Button
                         android:id="@+id/champ_item_2_button"
-                        android:layout_width="@dimen/input_width"
-                        android:layout_height="@dimen/text_height"
-                        android:background="@android:color/transparent"
-                        android:text="@string/plus"
-                        android:textSize="30sp"
-                        android:textColor="@android:color/holo_green_light" />
+                        style="@style/plus_button"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        />
                     <ImageView
                         android:id="@+id/champ_item_2_image"
-                        android:layout_width="@dimen/item_size"
-                        android:layout_height="@dimen/item_size"
-                        android:layout_gravity="center"
+                        style="@style/item_image"
                         android:layout_marginStart="5dp"
-                        android:visibility="gone"
-                        android:focusable="true"
-                        android:clickable="true"/>
+                        android:visibility="gone"/>
                     <Button
                         android:id="@+id/champ_item_2_clear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clear"
-                        android:visibility="gone"/>
+                        style="@style/clear_button"
+                        android:visibility="invisible"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <Button
                         android:id="@+id/champ_item_3_button"
-                        android:layout_width="@dimen/input_width"
-                        android:layout_height="@dimen/text_height"
-                        android:background="@android:color/transparent"
-                        android:text="@string/plus"
-                        android:textSize="30sp"
-                        android:textColor="@android:color/holo_green_light"/>
+                        style="@style/plus_button"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp" />
                     <ImageView
                         android:id="@+id/champ_item_3_image"
-                        android:layout_width="@dimen/item_size"
-                        android:layout_height="@dimen/item_size"
-                        android:layout_gravity="center"
+                        style="@style/item_image"
                         android:layout_marginStart="5dp"
-                        android:visibility="gone"
-                        android:focusable="true"
-                        android:clickable="true"/>
+                        android:visibility="gone"/>
                     <Button
                         android:id="@+id/champ_item_3_clear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clear"
-                        android:visibility="gone"/>
+                        style="@style/clear_button"
+                        android:visibility="invisible"/>
                 </TableRow>
             </TableLayout>
         </LinearLayout>

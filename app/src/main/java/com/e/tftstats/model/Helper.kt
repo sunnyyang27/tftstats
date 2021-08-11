@@ -27,9 +27,11 @@ class Helper {
     companion object {
         // Used by AddItemFragment
         const val numRows = 10
+        const val radiantRows = 9
         val itemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
-        val shadowItemTable: Array<Array<Item?>> = Array(numRows) { arrayOfNulls<Item>(numRows) }
+        val radiantItemTable: Array<Array<Item?>> = Array(radiantRows) { arrayOfNulls<Item>(radiantRows) }
         val consumableItems: Array<Array<Item?>> = Array(1) { arrayOfNulls<Item>(4) }
+        val emblemItems: Array<Array<Item?>> = Array(2) { arrayOfNulls<Item>(14) }
 
         // Used by AddChampFragment and MainActivity.AddChamp
         private val championIdMap: MutableMap<Int, Champion> = HashMap()
@@ -48,7 +50,7 @@ class Helper {
 
         // Used in GameModel
         var tgId: Int = -1
-        var shadowTgId: Int = -1
+        var radiantTgId: Int = -1
 
         // Used in Home, ItemStats, FinalComp
         val traitColors = arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
@@ -58,8 +60,9 @@ class Helper {
         fun loadAssets() {
             loadChampions()
             loadItems()
-            loadShadowItems()
+            loadRadiantItems()
             loadConsumables()
+            loadEmblems()
             loadChampionsHashmap()
             loadTraitsMap()
             initialized = true
@@ -69,11 +72,7 @@ class Helper {
             champions.add(Champion("Kalista", Origin.ABOMINATION, Origin.LEGIONNAIRE, 1, R.drawable.kalista))
             champions.add(Champion("Brand", Origin.ABOMINATION, Origin.SPELLWEAVER, 2, R.drawable.brand))
             champions.add(Champion("Nunu & Willump", Origin.ABOMINATION, Origin.BRAWLER, 3, R.drawable.nunu))
-            champions.add(Champion("Ryze", Origin.ABOMINATION, Origin.FORGOTTEN, 4, R.drawable.ryze, Origin.MYSTIC))
-
-            champions.add(Champion("Lissandra", Origin.COVEN, Origin.RENEWER, 1, R.drawable.lissandra))
-            champions.add(Champion("Leblanc", Origin.COVEN, Origin.ASSASSIN, 2, R.drawable.leblanc))
-            champions.add(Champion("Morgana", Origin.COVEN, Origin.NIGHTBRINGER, 3, R.drawable.morgana, Origin.MYSTIC))
+            champions.add(Champion("Fiddlesticks", Origin.ABOMINATION, Origin.REVENANT, 4, R.drawable.fiddlesticks, Origin.MYSTIC))
 
             champions.add(Champion("Gragas", Origin.DAWNBRINGER, Origin.BRAWLER, 1, R.drawable.gragas))
             champions.add(Champion("Khazix", Origin.DAWNBRINGER, Origin.ASSASSIN, 1, R.drawable.khazix))
@@ -81,27 +80,19 @@ class Helper {
             champions.add(Champion("Nidalee", Origin.DAWNBRINGER, Origin.SKIRMISHER, 3, R.drawable.nidalee))
             champions.add(Champion("Riven", Origin.DAWNBRINGER, Origin.LEGIONNAIRE, 3, R.drawable.riven))
             champions.add(Champion("Karma", Origin.DAWNBRINGER, Origin.INVOKER, 4, R.drawable.karma))
-            champions.add(Champion("Garen", Origin.DAWNBRINGER, Origin.KNIGHT, 5, R.drawable.garen, Origin.GODKING))
+            champions.add(Champion("Garen", Origin.DAWNBRINGER, Origin.KNIGHT, 5, R.drawable.garen, Origin.VICTORIOUS))
 
             champions.add(Champion("Udyr", Origin.DRACONIC, Origin.SKIRMISHER, 1, R.drawable.udyr))
             champions.add(Champion("Sett", Origin.DRACONIC, Origin.BRAWLER, 2, R.drawable.sett))
-            champions.add(Champion("Ashe", Origin.VERDANT, Origin.DRACONIC, 3, R.drawable.ashe, Origin.RANGER))
+            champions.add(Champion("Ashe", Origin.DRACONIC, Origin.RANGER, 3, R.drawable.ashe))
             champions.add(Champion("Zyra", Origin.DRACONIC, Origin.SPELLWEAVER, 3, R.drawable.zyra))
+            champions.add(Champion("Galio", Origin.DRACONIC, Origin.SENTINEL, 4, R.drawable.galio, Origin.KNIGHT))
             champions.add(Champion("Heimerdinger", Origin.DRACONIC, Origin.CARETAKER, 5, R.drawable.heimerdinger, Origin.RENEWER))
 
-            champions.add(Champion("Trundle", Origin.DRAGONSLAYER, Origin.SKIRMISHER, 2, R.drawable.trundle))
-            champions.add(Champion("Pantheon", Origin.DRAGONSLAYER, Origin.SKIRMISHER, 3, R.drawable.pantheon))
-            champions.add(Champion("Diana", Origin.DRAGONSLAYER, Origin.NIGHTBRINGER, 4, R.drawable.diana, Origin.ASSASSIN))
-            champions.add(Champion("Mordekaiser", Origin.DRAGONSLAYER, Origin.LEGIONNAIRE, 4, R.drawable.mordekaiser))
-
-            champions.add(Champion("Kindred", Origin.ETERNAL, Origin.MYSTIC, 5, R.drawable.kindred, Origin.RANGER))
-
-            champions.add(Champion("Warwick", Origin.FORGOTTEN, Origin.BRAWLER, 1, R.drawable.warwick))
             champions.add(Champion("Vayne", Origin.FORGOTTEN, Origin.RANGER, 1, R.drawable.vayne))
             champions.add(Champion("Hecarim", Origin.FORGOTTEN, Origin.CAVALIER, 2, R.drawable.hecarim))
             champions.add(Champion("Thresh", Origin.FORGOTTEN, Origin.KNIGHT, 2, R.drawable.thresh))
-            champions.add(Champion("Viktor", Origin.FORGOTTEN, Origin.SPELLWEAVER, 2, R.drawable.viktor))
-            champions.add(Champion("Katarina", Origin.FORGOTTEN, Origin.ASSASSIN, 3, R.drawable.katarina))
+            champions.add(Champion("Miss Fortune", Origin.FORGOTTEN, Origin.CANNONEER, 3, R.drawable.missfortune))
             champions.add(Champion("Draven", Origin.FORGOTTEN, Origin.LEGIONNAIRE, 4, R.drawable.draven))
             champions.add(Champion("Viego", Origin.FORGOTTEN, Origin.ASSASSIN, 5, R.drawable.viego, Origin.SKIRMISHER))
 
@@ -109,8 +100,11 @@ class Helper {
             champions.add(Champion("Poppy", Origin.HELLION, Origin.KNIGHT, 1, R.drawable.poppy))
             champions.add(Champion("Ziggs", Origin.HELLION, Origin.SPELLWEAVER, 1, R.drawable.ziggs))
             champions.add(Champion("Kennen", Origin.HELLION, Origin.SKIRMISHER, 2, R.drawable.kennen))
+            champions.add(Champion("Tristana", Origin.HELLION, Origin.CANNONEER, 2, R.drawable.tristana))
             champions.add(Champion("Lulu", Origin.HELLION, Origin.MYSTIC, 3, R.drawable.lulu))
             champions.add(Champion("Teemo", Origin.HELLION, Origin.CRUEL, 5, R.drawable.teemo, Origin.INVOKER))
+
+            champions.add(Champion("Gwen", Origin.INANIMATE, Origin.MYSTIC, 5, R.drawable.gwen))
 
             champions.add(Champion("Nautilus", Origin.IRONCLAD, Origin.KNIGHT, 2, R.drawable.nautilus))
             champions.add(Champion("Jax", Origin.IRONCLAD, Origin.SKIRMISHER, 4, R.drawable.jax))
@@ -121,7 +115,7 @@ class Helper {
             champions.add(Champion("Lee Sin", Origin.NIGHTBRINGER, Origin.SKIRMISHER, 3, R.drawable.leesin))
             champions.add(Champion("Yasuo", Origin.NIGHTBRINGER, Origin.LEGIONNAIRE, 3, R.drawable.yasuo))
             champions.add(Champion("Aphelios", Origin.NIGHTBRINGER, Origin.RANGER, 4, R.drawable.aphelios))
-            champions.add(Champion("Darius", Origin.NIGHTBRINGER, Origin.KNIGHT, 5, R.drawable.darius, Origin.GODKING))
+            champions.add(Champion("Diana", Origin.NIGHTBRINGER, Origin.ASSASSIN, 4, R.drawable.diana))
 
             champions.add(Champion("Aatrox", Origin.REDEEMED, Origin.LEGIONNAIRE, 1, R.drawable.aatrox))
             champions.add(Champion("Leona", Origin.REDEEMED, Origin.KNIGHT, 1, R.drawable.leona))
@@ -129,13 +123,19 @@ class Helper {
             champions.add(Champion("Varus", Origin.REDEEMED, Origin.RANGER, 2, R.drawable.varus))
             champions.add(Champion("Lux", Origin.REDEEMED, Origin.MYSTIC, 3, R.drawable.lux))
             champions.add(Champion("Vel'koz", Origin.REDEEMED, Origin.SPELLWEAVER, 4, R.drawable.velkoz))
-            champions.add(Champion("Kayle", Origin.REDEEMED, Origin.VERDANT, 5, R.drawable.kayle, Origin.LEGIONNAIRE))
+            champions.add(Champion("Kayle", Origin.REDEEMED, Origin.LEGIONNAIRE, 5, R.drawable.kayle))
 
             champions.add(Champion("Nocturne", Origin.REVENANT, Origin.ASSASSIN, 3, R.drawable.nocturne))
             champions.add(Champion("Ivern", Origin.REVENANT, Origin.INVOKER, 4, R.drawable.ivern, Origin.RENEWER))
             champions.add(Champion("Volibear", Origin.REVENANT, Origin.BRAWLER, 5, R.drawable.volibear))
 
-            champions.add(Champion("Taric", Origin.VERDANT, Origin.KNIGHT, 4, R.drawable.taric))
+            champions.add(Champion("Senna", Origin.SENTINEL, Origin.CANNONEER, 1, R.drawable.senna))
+            champions.add(Champion("Olaf", Origin.SENTINEL, Origin.SKIRMISHER, 1, R.drawable.olaf))
+            champions.add(Champion("Pyke", Origin.SENTINEL, Origin.ASSASSIN, 2, R.drawable.pyke))
+            champions.add(Champion("Irelia", Origin.SENTINEL, Origin.LEGIONNAIRE, 2, R.drawable.irelia, Origin.SKIRMISHER))
+            champions.add(Champion("Rakan", Origin.SENTINEL, Origin.RENEWER, 3, R.drawable.rakan))
+            champions.add(Champion("Lucian", Origin.SENTINEL, Origin.CANNONEER, 4, R.drawable.lucian))
+            champions.add(Champion("Akshan", Origin.SENTINEL, Origin.RANGER, 5, R.drawable.akshan))
         }
 
         private fun loadItems() {
@@ -161,138 +161,126 @@ class Helper {
             addItem(glove)
             addItem(spatula)
 
-            addItem("Deathblade", R.drawable.deathblade, sword, sword)
-            addItem("Giant Slayer", R.drawable.giantslayer, sword, bow)
-            addItem("Guardian Angel", R.drawable.guardianangel, sword, chain, true)
-            addItem("Bloodthirster", R.drawable.bloodthirster, sword, cloak)
-            addItem("Hextech Gunblade", R.drawable.gunblade, sword, rod)
-            addItem("Spear of Shojin", R.drawable.shojin, sword, tear)
-            addItem("Zeke's Herald", R.drawable.zekes, sword, belt)
-            addItem("Infinity Edge", R.drawable.infinityedge, sword, glove, true)
-            addItem("Skirmisher Emblem", R.drawable.skirmisherspat, sword, spatula, origin = Origin.SKIRMISHER)
+            addItem("Deathblade", R.drawable.deathblade, true)
+            addItem("Giant Slayer", R.drawable.giantslayer)
+            addItem("Guardian Angel", R.drawable.guardianangel, unique = true)
+            addItem("Bloodthirster", R.drawable.bloodthirster)
+            addItem("Hextech Gunblade", R.drawable.gunblade)
+            addItem("Spear of Shojin", R.drawable.shojin)
+            addItem("Zeke's Herald", R.drawable.zekes)
+            addItem("Infinity Edge", R.drawable.infinityedge, unique = true)
+            addItem("Skirmisher Emblem", R.drawable.skirmisherspat, origin = Origin.SKIRMISHER)
 
-            addItem("Rapid Firecannon", R.drawable.rfc, bow, bow)
-            addItem("Titan's Resolve", R.drawable.titans, bow, chain)
-            addItem("Runaan's Hurricane", R.drawable.hurricane, bow, cloak)
-            addItem("Guinsoo's Rageblade", R.drawable.guinsoo, bow, rod)
-            addItem("Statikk Shiv", R.drawable.shiv, bow, tear)
-            addItem("Zz'Rot Portal", R.drawable.zzrot, bow, belt)
-            addItem("Last Whisper", R.drawable.lastwhisper, bow, glove, true)
-            addItem("Legionnaire Emblem", R.drawable.legionnairespat, bow, spatula, origin = Origin.LEGIONNAIRE)
+            addItem("Rapid Firecannon", R.drawable.rfc,true)
+            addItem("Titan's Resolve", R.drawable.titans)
+            addItem("Runaan's Hurricane", R.drawable.hurricane)
+            addItem("Guinsoo's Rageblade", R.drawable.guinsoo)
+            addItem("Statikk Shiv", R.drawable.shiv)
+            addItem("Zz'Rot Portal", R.drawable.zzrot)
+            addItem("Last Whisper", R.drawable.lastwhisper, unique = true)
+            addItem("Hellion Emblem", R.drawable.hellionspat, origin = Origin.HELLION)
 
-            addItem("Bramble Vest", R.drawable.bramble, chain, chain)
-            addItem("Gargoyle Stoneplate", R.drawable.gargoyle, chain, cloak)
-            addItem("Locket of the Iron Solari", R.drawable.locket, chain, rod)
-            addItem("Frozen Heart", R.drawable.frozenheart, chain, tear, true)
-            addItem("Sunfire Cape", R.drawable.sunfire, chain, belt, true)
-            addItem("Shroud of Stillness", R.drawable.shroud, chain, glove, true)
-            addItem("Ironclad Emblem", R.drawable.ironcladspat, chain, spatula, origin = Origin.IRONCLAD)
+            addItem("Bramble Vest", R.drawable.bramble, true)
+            addItem("Gargoyle Stoneplate", R.drawable.gargoyle)
+            addItem("Locket of the Iron Solari", R.drawable.locket)
+            addItem("Frozen Heart", R.drawable.frozenheart, unique = true)
+            addItem("Sunfire Cape", R.drawable.sunfire, unique = true)
+            addItem("Shroud of Stillness", R.drawable.shroud, unique = true)
+            addItem("Cavalier Emblem", R.drawable.cavalierspat, origin = Origin.CAVALIER)
 
-            addItem("Dragon's Claw", R.drawable.dclaw, cloak, cloak)
-            addItem("Ionic Spark", R.drawable.spark, cloak, rod)
-            addItem("Chalice of Power", R.drawable.chalice, cloak, tear)
-            addItem("Zephyr", R.drawable.zephyr, cloak, belt, true)
-            addItem("Quicksilver", R.drawable.qss, cloak, glove, true)
-            addItem("Redeemed Emblem", R.drawable.redeemedspat, cloak, spatula, origin = Origin.REDEEMED)
+            addItem("Dragon's Claw", R.drawable.dclaw, true)
+            addItem("Ionic Spark", R.drawable.spark)
+            addItem("Chalice of Power", R.drawable.chalice)
+            addItem("Zephyr", R.drawable.zephyr, unique = true)
+            addItem("Quicksilver", R.drawable.qss, unique = true)
+            addItem("Redeemed Emblem", R.drawable.redeemedspat, origin = Origin.REDEEMED)
 
-            addItem("Rabadon's Deathcap", R.drawable.rabadons, rod, rod)
-            addItem("Archangel's Staff", R.drawable.archangels, rod, tear)
-            addItem("Morellonomicon", R.drawable.morello, rod, belt, true)
-            addItem("Jeweled Gauntlet", R.drawable.jeweled, rod, glove)
-            addItem("Spellweaver Emblem", R.drawable.spellweaverspat, rod, spatula, origin = Origin.SPELLWEAVER)
+            addItem("Rabadon's Deathcap", R.drawable.rabadons, true)
+            addItem("Archangel's Staff", R.drawable.archangels)
+            addItem("Morellonomicon", R.drawable.morello, unique = true)
+            addItem("Jeweled Gauntlet", R.drawable.jeweled)
+            addItem("Spellweaver Emblem", R.drawable.spellweaverspat, origin = Origin.SPELLWEAVER)
 
-            addItem("Blue Buff", R.drawable.bluebuff, tear, tear, true)
-            addItem("Redemption", R.drawable.redemption, tear, belt)
-            addItem("Hand of Justice", R.drawable.hoj, tear, glove)
-            addItem("Renewer Emblem", R.drawable.renewerspat, tear, spatula, origin = Origin.RENEWER)
+            addItem("Blue Buff", R.drawable.bluebuff,true, unique = true)
+            addItem("Redemption", R.drawable.redemption)
+            addItem("Hand of Justice", R.drawable.hoj)
+            addItem("Renewer Emblem", R.drawable.renewerspat, origin = Origin.RENEWER)
 
-            addItem("Warmog's Armor", R.drawable.warmog, belt, belt)
-            addItem("Trap Claw", R.drawable.trapclaw, belt, glove, true)
-            addItem("Dawnbringer Emblem", R.drawable.dawnbringerspat, belt, spatula, origin = Origin.DAWNBRINGER)
+            addItem("Warmog's Armor", R.drawable.warmog, true)
+            addItem("Trap Claw", R.drawable.trapclaw, unique = true)
+            addItem("Dawnbringer Emblem", R.drawable.dawnbringerspat,  origin = Origin.DAWNBRINGER)
 
-            addItem("Thief's Gloves", R.drawable.thiefs, glove, glove, true)
-            addItem("Assassin Emblem", R.drawable.assassinspat, glove, spatula, origin = Origin.ASSASSIN)
+            addItem("Thief's Gloves", R.drawable.thiefs, true, unique = true)
+            addItem("Assassin Emblem", R.drawable.assassinspat, origin = Origin.ASSASSIN)
 
-            addItem("Force of Nature", R.drawable.fon, spatula, spatula)
+            addItem("Force of Nature", R.drawable.fon, true)
         }
 
-        private fun loadShadowItems() {
-            val sword = Item("Shadow B.F. Sword", R.drawable.shadowbfsword)
-            val bow = Item("Shadow Recurve Bow", R.drawable.shadowbow)
-            val chain = Item("Shadow Chain Vest", R.drawable.shadowchainvest)
-            val cloak = Item("Shadow Negatron Cloak", R.drawable.shadowcloak)
-            val rod = Item("Shadow Needlessly Large Rod", R.drawable.shadowrod)
-            val tear = Item("Shadow Tear of the Goddess", R.drawable.shadowtear)
-            val belt = Item("Shadow Giant's Belt", R.drawable.shadowbelt)
-            val glove = Item("Shadow Sparring Gloves", R.drawable.shadowglove)
-            val shadowSpatula = Item("Shadow Spatula", R.drawable.shadowspat)
+        private fun loadRadiantItems() {
+            val sword = Item("Radiant B.F. Sword", R.drawable.radiantbfsword)
+            val bow = Item("Radiant Recurve Bow", R.drawable.radiantbow)
+            val chain = Item("Radiant Chain Vest", R.drawable.radiantchainvest)
+            val cloak = Item("Radiant Negatron Cloak", R.drawable.radiantcloak)
+            val rod = Item("Radiant Needlessly Large Rod", R.drawable.radiantrod)
+            val tear = Item("Radiant Tear of the Goddess", R.drawable.radianttear)
+            val belt = Item("Radiant Giant's Belt", R.drawable.radiantbelt)
+            val glove = Item("Radiant Sparring Gloves", R.drawable.radiantglove)
 
             itemNum = 1
-            shadowItemTable[0][0] = null
+            radiantItemTable[0][0] = null
 
-            addShadowItem(sword)
-            addShadowItem(bow)
-            addShadowItem(chain)
-            addShadowItem(cloak)
-            addShadowItem(rod)
-            addShadowItem(tear)
-            addShadowItem(belt)
-            addShadowItem(glove)
-            addShadowItem(shadowSpatula)
+            addRadiantItem(sword)
+            addRadiantItem(bow)
+            addRadiantItem(chain)
+            addRadiantItem(cloak)
+            addRadiantItem(rod)
+            addRadiantItem(tear)
+            addRadiantItem(belt)
+            addRadiantItem(glove)
 
-            addShadowItem("Caustic Deathblade", R.drawable.shadowdeathblade, sword, sword)
-            addShadowItem("Spectral Giant Slayer", R.drawable.shadowgiantslayer, sword, bow)
-            addShadowItem("Guardian Fallen Angel", R.drawable.shadowguardianangel, sword, chain, true)
-            addShadowItem("Riskthirster", R.drawable.shadowbloodthirster, sword, cloak)
-            addShadowItem("Hextech Gunblade Of Immortality", R.drawable.shadowgunblade, sword, rod)
-            addShadowItem("Spectral Spear of Shojin", R.drawable.shadowshojin, sword, tear)
-            addShadowItem("Zeke's Bleak Herald", R.drawable.shadowzekes, sword, belt)
-            addShadowItem("Sacrificial Infinity Edge", R.drawable.shadowinfinityedge, sword, glove, true)
-            addShadowItem("Forgotten Emblem", R.drawable.forgottenspat, sword, shadowSpatula, origin = Origin.FORGOTTEN)
+            addRadiantItem("Luminous Deathblade", R.drawable.radiantdeathblade, true)
+            addRadiantItem("Demon Slayer", R.drawable.radiantgiantslayer)
+            addRadiantItem("Guardian Archangel", R.drawable.radiantguardianangel, unique = true)
+            addRadiantItem("Blessed Bloodthirster", R.drawable.radiantbloodthirster)
+            addRadiantItem("Hextech Lifeblade", R.drawable.radiantgunblade)
+            addRadiantItem("Spear of Hirana", R.drawable.radiantshojin)
+            addRadiantItem("Zeke's Harmony", R.drawable.radiantzekes)
+            addRadiantItem("Zenith Edge", R.drawable.radiantinfinityedge, unique = true)
 
-            addShadowItem("Rapid Deathcannon", R.drawable.shadowrfc, bow, bow)
-            addShadowItem("Titan's Revenge", R.drawable.shadowtitans, bow, chain)
-            addShadowItem("Runaan's Untamed Hurricane", R.drawable.shadowhurricane, bow, cloak)
-            addShadowItem("Guinsoo's Sacrificial Rageblade", R.drawable.shadowguinsoo, bow, rod)
-            addShadowItem("Statikk Stiletto", R.drawable.shadowshiv, bow, tear)
-            addShadowItem("Unstable Zz'Rot Portal", R.drawable.shadowzzrot, bow, belt)
-            addShadowItem("Final Whisper", R.drawable.shadowlastwhisper, bow, glove, true)
-            addShadowItem("Hellion Emblem", R.drawable.hellionspat, bow, shadowSpatula, origin = Origin.HELLION)
+            addRadiantItem("Rapid Lightcannon", R.drawable.radiantrfc, true)
+            addRadiantItem("Titan's Vow", R.drawable.radianttitans)
+            addRadiantItem("Runaan's Tempest", R.drawable.radianthurricane)
+            addRadiantItem("Guinsoo's Reckoning", R.drawable.radiantguinsoo)
+            addRadiantItem("Statikk Favor", R.drawable.radiantshiv)
+            addRadiantItem("Zz'Rot's Invitation", R.drawable.radiantzzrot)
+            addRadiantItem("Eternal Whisper", R.drawable.radiantlastwhisper, unique = true)
 
-            addShadowItem("Refracted Bramble Vest", R.drawable.shadowbramble, chain, chain)
-            addShadowItem("Gargoyle Stoneplate Of Immortality", R.drawable.shadowgargoyle, chain, cloak)
-            addShadowItem("Locket of the Silver Lunari", R.drawable.shadowlocket, chain, rod)
-            addShadowItem("Frozen Dark Heart", R.drawable.shadowfrozenheart, chain, tear, true)
-            addShadowItem("Eclipse Cape", R.drawable.shadowsunfire, chain, belt, true)
-            addShadowItem("Dark Shroud of Stillness", R.drawable.shadowshroud, chain, glove, true)
-            addShadowItem("Cavalier Emblem", R.drawable.cavalierspat, chain, shadowSpatula, origin = Origin.CAVALIER)
+            addRadiantItem("Rosethorn Vest", R.drawable.radiantbramble, true)
+            addRadiantItem("Dvrapala Stoneplate", R.drawable.radiantgargoyle)
+            addRadiantItem("Locket of Targon Prime", R.drawable.radiantlocket)
+            addRadiantItem("Frozen Heart Of Gold", R.drawable.radiantfrozenheart, unique = true)
+            addRadiantItem("Sunlight Cape", R.drawable.radiantsunfire, unique = true)
+            addRadiantItem("Shroud of Reverance", R.drawable.radiantshroud, unique = true)
 
-            addShadowItem("Refracted Dragon's Claw", R.drawable.shadowdclaw, cloak, cloak)
-            addShadowItem("Ionic Dark Spark", R.drawable.shadowspark, cloak, rod)
-            addShadowItem("Chalice of Malice", R.drawable.shadowchalice, cloak, tear)
-            addShadowItem("Turbulent Zephyr", R.drawable.shadowzephyr, cloak, belt, true)
-            addShadowItem("Caustic Quicksilver", R.drawable.shadowqss, cloak, glove, true)
-            addShadowItem("Revenant Emblem", R.drawable.revenantspat, cloak, shadowSpatula, origin = Origin.REVENANT)
+            addRadiantItem("Dragon's Will", R.drawable.radiantdclaw, true)
+            addRadiantItem("Covalent Spark", R.drawable.radiantspark)
+            addRadiantItem("Chalice of Charity", R.drawable.radiantchalice)
+            addRadiantItem("Mistral", R.drawable.radiantzephyr, unique = true)
+            addRadiantItem("Quickestsilver", R.drawable.radiantqss, unique = true)
 
-            addShadowItem("Rabadon's Caustic Deathcap", R.drawable.shadowrabadons, rod, rod)
-            addShadowItem("Archangel's Staff Of Immortality", R.drawable.shadowarchangels, rod, tear)
-            addShadowItem("Mor-evil-lonomicon", R.drawable.shadowmorello, rod, belt, true)
-            addShadowItem("Sacrificial Gauntlet", R.drawable.shadowjeweled, rod, glove)
-            addShadowItem("Dragonslayer Emblem", R.drawable.dragonslayerspat, rod, shadowSpatula, origin = Origin.DRAGONSLAYER)
+            addRadiantItem("Rabadon's Ascended Deathcap", R.drawable.radiantrabadons, true)
+            addRadiantItem("Urf-Angel's Staff", R.drawable.radiantarchangels)
+            addRadiantItem("More More-ellonomicon", R.drawable.radiantmorello, unique = true)
+            addRadiantItem("Glamorous Gauntlet", R.drawable.radiantjeweled)
 
-            addShadowItem("Very Dark Blue Buff", R.drawable.shadowbluebuff, tear, tear, true)
-            addShadowItem("Sacrificial Redemption", R.drawable.shadowredemption, tear, belt)
-            addShadowItem("Hand of Vengeance", R.drawable.shadowhoj, tear, glove)
-            addShadowItem("Coven Emblem", R.drawable.covenspat, tear, shadowSpatula, origin = Origin.COVEN)
+            addRadiantItem("Blue Blessing", R.drawable.radiantbluebuff, true, unique = true)
+            addRadiantItem("Radiant Redemption", R.drawable.radiantredemption)
+            addRadiantItem("Fist of Fairness", R.drawable.radianthoj)
 
-            addShadowItem("Warmog's Sacrifical Armor", R.drawable.shadowwarmogs, belt, belt)
-            addShadowItem("Vengeful Trap Claw", R.drawable.shadowtrapclaw, belt, glove, true)
-            addShadowItem("Nightbringer Emblem", R.drawable.nightbringerspat, belt, shadowSpatula, origin = Origin.NIGHTBRINGER)
+            addRadiantItem("Warmog's Pride", R.drawable.radiantwarmogs, true)
+            addRadiantItem("Banshee's Silence", R.drawable.radianttrapclaw, unique = true)
 
-            addShadowItem("Trickster's Gloves", R.drawable.shadowthiefs, glove, glove, true)
-            addShadowItem("Abomination Emblem", R.drawable.abominationspat, glove, shadowSpatula, origin = Origin.ABOMINATION)
-
-            addShadowItem("Force of Darkness", R.drawable.fod, shadowSpatula, shadowSpatula)
+            addRadiantItem("Rascal's Gloves", R.drawable.radiantthiefs, true, unique = true)
         }
 
         private fun loadConsumables() {
@@ -306,6 +294,24 @@ class Helper {
             itemIdMap[consumableItems[0][3]!!.id] = consumableItems[0][3]!!
         }
 
+        private fun loadEmblems() {
+            itemNum = 0
+            addEmblem("Abomination Emblem", R.drawable.abomspat, Origin.ABOMINATION)
+            addEmblem("Brawler Emblem", R.drawable.brawlerspat, Origin.BRAWLER)
+            addEmblem("Cannoneer Emblem", R.drawable.cannoneerspat, Origin.CANNONEER)
+            addEmblem("Draconic Emblem", R.drawable.draconicspat, Origin.DRACONIC)
+            addEmblem("Forgotten Emblem", R.drawable.forgottenspat, Origin.FORGOTTEN)
+            addEmblem("Invoker Emblem", R.drawable.invokerspat, Origin.INVOKER)
+            addEmblem("Ironclad Emblem", R.drawable.ironcladspat, Origin.IRONCLAD)
+            addEmblem("Knight Emblem", R.drawable.knightspat, Origin.KNIGHT)
+            addEmblem("Legionnaire Emblem", R.drawable.legionnairespat, Origin.LEGIONNAIRE)
+            addEmblem("Mystic Emblem", R.drawable.mysticspat, Origin.MYSTIC)
+            addEmblem("Nightbringer Emblem", R.drawable.nightbringerspat, Origin.NIGHTBRINGER)
+            addEmblem("Ranger Emblem", R.drawable.rangerspat, Origin.RANGER)
+            addEmblem("Revenant Emblem", R.drawable.revenantspat, Origin.REVENANT)
+            addEmblem("Sentinel Emblem", R.drawable.sentinelspat, Origin.SENTINEL)
+        }
+
         private fun addItem(item: Item) {
             itemTable[0][itemNum] = item
             itemTable[itemNum][0] = item
@@ -313,19 +319,19 @@ class Helper {
             itemIdMap[item.id] = item
         }
 
-        private fun addItem(name: String, imagePath: Int, item1: Item, item2: Item, unique: Boolean = false, origin: Origin = Origin.NONE) {
+        private fun addItem(name: String, imagePath: Int, double: Boolean = false, unique: Boolean = false, origin: Origin = Origin.NONE) {
             val item: Item = if (origin != Origin.NONE) {
-                SpatItem(name, imagePath, item1, item2, origin)
+                SpatItem(name, imagePath, origin)
             } else {
-                FullItem(name, imagePath, item1, item2, unique)
+                Item(name, imagePath, unique)
             }
             itemIdMap[item.id] = item
             if (item.imagePath == R.drawable.thiefs) tgId = item.id
-            if (item1.id == item2.id) {
+            if (double) {
                 itemNum += itemNum / numRows
             }
             itemTable[itemNum / numRows][itemNum % numRows] = item
-            if (item1.id == item2.id) {
+            if (double) {
                 itemNum++
                 return
             }
@@ -333,30 +339,37 @@ class Helper {
             itemNum++
         }
 
-        private fun addShadowItem(item: Item) {
-            shadowItemTable[0][itemNum] = item
-            shadowItemTable[itemNum][0] = item
+        private fun addRadiantItem(item: Item) {
+            radiantItemTable[0][itemNum] = item
+            radiantItemTable[itemNum][0] = item
             itemIdMap[item.id] = item
             itemNum++
         }
 
-        private fun addShadowItem(name: String, imagePath: Int, item1: Item, item2: Item, unique: Boolean = false, origin: Origin = Origin.NONE) {
+        private fun addRadiantItem(name: String, imagePath: Int, double: Boolean = false, unique: Boolean = false, origin: Origin = Origin.NONE) {
             val item: Item = if (origin != Origin.NONE) {
-                SpatItem(name, imagePath, item1, item2, origin)
+                SpatItem(name, imagePath, origin)
             } else {
-                FullItem(name, imagePath, item1, item2, unique)
+                Item(name, imagePath, unique)
             }
             itemIdMap[item.id] = item
-            if (item1.id == item2.id) {
-                itemNum += itemNum / numRows
+            if (double) {
+                itemNum += itemNum / radiantRows
             }
-            shadowItemTable[itemNum / numRows][itemNum % numRows] = item
-            if (item.imagePath == R.drawable.shadowthiefs) shadowTgId = item.id
-            if (item1.id == item2.id) {
+            radiantItemTable[itemNum / radiantRows][itemNum % radiantRows] = item
+            if (item.imagePath == R.drawable.radiantthiefs) radiantTgId = item.id
+            if (double) {
                 itemNum++
                 return
             }
-            shadowItemTable[itemNum % numRows][itemNum / numRows] = item
+            radiantItemTable[itemNum % radiantRows][itemNum / radiantRows] = item
+            itemNum++
+        }
+
+        private fun addEmblem(name: String, imagePath: Int, origin: Origin) {
+            val item = SpatItem(name, imagePath, origin)
+            emblemItems[itemNum / numRows][itemNum % numRows] = item
+            itemIdMap[emblemItems[itemNum / numRows][itemNum % numRows]!!.id] = emblemItems[itemNum / numRows][itemNum % numRows]!!
             itemNum++
         }
 
@@ -369,29 +382,28 @@ class Helper {
         private fun loadTraitsMap() {
             // arrayOf(R.color.trait_bronze, R.color.trait_silver, R.color.trait_gold, R.color.trait_plat)
             addTrait(Origin.ABOMINATION, arrayOf(3, 4, 5), arrayOf(1, 2, 3), R.drawable.abomination)
-            addTrait(Origin.COVEN, arrayOf(3), arrayOf(2), R.drawable.coven)
             addTrait(Origin.DAWNBRINGER, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.dawnbringer)
             addTrait(Origin.DRACONIC, arrayOf(3, 5), arrayOf(0, 2), R.drawable.draconic)
-            addTrait(Origin.DRAGONSLAYER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.dragonslayer)
-            addTrait(Origin.ETERNAL, arrayOf(1), arrayOf(2), R.drawable.eternal)
-            addTrait(Origin.FORGOTTEN, arrayOf(3, 6, 9), arrayOf(0, 1, 2), R.drawable.forgotten)
-            addTrait(Origin.HELLION, arrayOf(3, 5, 7), arrayOf(0, 2, 3), R.drawable.hellion)
+            addTrait(Origin.FORGOTTEN, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.forgotten)
+            addTrait(Origin.HELLION, arrayOf(2, 4, 6,  8), arrayOf(0, 1, 2, 3), R.drawable.hellion)
+            addTrait(Origin.INANIMATE, arrayOf(1), arrayOf(2), R.drawable.inanimate)
             addTrait(Origin.IRONCLAD, arrayOf(2, 3, 4), arrayOf(0, 2, 3), R.drawable.ironclad)
             addTrait(Origin.NIGHTBRINGER, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.nightbringer)
             addTrait(Origin.REDEEMED, arrayOf(3, 6, 9), arrayOf(0, 2, 3), R.drawable.redeemed)
-            addTrait(Origin.REVENANT, arrayOf(2, 3, 4), arrayOf(0, 2, 3), R.drawable.revenant)
-            addTrait(Origin.VERDANT, arrayOf(2, 3), arrayOf(0, 2), R.drawable.verdant)
+            addTrait(Origin.REVENANT, arrayOf(2, 3, 4, 5), arrayOf(0, 1, 2, 3), R.drawable.revenant)
+            addTrait(Origin.SENTINEL, arrayOf(3, 6, 9), arrayOf(0, 1, 2), R.drawable.sentinel)
+            addTrait(Origin.VICTORIOUS, arrayOf(1), arrayOf(2), R.drawable.victorious)
             addTrait(Origin.ASSASSIN, arrayOf(2, 4, 6), arrayOf(0, 1, 2), R.drawable.assassin)
-            addTrait(Origin.BRAWLER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.brawler)
+            addTrait(Origin.BRAWLER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.brawler)
+            addTrait(Origin.CANNONEER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.cannoneer)
             addTrait(Origin.CARETAKER, arrayOf(1), arrayOf(2), R.drawable.caretaker)
             addTrait(Origin.CAVALIER, arrayOf(2, 3, 4), arrayOf(0, 1, 2), R.drawable.cavalier)
             addTrait(Origin.CRUEL, arrayOf(1), arrayOf(2), R.drawable.cruel)
-            addTrait(Origin.GODKING, arrayOf(1), arrayOf(2), R.drawable.godking)
             addTrait(Origin.INVOKER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.invoker)
             addTrait(Origin.KNIGHT, arrayOf(2, 4, 6), arrayOf(0, 1, 2), R.drawable.knight)
             addTrait(Origin.LEGIONNAIRE, arrayOf(2, 4, 6, 8), arrayOf(0, 1, 2, 3), R.drawable.legionnaire)
-            addTrait(Origin.MYSTIC, arrayOf(2, 3, 4), arrayOf(0, 1, 2), R.drawable.mystic)
-            addTrait(Origin.RANGER, arrayOf(2, 4), arrayOf(0, 2), R.drawable.ranger)
+            addTrait(Origin.MYSTIC, arrayOf(2, 3, 4, 5), arrayOf(0, 1, 2, 3), R.drawable.mystic)
+            addTrait(Origin.RANGER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.ranger)
             addTrait(Origin.RENEWER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.renewer)
             addTrait(Origin.SKIRMISHER, arrayOf(3, 6, 9), arrayOf(0, 2, 3), R.drawable.skirmisher)
             addTrait(Origin.SPELLWEAVER, arrayOf(2, 4, 6), arrayOf(0, 2, 3), R.drawable.spellweaver)
@@ -486,6 +498,19 @@ class Helper {
             return row
         }
 
+        fun createRowTopBottom(context: Context?, margin: Int = 0) : TableRow {
+            val row = TableRow(context)
+            val layoutParams = TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT)
+            if (margin > 0) {
+                layoutParams.bottomMargin = margin
+                layoutParams.marginEnd = margin
+                layoutParams.topMargin = margin
+            }
+            row.layoutParams = layoutParams
+            row.gravity = Gravity.CENTER_VERTICAL
+            return row
+        }
+
         fun createImageView(context: Context?, src: Int, layoutParams: ViewGroup.LayoutParams, tooltip: String = "") : ImageView {
             val image = ImageView(context)
             image.layoutParams = layoutParams
@@ -498,10 +523,15 @@ class Helper {
         }
 
         fun createSmallButton(context: Context?, text: String) : Button {
-            val btn = Button(context)
+            val btn = createSmallButton(context)
             btn.text = text
-            btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
             btn.textSize = 12f
+            return btn
+        }
+
+        fun createSmallButton(context: Context?) : Button {
+            val btn = Button(context)
+            btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
             btn.minimumWidth = 0
             btn.minWidth = 0
             btn.minimumHeight = 0
@@ -564,7 +594,7 @@ class Helper {
         }
 
         fun originName(origin: Origin) : String {
-            return origin.name.toLowerCase().capitalize()
+            return origin.name.toLowerCase(Locale.getDefault()).capitalize()
         }
 
         // Measurements

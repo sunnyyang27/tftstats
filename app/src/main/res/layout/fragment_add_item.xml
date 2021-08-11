@@ -7,21 +7,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/item_type_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/shadow_items"
+            android:text="@string/radiant_items"
             android:textSize="@dimen/text_body_size"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/table"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/item_type_switch" >
+            android:layout_below="@+id/item_type_switch"
+            android:layout_centerHorizontal="true">
 
             <TableLayout
                 android:id="@+id/item_table"
@@ -30,7 +32,7 @@
             </TableLayout>
 
             <TableLayout
-                android:id="@+id/shadow_item_table"
+                android:id="@+id/radiant_item_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone">
@@ -46,6 +48,16 @@
             android:layout_below="@+id/table">
         </TableLayout>
 
+        <TableLayout
+            android:id="@+id/emblem_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignStart="@+id/table"
+            android:layout_alignEnd="@+id/table"
+            android:layout_below="@+id/consumable_table">
+        </TableLayout>
+
         <TextView
             android:id="@+id/item_selected_label"
             android:layout_width="wrap_content"
@@ -54,15 +66,19 @@
             android:text="@string/item_selected"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="@dimen/text_body_size"
-            android:layout_below="@+id/consumable_table" />
+            android:layout_alignTop="@+id/item_selected_image"
+            android:layout_alignBottom="@+id/item_selected_image"
+            android:layout_toStartOf="@+id/item_selected_image"/>
 
         <ImageView
             android:id="@+id/item_selected_image"
-            android:layout_width="@dimen/item_size"
-            android:layout_height="@dimen/item_size"
-            android:layout_toEndOf="@+id/item_selected_label"
-            android:layout_alignTop="@+id/item_selected_label"
-            android:layout_alignBottom="@+id/item_selected_label" />
+            android:layout_width="@dimen/big_item_size"
+            android:layout_height="@dimen/big_item_size"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginStart="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/emblem_table"
+            android:contentDescription="@string/item_selected_desc"/>
     </RelativeLayout>
 
     <Button

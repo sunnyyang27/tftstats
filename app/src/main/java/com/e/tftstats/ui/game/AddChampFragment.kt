@@ -150,7 +150,7 @@ class AddChampFragment : Fragment() {
             image.tag = -1
             image.visibility = View.GONE
             itemBtn.visibility = View.VISIBLE
-            clear.visibility = View.GONE
+            clear.visibility = View.INVISIBLE
             currentGame.addItemToTeam(-1, itemType)
         }
 

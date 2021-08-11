@@ -43,13 +43,13 @@ class GameModel {
             }
         }
 
-        // Armory item: must exist if stage >= 2 and roundDied >= 2
-        if ((roundDied < 2 && roundDied > -1) || currentStageDisplayed == 1)
+        // Armory item
+        if (!hasArmoryItem(roundDied))
             s.armoryItem = -1
         else {
             s.armoryItem = activity.findViewById<ImageView>(R.id.armory_image).tag as? Int ?: -1
-            // If stage 4+, armory may or may not appear
-            if (s.armoryItem == -1 && currentStageDisplayed <= 3) {
+            // If stage 5+, armory may or may not appear
+            if (s.armoryItem == -1 && currentStageDisplayed <= 4) {
                 error.append("Missing armory item.\n")
             }
         }
@@ -139,8 +139,8 @@ class GameModel {
         var tgId = -1
         if (teamItems.contains(Helper.tgId)) {
             tgId = Helper.tgId
-        } else if (teamItems.contains(Helper.shadowTgId)) {
-            tgId = Helper.shadowTgId
+        } else if (teamItems.contains(Helper.radiantTgId)) {
+            tgId = Helper.radiantTgId
         }
 
         val tgMsg = StringBuilder()
@@ -160,7 +160,7 @@ class GameModel {
                 hasExtraItems = true
             }
             // Base component
-            if (Helper.itemTable[0].contains(item) || Helper.shadowItemTable[0].contains(item)) {
+            if (Helper.itemTable[0].contains(item) || Helper.radiantItemTable[0].contains(item)) {
                 numComponents++
                 components.append(item.name)
                 components.append(", ")
@@ -182,5 +182,17 @@ class GameModel {
         }
 
         return error.toString()
+    }
+
+    /** Return false if armory item is not required. */
+    private fun hasArmoryItem(roundDied: Int) : Boolean {
+        // Stage 1: no
+        if (currentStageDisplayed == 1) return false
+        // Stage 2 or 4: yes if roundDied >= 2
+        if (currentStageDisplayed == 2 || currentStageDisplayed == 4) return roundDied >= 2 || roundDied == -1
+        // Stage 3: yes if roundDied >= 6
+        if (currentStageDisplayed == 3) return roundDied >= 6 || roundDied == -1
+        // Stage 5+: maybe
+        return true
     }
 }
