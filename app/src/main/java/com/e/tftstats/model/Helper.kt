@@ -498,6 +498,19 @@ class Helper {
             return row
         }
 
+        fun createRowTopBottom(context: Context?, margin: Int = 0) : TableRow {
+            val row = TableRow(context)
+            val layoutParams = TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT)
+            if (margin > 0) {
+                layoutParams.bottomMargin = margin
+                layoutParams.marginEnd = margin
+                layoutParams.topMargin = margin
+            }
+            row.layoutParams = layoutParams
+            row.gravity = Gravity.CENTER_VERTICAL
+            return row
+        }
+
         fun createImageView(context: Context?, src: Int, layoutParams: ViewGroup.LayoutParams, tooltip: String = "") : ImageView {
             val image = ImageView(context)
             image.layoutParams = layoutParams
@@ -510,10 +523,15 @@ class Helper {
         }
 
         fun createSmallButton(context: Context?, text: String) : Button {
-            val btn = Button(context)
+            val btn = createSmallButton(context)
             btn.text = text
-            btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
             btn.textSize = 12f
+            return btn
+        }
+
+        fun createSmallButton(context: Context?) : Button {
+            val btn = Button(context)
+            btn.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
             btn.minimumWidth = 0
             btn.minWidth = 0
             btn.minimumHeight = 0

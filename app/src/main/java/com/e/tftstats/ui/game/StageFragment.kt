@@ -11,6 +11,7 @@ import com.e.tftstats.MainActivity
 import com.e.tftstats.R
 import com.e.tftstats.model.Helper
 import com.e.tftstats.model.Stage
+import kotlinx.android.synthetic.main.item_row.view.*
 
 class StageFragment : Fragment() {
 
@@ -303,15 +304,13 @@ class StageFragment : Fragment() {
 
     private fun createPveItemsTable(itemMap: Map<Int, Int>) {
         val pveTable = root.findViewById<TableLayout>(R.id.pve_table)
-        val itemSize = resources.getDimensionPixelSize(R.dimen.item_size)
         var index = 0
         for (entry in itemMap.toSortedMap()) {
-            val row = Helper.createRow(context)
-            // Image
-            val imageLayoutParams = TableRow.LayoutParams(itemSize, itemSize)
-            val image = Helper.createImageView(context, Helper.getItem(entry.value).imagePath, imageLayoutParams)
-            image.isClickable = true
-            image.isFocusable = true
+            val row = layoutInflater.inflate(R.layout.item_row, pveTable, false) as TableRow
+            val image = row.item_image
+            val src = Helper.getItem(entry.value).imagePath
+            image.setImageResource(src)
+            image.tag = src
             image.setOnClickListener {
                 val args = Bundle()
                 args.putInt("rowId", entry.key)
@@ -319,17 +318,11 @@ class StageFragment : Fragment() {
                 args.putDouble("itemType", 4.0)
                 requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_additem, args)
             }
-            row.addView(image)
-
-            // Clear
-            val clear = Button(context)
-            clear.text = getString(R.string.clear)
+            val clear = row.item_clear
             clear.setOnClickListener {
                 currentGame.stages[currentStage - 1].pveItemsMap.remove(entry.key)
                 pveTable.removeView(row)
             }
-            row.addView(clear)
-
             pveTable.addView(row, index++)
         }
 

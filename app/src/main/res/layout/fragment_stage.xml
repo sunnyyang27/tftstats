@@ -77,27 +77,17 @@
 
                 <Button
                     android:id="@+id/armory_button"
-                    android:layout_width="@dimen/input_width"
-                    android:layout_height="@dimen/text_height"
-                    android:background="@android:color/transparent"
-                    android:text="@string/plus"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_green_light" />
+                    style="@style/plus_button" />
 
                 <ImageView
                     android:id="@+id/armory_image"
-                    android:layout_width="@dimen/item_size"
-                    android:layout_height="@dimen/item_size"
+                    style="@style/item_image"
                     android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:clickable="true"/>
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/clear_armory_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/clear"
+                    style="@style/clear_button"
                     android:visibility="gone"/>
             </LinearLayout>
 
@@ -121,21 +111,13 @@
 
                 <Button
                     android:id="@+id/carousel_button"
-                    android:layout_width="@dimen/input_width"
-                    android:layout_height="@dimen/text_height"
-                    android:background="@android:color/transparent"
-                    android:text="@string/plus"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_green_light" />
+                    style="@style/plus_button" />
 
                 <ImageView
                     android:id="@+id/carousel_image"
-                    android:layout_width="@dimen/item_size"
-                    android:layout_height="@dimen/item_size"
+                    style="@style/item_image"
                     android:layout_marginStart="5dp"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:clickable="true"/>
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -160,16 +142,13 @@
                     android:id="@+id/pve_table"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:gravity="center_vertical">
                     <TableRow>
                         <Button
                             android:id="@+id/pve_button"
-                            android:layout_width="@dimen/input_width"
-                            android:layout_height="@dimen/text_height"
-                            android:background="@android:color/transparent"
-                            android:text="@string/plus"
-                            android:textSize="30sp"
-                            android:textColor="@android:color/holo_green_light" />
+                            style="@style/plus_button"
+                            android:layout_marginTop="15dp"/>
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
