@@ -225,8 +225,8 @@ class StageFragment : Fragment() {
                 armoryImage.tag = s.armoryItem
                 armoryImage.visibility = View.VISIBLE
                 root.findViewById<Button>(R.id.armory_button).visibility = View.GONE
-                // Show clear armory button if stage >= 4
-                if (currentStage >= 4) {
+                // Show clear armory button if stage > 4
+                if (currentStage > 4) {
                     root.findViewById<Button>(R.id.clear_armory_button).visibility = View.VISIBLE
                 }
             }
