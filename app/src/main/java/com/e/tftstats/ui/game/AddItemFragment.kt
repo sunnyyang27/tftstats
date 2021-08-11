@@ -25,8 +25,9 @@ class AddItemFragment : Fragment() {
     private var currentImageClicked: Int = -1          // imageView ID, not item ID
     private var selectedItemId: Int = -1
     private var imageUpdated: Boolean = false
-    private var itemType: Double = 0.0 // 1 = armory, 2 = carousel, 3.1 = champItem1, 3.2 = champItem2, 3.3 = champItem3
+    private var itemType: Double = 0.0 // 1 = armory, 2 = carousel, 3.1-3 = champItem, 4 = PVE
     private var pveRowId: Int = -1
+    private var currentStage: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,23 +43,34 @@ class AddItemFragment : Fragment() {
 
         itemSize = (MainActivity.screenWidth - 16) / (Helper.numRows + 1)
         radiantItemSize = (MainActivity.screenWidth - 16) / (Helper.radiantRows + 1)
+        currentStage = MainActivity.currentGame.currentStageDisplayed
         val itemSwitch = root.findViewById<SwitchMaterial>(R.id.item_type_switch)
         val itemTable = root.findViewById<TableLayout>(R.id.item_table)
         val radiantItemTable = root.findViewById<TableLayout>(R.id.radiant_item_table)
         val consumableTable = root.findViewById<TableLayout>(R.id.consumable_table)
         val emblemTable = root.findViewById<TableLayout>(R.id.emblem_table)
-        createTable(Helper.itemTable, itemTable)
-        // Only show radiant items on 3-6 armory or champion items
-        if (isChampionItem() || (MainActivity.currentGame.currentStageDisplayed == 3 && itemType == 1.0)) {
-            createTable(Helper.radiantItemTable, radiantItemTable, true)
-        } else {
-            itemSwitch.visibility = View.GONE
-        }
-        // Don't show consumable for champion items
-        if (!isChampionItem())
-            createTable(Helper.consumableItems, consumableTable)
-        createTable(Helper.emblemItems, emblemTable)
 
+        // Create tables
+        if (shouldCreateNormalTable()) {
+            createTable(Helper.itemTable, itemTable)
+            createTable(Helper.emblemItems, emblemTable)
+        }
+
+        if (shouldCreateRadiantTable()) {
+            createTable(Helper.radiantItemTable, radiantItemTable, true)
+            // Show switch if champion
+            if (isChampionItem()) {
+                itemSwitch.visibility = View.VISIBLE
+            } else {
+                radiantItemTable.visibility = View.VISIBLE
+            }
+        }
+
+        if (shouldCreateConsumablesTable()) {
+            createTable(Helper.consumableItems, consumableTable)
+        }
+
+        // Initialize first item selected
         if (selectedItemId >= 0) {
             val itemSelectedImage = root.findViewById<ImageView>(R.id.item_selected_image)
             val item = Helper.getItem(selectedItemId)
@@ -185,5 +197,23 @@ class AddItemFragment : Fragment() {
 
     private fun isChampionItem() : Boolean {
         return itemType >= 3 && itemType < 4
+    }
+
+    private fun isStage3Armory() : Boolean {
+        return currentStage == 3 && itemType == 1.0
+    }
+
+    private fun shouldCreateNormalTable() : Boolean {
+        // Everything except stage 3 armory
+        return !isStage3Armory()
+    }
+
+    private fun shouldCreateRadiantTable() : Boolean {
+        return isStage3Armory() || isChampionItem()
+    }
+
+    private fun shouldCreateConsumablesTable() : Boolean {
+        // Armory not stage 3, PVE
+        return itemType == 4.0 || (currentStage != 3 && itemType == 1.0)
     }
 }
