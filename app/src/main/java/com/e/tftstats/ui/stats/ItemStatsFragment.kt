@@ -131,6 +131,8 @@ class ItemStatsFragment : Fragment() {
             createSection1Row(table, selected.id, getString(R.string.armory), stageDao::getAvgPlacementPerArmoryAndStage)
             createSection1Row(table, selected.id, getString(R.string.carousel), stageDao::getAvgPlacementPerCarouselAndStage)
             createSection1Row(table, selected.id, getString(R.string.pve), ::getAvgPlacementPerPveAndStage)
+            val itemImage = requireView().findViewById<ImageView>(R.id.item_image)
+            itemImage.setImageResource(selected.imagePath)
         }
     }
 
