@@ -12,6 +12,7 @@
     <string name="menu_level">Level</string>
     <string name="menu_item_stats">Item Stats</string>
     <string name="menu_final_comp_stats">Final Comp Stats</string>
+    <string name="menu_death_stats">Death Stats</string>
 
     <string name="fragment_new_game">New Game</string>
     <string name="fragment_addchamp">Add champion</string>
@@ -116,4 +117,6 @@
     <string name="avg_placement_by_item">Average Placement by Item</string>
     <string name="best_items">Best Items</string>
 
+    <!-- Death Stats -->
+    <string name="death_stats_title">Placement per stage of death</string>
 </resources>

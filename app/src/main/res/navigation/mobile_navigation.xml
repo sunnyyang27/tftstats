@@ -52,6 +52,12 @@
         tools:layout="@layout/fragment_final_comp_stats" />
 
     <fragment
+        android:id="@+id/nav_death_stats"
+        android:name="com.e.tftstats.ui.stats.DeathStatsFragment"
+        android:label="@string/menu_death_stats"
+        tools:layout="@layout/fragment_death_stats" />
+
+    <fragment
         android:id="@+id/nav_game_stats"
         android:name="com.e.tftstats.ui.home.GameStatsFragment"
         android:label="@string/fragment_game_stats"
