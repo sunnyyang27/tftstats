@@ -21,8 +21,8 @@ interface GameDao {
     @Query("SELECT AVG(placement) from Game")
     fun getAvgPlacement(): Double
 
-    @Query("UPDATE Game SET roundDied = :roundDied where id = :gameId")
-    fun updateGameRoundDied(gameId: Int, roundDied: Int)
+    @Query("UPDATE Game SET roundDied = :roundDied, placement = :placement where id = :gameId")
+    fun updateGameRoundPlacement(gameId: Int, roundDied: Int, placement: Int)
 
     @Update
     fun updateGames(vararg games: Game)

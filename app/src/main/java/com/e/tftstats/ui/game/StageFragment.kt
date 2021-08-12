@@ -183,7 +183,7 @@ class StageFragment : Fragment() {
                     requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.nav_final_comp)
                 } else {
                     stageDao.updateStages(currentGame.stages[currentStage - 1])
-                    MainActivity.db!!.gameDao().updateGameRoundDied(gameId, currentGame.roundDied)
+                    MainActivity.db!!.gameDao().updateGameRoundPlacement(gameId, currentGame.roundDied, currentGame.stages[currentStage - 1].placement)
                     requireActivity().onBackPressed()
                 }
             }
